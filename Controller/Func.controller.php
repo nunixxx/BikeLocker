@@ -14,33 +14,21 @@ if ($acao == 'cadastrar'){
     $funcionario->save();
     header('Location:../View/Index.php ');
 }
-// else if($acao == 'deletar'){
-//     Papelfuncionario::delete($_REQUEST['id']);
-//     funcionario::delete($_REQUEST['id']);
-//     header('Location:../View/Index.php ');
+else if($acao == 'deletar'){
+    funcionario::delete($_REQUEST['cpf']);
+    header('Location:../View/Index.php ');
 
-// } else if($acao =='atualizar'){
-//     $funcionario = new Funcionario();
-//     $funcionario->setNome($_POST['nome']);
-//     $funcionario->setEmail($_POST['email']);
-//     $funcionario->setSenha($_POST['senha']);
-//     $funcionario->setId($_POST['id']);
+} else if($acao =='atualizar'){
+    $funcionario = new Funcionario();
+    $funcionario->setNome($_POST['nome']);
+    $funcionario->setEmail($_POST['email']);
+    $funcionario->setSenha($_POST['senha']);
+    $funcionario->setPapel($_POST['papel']);
     
-//     $funcionario->update();
+    $funcionario->update();
 
-//     foreach($_POST["papeis"] as $papel){
-//         $papelfuncionario->setIdPapel($papel);
-//         $papelfuncionario->save();
-//     }
+    header('Location:../View/Index.php ');
 
-    
-//     header('Location:../View/Index.php ');
-
-// } else if($acao == 'atualizarView'){
-//     $funcionario = new Funcionario();
-//     $funcionario->setID($_REQUEST['id']);
-//     $funcionario->load();
-// }
-
+}
 
 ?>

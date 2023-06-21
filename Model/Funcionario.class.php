@@ -60,38 +60,38 @@ class Funcionario {
         }
     }
 
-    public static function delete($id){
+    public static function delete($cpf){
         $pdo = conexao();
 
-        $stmt = $pdo->prepare('DELETE FROM USUARIO WHERE id_user = :id');
+        $stmt = $pdo->prepare('DELETE FROM FUNCIONARIO WHERE CPF = :cpf');
         $stmt->execute([
-            ':id' => $id
+            ':cpf' => $cpf
         ]); 
     }
     public static function getAll(){
         $pdo = conexao();
         $lista = [];
-        foreach($pdo->query('SELECT * FROM USUARIO') as $linha){
-            $user = new Usuario();
-            $user->setNome($linha['nome']);
-            $user->setEmail($linha['email']);
-            $user->setSenha($linha['senha']);
-            $user->setId($linha['id_user']);
+        foreach($pdo->query('SELECT * FROM FUNCIONARIO') as $linha){
+            $funcs = new Usuario();
+            $funcs->setNome($linha['nome']);
+            $funcs->setSenha($linha['senha']);
+            $funcs->setCpf($linha['cpf']);
+            $funcs->setPapel($linha['papel']);
 
-            $lista[] = $user;
+            $lista[] = $funcs;
         }
     return $lista;
     }
     public function update(){
         $pdo = conexao();
         try{
-        $stmt = $pdo->prepare('UPDATE USUARIO SET nome = :nome, email = :email, senha = :senha WHERE id = :id');
+        $stmt = $pdo->prepare('UPDATE FUNCIONARIO SET nome = :nome, papel = :papel, senha = :senha WHERE cpf = :cpf');
 
         $stmt->execute([
             ':nome' => $this->nome,
             ':senha' => $this->senha,
-            ':email' => $this->email,
-            ':id' => $this->id
+            ':papel' => $this->papel,
+            ':cpf' => $this->cpf
         ]);
         return true;
         } catch (Exception $e){
@@ -101,9 +101,9 @@ class Funcionario {
     public  function load(){
         $pdo = conexao();
         #TODO ver que esse código cheira mal...
-        foreach($pdo->query('SELECT * FROM USUARIOS WHERE id = ' . $this->id) as $linha){
+        foreach($pdo->query('SELECT * FROM FUNCIONARIO WHERE CPF = ' . $this->cpf) as $linha){
             $this->setNome($linha['nome']);
-            $this->setEmail($linha['email']);
+            $this->setPapel($linha['papel']);
             $this->setSenha($linha['senha']);
             }
 
