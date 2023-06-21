@@ -1,0 +1,13 @@
+.formFunc{
+    background-color: rgba(145, 145, 145, 0.4);
+    position:absolute; 
+    position: right;
+    text-align: center;
+    top: 50%;
+    left: 50%;  
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    padding: 50px;
+    box-shadow: 10px 10px 30px;
+    }
+    
