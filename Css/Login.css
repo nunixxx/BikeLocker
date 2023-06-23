@@ -1,22 +1,12 @@
-.table{
-    max-width: 1000px;
-    position:absolute; 
-    position: right;
-    top: 50%;
-    left: 40%;
-} 
-.formFunc{
+.loginPanel{
     background-color: rgba(145, 145, 145, 0.4);
     position:absolute; 
     position:left;
     top: 50%;
-    left: 30%;  
+    left: 50%;  
     text-align: center;
     transform: translate(-50%, -50%);
     border-radius: 10px;
     padding: 50px;
     box-shadow: 10px 10px 30px;
 }
-
-    
-    

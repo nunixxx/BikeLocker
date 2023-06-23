@@ -4,8 +4,16 @@ class Funcionario {
     private $cpf;
     private $nome;
     private $senha;
+    private $email;
     private $papel;
 
+    public function getEmail() {
+        return $this->email;
+    }
+
+    public function setEmail($email) {
+        $this->email = $email;
+    }
     public function getCPF() {
         return $this->cpf;
     }
@@ -45,12 +53,13 @@ class Funcionario {
             
             $pdo->beginTransaction();
 
-            $stmt = $pdo->prepare('INSERT INTO FUNCIONARIO (cpf, nome, senha, papel) VALUES (:cpf, :nome, :senha, :papel)');
+            $stmt = $pdo->prepare('INSERT INTO FUNCIONARIO (cpf, nome, senha, papel, email) VALUES (:cpf, :nome, :senha, :papel, :email)');
             $stmt->execute([
                 ':cpf' => $this->cpf,
                 ':nome' => $this->nome,
                 ':senha' => $this->senha,
-                ':papel' => $this->papel
+                ':papel' => $this->papel,
+                ':email' => $this->email
             ]);
             $pdo->commit();
             
@@ -72,11 +81,12 @@ class Funcionario {
         $pdo = conexao();
         $lista = [];
         foreach($pdo->query('SELECT * FROM FUNCIONARIO') as $linha){
-            $funcs = new Usuario();
+            $funcs = new Funcionario();
             $funcs->setNome($linha['nome']);
             $funcs->setSenha($linha['senha']);
-            $funcs->setCpf($linha['cpf']);
+            $funcs->setCPF($linha['CPF']);
             $funcs->setPapel($linha['papel']);
+            $funcs->setEmail($linha['email']);
 
             $lista[] = $funcs;
         }
@@ -85,13 +95,14 @@ class Funcionario {
     public function update(){
         $pdo = conexao();
         try{
-        $stmt = $pdo->prepare('UPDATE FUNCIONARIO SET nome = :nome, papel = :papel, senha = :senha WHERE cpf = :cpf');
+        $stmt = $pdo->prepare('UPDATE FUNCIONARIO SET nome = :nome, papel = :papel, senha = :senha, email = :email WHERE cpf = :cpf');
 
         $stmt->execute([
             ':nome' => $this->nome,
             ':senha' => $this->senha,
             ':papel' => $this->papel,
-            ':cpf' => $this->cpf
+            ':cpf' => $this->cpf,
+            ':email' => $this->email
         ]);
         return true;
         } catch (Exception $e){
@@ -108,6 +119,11 @@ class Funcionario {
             }
 
         return $this;
+    }
+
+public function __toString()
+    {
+        return $this->getNome() ." // ". $this->getEmail() ." // ". $this->getPapel();
     }
 }
 ?>

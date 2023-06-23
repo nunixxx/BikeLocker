@@ -16,17 +16,6 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
---
--- Estrutura da tabela `administrador`
---
-
-CREATE TABLE `bikelocker`.`administrador` (
-  `CPF` int(11) NOT NULL,
-  `Senha` text NOT NULL,
-  `papel` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
--- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `bike`
