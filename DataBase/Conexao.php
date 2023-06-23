@@ -1,5 +1,8 @@
 <?php
+session_start();
+
 function Conexao(){
+
     try {
         $pdo = new PDO('mysql:host=localhost;dbname=bikelocker;charset=utf8', 'root','');
 

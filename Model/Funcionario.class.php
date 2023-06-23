@@ -7,46 +7,80 @@ class Funcionario {
     private $email;
     private $papel;
 
-    public function getEmail() {
+    public function getEmail() 
+    {
         return $this->email;
     }
 
-    public function setEmail($email) {
+    public function setEmail($email) 
+    {
         $this->email = $email;
     }
-    public function getCPF() {
+    public function getCPF() 
+    {
         return $this->cpf;
     }
 
-    public function setCPF($cpf) {
+    public function setCPF($cpf) 
+    {
         $this->cpf = $cpf;
     }
 
-    public function getNome() {
+    public function getNome() 
+    {
         return $this->nome;
     }
 
-    public function setNome($nome) {
+    public function setNome($nome) 
+    {
         $this->nome = $nome;
     }
 
-    public function getSenha() {
+    public function getSenha() 
+    {
         return $this->senha;
     }
 
-    public function setSenha($senha) {
+    public function setSenha($senha) 
+    {
         $this->senha = $senha;
     }
 
-    public function getPapel() {
+    public function getPapel() 
+    {
         return $this->papel;
     }
 
-    public function setPapel($papel) {
+    public function setPapel($papel) 
+    {
         $this->papel = $papel;
     }
 
-    public function save(){
+    public function login($cpf, $senha)
+    {
+        $pdo = conexao();
+
+        $stmt= $pdo->prepare("SELECT * FROM funcionario WHERE CPF = :cpf AND senha = :senha");
+        $stmt->execute([
+            ':cpf' => $cpf,
+            ':senha' => $senha,
+        ]);
+
+            if($stmt->rowCount() == 1){
+                $dado = $stmt->fetch();
+
+                $_SESSION['cpfFunc'] = $dado['cpf'];
+                $_SESSION['papel']= $dado['papel'];
+
+                return true;
+            }else{
+                return false;
+            }
+
+    }
+
+    public function save()
+    {
         $pdo = conexao();
 
         try {
@@ -69,7 +103,8 @@ class Funcionario {
         }
     }
 
-    public static function delete($cpf){
+    public static function delete($cpf)
+    {
         $pdo = conexao();
 
         $stmt = $pdo->prepare('DELETE FROM FUNCIONARIO WHERE CPF = :cpf');
@@ -77,7 +112,8 @@ class Funcionario {
             ':cpf' => $cpf
         ]); 
     }
-    public static function getAll(){
+    public static function getAll()
+    {
         $pdo = conexao();
         $lista = [];
         foreach($pdo->query('SELECT * FROM FUNCIONARIO') as $linha){
@@ -92,7 +128,8 @@ class Funcionario {
         }
     return $lista;
     }
-    public function update(){
+    public function update()
+    {
         $pdo = conexao();
         try{
         $stmt = $pdo->prepare('UPDATE FUNCIONARIO SET nome = :nome, papel = :papel, senha = :senha, email = :email WHERE cpf = :cpf');
@@ -109,7 +146,8 @@ class Funcionario {
             return false;
         }
     }
-    public  function load(){
+    public  function load()
+    {
         $pdo = conexao();
         #TODO ver que esse código cheira mal...
         foreach($pdo->query('SELECT * FROM FUNCIONARIO WHERE CPF = ' . $this->cpf) as $linha){

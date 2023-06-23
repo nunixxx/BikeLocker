@@ -1,22 +1,28 @@
 <?php
 include_once '../Model/Funcionario.class.php';
-$acao = $_GET['acao'];
+require_once '../DataBase/Conexao.php';
+    if(isset($_POST['cpf']) && !empty($_POST['cpf']) && isset($_POST['senha']) && !empty($_POST['senha'])){
 
-$funcionarios = Funcionario::getAll();
-$quantFunc = sizeof($funcionarios);
+        $func = new Funcionario();
 
-if($acao == 'login'){
-    $funcionarios = new Funcionario();
-    $funcionario->setCpf($_POST['cpf']);
-    $funcionario->setSenha($_POST['senha']);
+        $cpf = addslashes($_POST['cpf']);
+        $senha = addslashes($_POST['senha']);
 
-        for($i=0; $i<=$quantFunc; $i++)
+        if($func->login($cpf, $senha) == true)
         {
-            if($funcionario->getCPF() == $funcionarios[$i]->getCPF() && $funcionario->getSenha() == $funcionarios[$i]->getSenha())
+            if($_SESSION['papel'] == 'func')
             {
-                header('Location:../View/teste.html');
+                header('Location:../View/Func/ola.php');
+            }else
+            {
+                header('Location:../View/Adm/Index.php');
             }
-        }
-    echo 'func no encotrado';
 
-}
+        }else{
+            header('Location:../View/Login.php');
+        }
+
+    }else{
+        header('Location:../View/Login.php');
+    }
+?>

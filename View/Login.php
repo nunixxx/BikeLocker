@@ -1,7 +1,6 @@
 <?php
     include_once '../Model/Funcionario.class.php';
-
-    $funcionarios = Funcionario::getAll();
+    include_once '../DataBase/Conexao.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -15,10 +14,10 @@
     <title>Document</title>
 </head>
 <body>
-    <form class="loginPanel">
+    <div class="loginPanel">
         <h3>Cadastro</h3>
         <br>
-        <form action= "../controller/Login.controller.php?acao=login" method="post">
+        <form action= "../Controller/Login.controller.php" method="post">
             <div class="inputBox">
                 <input type="text" name="cpf" id="cpf" placeholder="CPF" class="form-control"/>
             </div>
@@ -29,5 +28,6 @@
             <br>
             <input type="submit" class="btn btn-primary btn-block mb-4" style="background-color: green; border: 0px;">
         </form>
+    </div>
 </body>
 </html> 
