@@ -1,5 +1,6 @@
 <?php
- include_once "../DataBase/Conexao.php";
+ require __DIR__ . "..\..\DataBase\Conexao.php";
+
 class Funcionario {
     private $cpf;
     private $nome;
@@ -58,7 +59,7 @@ class Funcionario {
 
     public function login($cpf, $senha)
     {
-        $pdo = conexao();
+        global $pdo;
 
         $stmt= $pdo->prepare("SELECT * FROM funcionario WHERE CPF = :cpf AND senha = :senha");
         $stmt->execute([
@@ -69,7 +70,7 @@ class Funcionario {
             if($stmt->rowCount() == 1){
                 $dado = $stmt->fetch();
 
-                $_SESSION['cpfFunc'] = $dado['cpf'];
+                $_SESSION['cpfFunc'] = $dado['CPF'];
                 $_SESSION['papel']= $dado['papel'];
 
                 return true;
@@ -81,7 +82,7 @@ class Funcionario {
 
     public function save()
     {
-        $pdo = conexao();
+        global $pdo;
 
         try {
             
@@ -105,7 +106,7 @@ class Funcionario {
 
     public static function delete($cpf)
     {
-        $pdo = conexao();
+        global $pdo;
 
         $stmt = $pdo->prepare('DELETE FROM FUNCIONARIO WHERE CPF = :cpf');
         $stmt->execute([
@@ -114,7 +115,7 @@ class Funcionario {
     }
     public static function getAll()
     {
-        $pdo = conexao();
+        global $pdo;
         $lista = [];
         foreach($pdo->query('SELECT * FROM FUNCIONARIO') as $linha){
             $funcs = new Funcionario();
@@ -130,7 +131,7 @@ class Funcionario {
     }
     public function update()
     {
-        $pdo = conexao();
+        global $pdo;
         try{
         $stmt = $pdo->prepare('UPDATE FUNCIONARIO SET nome = :nome, papel = :papel, senha = :senha, email = :email WHERE cpf = :cpf');
 
@@ -148,7 +149,7 @@ class Funcionario {
     }
     public  function load()
     {
-        $pdo = conexao();
+        global $pdo;
         #TODO ver que esse código cheira mal...
         foreach($pdo->query('SELECT * FROM FUNCIONARIO WHERE CPF = ' . $this->cpf) as $linha){
             $this->setNome($linha['nome']);

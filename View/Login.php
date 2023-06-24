@@ -1,6 +1,7 @@
 <?php
     include_once '../Model/Funcionario.class.php';
-    include_once '../DataBase/Conexao.php';
+    require_once __DIR__ . "..\..\DataBase\Conexao.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -15,7 +16,7 @@
 </head>
 <body>
     <div class="loginPanel">
-        <h3>Cadastro</h3>
+        <h3>Login</h3>
         <br>
         <form action= "../Controller/Login.controller.php" method="post">
             <div class="inputBox">

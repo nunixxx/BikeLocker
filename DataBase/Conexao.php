@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-function Conexao(){
+global $pdo;
 
     try {
         $pdo = new PDO('mysql:host=localhost;dbname=bikelocker;charset=utf8', 'root','');
@@ -13,5 +13,5 @@ function Conexao(){
     catch (PDOException $e) {
         echo 'Erro de Banco' . $e->getMassege();
     }
-}
+
 ?>

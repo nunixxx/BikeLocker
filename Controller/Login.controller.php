@@ -1,7 +1,9 @@
 <?php
 include_once '../Model/Funcionario.class.php';
-require_once '../DataBase/Conexao.php';
+   
     if(isset($_POST['cpf']) && !empty($_POST['cpf']) && isset($_POST['senha']) && !empty($_POST['senha'])){
+
+        require '../DataBase/Conexao.php';
 
         $func = new Funcionario();
 

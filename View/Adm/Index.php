@@ -1,8 +1,9 @@
 <?php
     include_once '../../Model/Funcionario.class.php';
-    include_once '../../DataBase/Conexao.php';
-    $acao = 'cadastrar';
 
+    if(isset($_SESSION['cpfFunc']) && !empty($_SESSION['cpfFunc'])):
+
+    $acao = 'cadastrar';
     $funcionarios = Funcionario::getAll();
 ?>
 <!DOCTYPE html>
@@ -18,6 +19,34 @@
 </head>
 
 <body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Gerenciar
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Bicicletário</a></li>
+            <li><a class="dropdown-item" href="#">Usuário</a></li>
+            <li><a class="dropdown-item" href="#">Bicicletas</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="d-flex" role="search">
+        <button class="btn btn-outline-danger" type="submit" onclick="window.location.href='../../Controller/Logout.controller.php'">Sair</button>
+    </div>
+    </div>
+  </div>
+</nav>
     <div class="formFunc">
         <h3>Cadastro</h3>
         <br>
@@ -82,3 +111,8 @@
 </body>
 
 </html>
+<?php 
+else: 
+    header(__DIR__ . "../View/Login.php");
+endif;
+ ?>
