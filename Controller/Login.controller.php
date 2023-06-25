@@ -14,10 +14,10 @@ include_once '../Model/Funcionario.class.php';
         {
             if($_SESSION['papel'] == 'func')
             {
-                header('Location:../View/Func/ola.php');
+                header('Location:../View/Func/Bicicletario.php');
             }else
             {
-                header('Location:../View/Adm/Index.php');
+                header('Location:../View/Adm/Gere.Func.php');
             }
 
         }else{

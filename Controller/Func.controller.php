@@ -13,11 +13,11 @@ if ($acao == 'cadastrar'){
     $funcionario->setPapel($_POST['papel']);
     
     $funcionario->save();
-    header('Location:../View/Adm/Index.php ');
+    header('Location:../View/Adm/Gere.Func.php ');
 }
 else if($acao == 'deletar'){
     funcionario::delete($_REQUEST['id']);
-    header('Location:../View/Adm/Index.php ');
+    header('Location:../View/Adm/Gere.Func.php ');
 }
 // } else if($acao =='atualizar'){
 //     $funcionario = new Funcionario();
@@ -29,7 +29,7 @@ else if($acao == 'deletar'){
     
 //     $funcionario->update();
 
-//     header('Location:../View/Adm/Index.php ');
+//     header('Location:../View/Adm/Gere.Func.php ');
 
 // }
 

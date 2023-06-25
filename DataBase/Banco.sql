@@ -54,10 +54,12 @@ CREATE TABLE `bikelocker`.`cor_bike` (
 --
 
 CREATE TABLE `bikelocker`.`funcionario` (
-  `CPF` int(11) NOT NULL,
+  `CPF` BIGINT(11) NOT NULL,
   `nome` text NOT NULL,
   `senha` text NOT NULL,
-  `papel` text NOT NULL
+  `papel` text NOT NULL,
+  `email` text NOT NULL
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -67,7 +69,7 @@ CREATE TABLE `bikelocker`.`funcionario` (
 --
 
 CREATE TABLE `bikelocker`.`user_bike` (
-  `CPF` int(11) NOT NULL,
+  `CPF` BIGINT(11) NOT NULL,
   `Id_Bike` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -78,11 +80,8 @@ CREATE TABLE `bikelocker`.`user_bike` (
 --
 
 CREATE TABLE `bikelocker`.`usuario` (
-  `CPF` int(11) NOT NULL,
-  `NOME` text NOT NULL,
-  `LOCKER` int(11) NOT NULL,
-  `CADEADO` tinyint(4) NOT NULL,
-  `CHEGADA` date NOT NULL
+  `CPF` BIGINT(11) NOT NULL,
+  `NOME` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -93,13 +92,10 @@ CREATE TABLE `bikelocker`.`usuario` (
 
 CREATE TABLE IF NOT EXISTS `bikelocker`.`bicicletario` (
   `LOCKER` INT NOT NULL,
-  `usuario_CPF` INT(11) NOT NULL,
+  `usuario_CPF` BIGINT(11) NOT NULL,
   `CADEADO` TINYINT NOT NULL,
   `CHEGADA` DATE NOT NULL,
-  PRIMARY KEY (`LOCKER`),
-  CONSTRAINT `fk_Bicicletario_usuario1`
-    FOREIGN KEY (`usuario_CPF`)
-    REFERENCES `bikelocker`.`usuario` (`CPF`)
+  PRIMARY KEY (`LOCKER`)
 )
 ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -112,7 +108,7 @@ ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 CREATE TABLE IF NOT EXISTS `bikelocker`.`historicoBicicletario` (
   `DATACONSULTA` DATE NOT NULL,
   `LOCKER` INT NOT NULL,
-  `CPF` INT(11) NOT NULL,
+  `usuario_CPF` BIGINT(11) NOT NULL,
   `CHEGADA` DATE NOT NULL,
   `SAIDA` DATE NOT NULL,
   PRIMARY KEY (`DATACONSULTA`))
@@ -123,12 +119,6 @@ ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 --
 -- Índices para tabelas despejadas
 --
-
---
--- Índices para tabela `administrador`
---
-ALTER TABLE `bikelocker`.`administrador`
-  ADD PRIMARY KEY (`CPF`);
 
 --
 -- Índices para tabela `bike`
@@ -179,12 +169,6 @@ ALTER TABLE `bikelocker`.`bike`
   MODIFY `Id_Bike` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `usuario`
---
-ALTER TABLE `bikelocker`.`usuario`
-  MODIFY `CPF` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- Restrições para despejos de tabelas
 --
 
@@ -201,4 +185,18 @@ ALTER TABLE `bikelocker`.`cor_bike`
 ALTER TABLE `bikelocker`.`user_bike`
   ADD CONSTRAINT `FK_Bike_TO_User_Bike` FOREIGN KEY (`Id_Bike`) REFERENCES `bike` (`Id_Bike`),
   ADD CONSTRAINT `FK_Usuario_TO_User_Bike` FOREIGN KEY (`CPF`) REFERENCES `usuario` (`CPF`);
+
+--
+-- Limitadores para a tabela `bicicletarios`
+--
+ALTER TABLE `bikelocker`.`bicicletario`
+  ADD CONSTRAINT `fk_Bicicletario_usuario1` FOREIGN KEY (`usuario_CPF`) REFERENCES `usuario` (`CPF`);
+
+--
+-- Limitadores para a tabela `hitoricobicicletarios`
+--
+ALTER TABLE `bikelocker`.`historicobicicletario`
+  ADD CONSTRAINT `fk_hist_bicicletario_usuario1` FOREIGN KEY (`usuario_CPF`) REFERENCES `usuario` (`CPF`);
+
+
 COMMIT;
