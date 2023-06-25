@@ -58,7 +58,7 @@
 <div class="formUser">
         <h3>Cadastro Usuários</h3>
         <br>
-        <form action= "../../controller/User.controller.php?acao=<?= $acao ?>" method="post">
+        <form action= "../../controller/User.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
             <div class="inputBox">
                 <input type="text" name="cpf" id="cpf" placeholder="CPF" class="form-control" value="<?= $usuario->getCPF();?>"/>
             </div>
@@ -67,6 +67,15 @@
                 <input type="text" name="nome" id="nome" placeholder="Nome" class="form-control" value="<?= $usuario->getNome();?>"/>
             </div>
             <br>
+            <div>
+                <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#563d7c" title="Choose your color"/>
+            </div>
+            <br>
+            <div class="btn btn-primary btn-rounded">
+                <label class="form-label text-white m-1" for="customFile1">Choose file</label>
+                <input type="file" class="form-control d-none" id="customFile1" name="imagem" value=""/>
+            </div>
+            <br><br>
             <input type="submit" class="btn btn-primary btn-block mb-4" value="Cadastrar">
         </form>
 </div>
