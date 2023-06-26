@@ -23,28 +23,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `bikelocker`.`bike` (
   `Id_Bike` int(11) NOT NULL,
-  `Imagem` blob DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `cor`
---
-
-CREATE TABLE `bikelocker`.`cor` (
-  `CodCor` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `cor_bike`
---
-
-CREATE TABLE `bikelocker`.`cor_bike` (
-  `CodCor` int(11) NOT NULL,
-  `Id_Bike` int(11) NOT NULL
+  `cor` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -127,19 +106,6 @@ ALTER TABLE `bikelocker`.`bike`
   ADD PRIMARY KEY (`Id_Bike`);
 
 --
--- Índices para tabela `cor`
---
-ALTER TABLE `bikelocker`.`cor`
-  ADD PRIMARY KEY (`CodCor`);
-
---
--- Índices para tabela `cor_bike`
---
-ALTER TABLE `bikelocker`.`cor_bike`
-  ADD KEY `FK_COR_TO_Cor_Bike` (`CodCor`),
-  ADD KEY `FK_Bike_TO_Cor_Bike` (`Id_Bike`);
-
---
 -- Índices para tabela `funcionario`
 --
 ALTER TABLE `bikelocker`.`funcionario`
@@ -171,13 +137,6 @@ ALTER TABLE `bikelocker`.`bike`
 --
 -- Restrições para despejos de tabelas
 --
-
---
--- Limitadores para a tabela `cor_bike`
---
-ALTER TABLE `bikelocker`.`cor_bike`
-  ADD CONSTRAINT `FK_Bike_TO_Cor_Bike` FOREIGN KEY (`Id_Bike`) REFERENCES `bike` (`Id_Bike`),
-  ADD CONSTRAINT `FK_COR_TO_Cor_Bike` FOREIGN KEY (`CodCor`) REFERENCES `cor` (`CodCor`);
 
 --
 -- Limitadores para a tabela `user_bike`
