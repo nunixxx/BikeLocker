@@ -23,7 +23,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `bikelocker`.`bike` (
   `Id_Bike` int(11) NOT NULL,
-  `cor` text NOT NULL
+  `cor` text NOT NULL,
+  `cpf` BIGINT(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -39,17 +40,6 @@ CREATE TABLE `bikelocker`.`funcionario` (
   `papel` text NOT NULL,
   `email` text NOT NULL
 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `user_bike`
---
-
-CREATE TABLE `bikelocker`.`user_bike` (
-  `CPF` BIGINT(11) NOT NULL,
-  `Id_Bike` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -74,6 +64,7 @@ CREATE TABLE IF NOT EXISTS `bikelocker`.`bicicletario` (
   `usuario_CPF` BIGINT(11) NOT NULL,
   `CADEADO` TINYINT NOT NULL,
   `CHEGADA` DATE NOT NULL,
+  `Bike_ID` INT(11) NOT NULL,
   PRIMARY KEY (`LOCKER`)
 )
 ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -90,6 +81,7 @@ CREATE TABLE IF NOT EXISTS `bikelocker`.`historicoBicicletario` (
   `usuario_CPF` BIGINT(11) NOT NULL,
   `CHEGADA` DATE NOT NULL,
   `SAIDA` DATE NOT NULL,
+  `BIKE_ID` INT(11) NOT NULL,
   PRIMARY KEY (`DATACONSULTA`))
 ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -103,6 +95,7 @@ ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 -- Índices para tabela `bike`
 --
 ALTER TABLE `bikelocker`.`bike`
+  ADD KEY `FK_Usuario_TO_Bike` (`CPF`),
   ADD PRIMARY KEY (`Id_Bike`);
 
 --
@@ -110,13 +103,6 @@ ALTER TABLE `bikelocker`.`bike`
 --
 ALTER TABLE `bikelocker`.`funcionario`
   ADD PRIMARY KEY (`CPF`);
-
---
--- Índices para tabela `user_bike`
---
-ALTER TABLE `bikelocker`.`user_bike`
-  ADD KEY `FK_Usuario_TO_User_Bike` (`CPF`),
-  ADD KEY `FK_Bike_TO_User_Bike` (`Id_Bike`);
 
 --
 -- Índices para tabela `usuario`
@@ -141,21 +127,22 @@ ALTER TABLE `bikelocker`.`bike`
 --
 -- Limitadores para a tabela `user_bike`
 --
-ALTER TABLE `bikelocker`.`user_bike`
-  ADD CONSTRAINT `FK_Bike_TO_User_Bike` FOREIGN KEY (`Id_Bike`) REFERENCES `bike` (`Id_Bike`),
-  ADD CONSTRAINT `FK_Usuario_TO_User_Bike` FOREIGN KEY (`CPF`) REFERENCES `usuario` (`CPF`);
+ALTER TABLE `bikelocker`.`bike`
+  ADD CONSTRAINT `FK_Usuario_TO_Bike` FOREIGN KEY (`CPF`) REFERENCES `usuario` (`CPF`);
 
 --
 -- Limitadores para a tabela `bicicletarios`
 --
 ALTER TABLE `bikelocker`.`bicicletario`
-  ADD CONSTRAINT `fk_Bicicletario_usuario1` FOREIGN KEY (`usuario_CPF`) REFERENCES `usuario` (`CPF`);
+  ADD CONSTRAINT `fk_Bicicletario_usuario1` FOREIGN KEY (`usuario_CPF`) REFERENCES `usuario` (`CPF`),
+  ADD CONSTRAINT `fk_Bicicletario_bike` FOREIGN KEY (`bike_id`) REFERENCES `bike` (`ID_BIKE`);
 
 --
 -- Limitadores para a tabela `hitoricobicicletarios`
 --
 ALTER TABLE `bikelocker`.`historicobicicletario`
-  ADD CONSTRAINT `fk_hist_bicicletario_usuario1` FOREIGN KEY (`usuario_CPF`) REFERENCES `usuario` (`CPF`);
+  ADD CONSTRAINT `fk_hist_bicicletario_usuario1` FOREIGN KEY (`usuario_CPF`) REFERENCES `usuario` (`CPF`),
+  ADD CONSTRAINT `fk_hist_Bicicletario_bike` FOREIGN KEY (`bike_id`) REFERENCES `bike` (`ID_BIKE`);
 
 
 COMMIT;

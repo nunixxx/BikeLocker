@@ -1,5 +1,6 @@
 <?php
     include_once __DIR__ . '../../../Model/User.class.php';
+    include_once __DIR__ . '../../../Model/Bike.class.php';
 
     if(isset($_SESSION['cpfFunc']) && !empty($_SESSION['cpfFunc']) && $_SESSION['papel']=='func'):
       $acao = 'cadastrar';
@@ -68,12 +69,12 @@
             </div>
             <br>
             <div>
-                <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#563d7c" title="Choose your color"/>
+                <input type="color" class="form-control form-control-color" id="cor" title="Choose your color"/>
             </div>
             <br>
             <div class="btn btn-primary btn-rounded">
-                <label class="form-label text-white m-1" for="customFile1">Choose file</label>
-                <input type="file" class="form-control d-none" id="customFile1" name="imagem" value=""/>
+                <label class="form-label text-white m-1" for="imagem">Choose file</label>
+                <input type="file" class="form-control d-none" id="imagem" name="imagem" value=""/>
             </div>
             <br><br>
             <input type="submit" class="btn btn-primary btn-block mb-4" value="Cadastrar">

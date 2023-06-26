@@ -2,7 +2,16 @@
 class Bike {
     private $cor;
     private $id;
+    private $cpf;
 
+    public function getCpf() 
+    {
+        return $this->cpf;
+    }
+    public function setCpf($cpf)
+    {
+        $this->cpf = $cpf;
+    }
     public function getCor() 
     {
         return $this->cor;
