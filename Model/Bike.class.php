@@ -36,10 +36,13 @@ public function save()
             
         $pdo->beginTransaction();
 
-        $stmt = $pdo->prepare('INSERT INTO Bike (cor) VALUES (:cor)');
+        $stmt = $pdo->prepare('INSERT INTO Bike (cor, CPF) VALUES (:cor, :CPF)');
         $stmt->execute([
-        ':cor' => $this->cor
+        ':cor' => $this->cor,
+        ':CPF' => $this->cpf
         ]);
+        $this->setId($pdo->lastInsertId());
+
         $pdo->commit();
         } catch (PDOException $e) 
         {
@@ -55,7 +58,7 @@ public static function delete($id)
             
         $pdo->beginTransaction(); 
 
-        $stmt = $pdo->prepare('DELETE FROM BIKE WHERE id_bike = :id');
+        $stmt = $pdo->prepare('DELETE FROM BIKE WHERE CPF = :id');
         $stmt->execute([
             ':id' => $id
         ]); 
@@ -77,7 +80,8 @@ public static function getAll()
         foreach($pdo->query('SELECT * FROM BIKE') as $linha){
             $bike = new Bike();
             $bike->setCor($linha['cor']);
-            $bike->setId($linha['id_bike']);
+            $bike->setId($linha['Id_Bike']);
+            $bike->setCpf($linha['cpf']);
 
             $pdo->commit();
             $lista[] = $bike;
@@ -106,11 +110,13 @@ public function update()
             return false;
         }
     }
+    
     public  function load(){
         global $pdo;
         #TODO ver que esse código cheira mal...
-        foreach($pdo->query('SELECT * FROM bike WHERE id_bike = ' . $this->id) as $linha){
+        foreach($pdo->query('SELECT * FROM bike WHERE cpf = ' . $this->cpf) as $linha){
             $this->setCor($linha['cor']);
+            $this->setId($linha['Id_Bike']);
             }
 
         return $this;

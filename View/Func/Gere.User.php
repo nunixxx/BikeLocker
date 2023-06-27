@@ -5,12 +5,15 @@
     if(isset($_SESSION['cpfFunc']) && !empty($_SESSION['cpfFunc']) && $_SESSION['papel']=='func'):
       $acao = 'cadastrar';
       $usuarios = Usuario::getAll();
+      $bike = Bike::getAll();
 
       if(isset($_GET['cpf'])){
         $usuario = new Usuario();
         $usuario->setCPF($_REQUEST['cpf']);
         $usuario->load(); 
-
+        $bike = new Bike();
+        $bike->setCpf($_REQUEST['cpf']);
+        $bike->load();
         $acao = 'atualizar';
 
     }else{
@@ -69,7 +72,7 @@
             </div>
             <br>
             <div>
-                <input type="color" class="form-control form-control-color" id="cor" title="Choose your color"/>
+                <input type="color" class="form-control form-control-color" id="cor" name="cor" value="<?= $bike->getCor();?>"/>
             </div>
             <br>
             <div class="btn btn-primary btn-rounded">
