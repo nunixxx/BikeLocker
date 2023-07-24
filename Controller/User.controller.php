@@ -24,12 +24,12 @@ if ($acao == 'cadastrar'){
     $bike->save();
 
     move_uploaded_file($imagePath,$savePath);
-    // header('Location:../View/Func/Gere.User.php');
+    header('Location:../View/Func/Gere.User.php');
 }
 else if($acao == 'deletar'){
     Bike::delete($_REQUEST['id']);
     Usuario::delete($_REQUEST['id']);    
-    // header('Location:../View/Func/Gere.User.php');
+    header('Location:../View/Func/Gere.User.php');
 } else if($acao == 'atualizar'){
     $user = new Usuario();
     $user->setCPF($_POST['cpf']);
@@ -39,7 +39,7 @@ else if($acao == 'deletar'){
 
     $user->update();
 
-    // header('Location:../View/Func/Gere.User.php');
+    header('Location:../View/Func/Gere.User.php');
 
 }
 ?>

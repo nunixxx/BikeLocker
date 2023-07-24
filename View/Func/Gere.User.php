@@ -5,19 +5,19 @@
     if(isset($_SESSION['cpfFunc']) && !empty($_SESSION['cpfFunc']) && $_SESSION['papel']=='func'):
       $acao = 'cadastrar';
       $usuarios = Usuario::getAll();
-      $bike = Bike::getAll();
 
       if(isset($_GET['cpf'])){
         $usuario = new Usuario();
         $usuario->setCPF($_REQUEST['cpf']);
-        $usuario->load(); 
         $bike = new Bike();
         $bike->setCpf($_REQUEST['cpf']);
+        $usuario->load(); 
         $bike->load();
         $acao = 'atualizar';
 
     }else{
         $usuario = new Usuario();
+        $bike = new Bike();
     }
 
 ?>
