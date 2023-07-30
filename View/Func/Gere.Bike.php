@@ -45,6 +45,6 @@
 
 <?php 
 else: 
-    header(__DIR__ . "../View/Login.php");
+    header('Location: ../../View/Login.php');
 endif;
  ?>
