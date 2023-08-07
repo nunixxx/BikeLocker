@@ -3,6 +3,8 @@
 use PHPUnit\Framework\TestCase;
 
 require_once './Model/Bike.class.php';
+require_once './Model/User.class.php';
+
 
 class BikeBDTest extends TestCase{
     private $bike;
@@ -14,7 +16,7 @@ class BikeBDTest extends TestCase{
         $this->bike = new Bike();
 
         $this->bike->setCpf(60082177058);
-        $this->bike->setCor('azul');
+        $this->bike->setCor('#501b1b');
 
         $this->user = new Usuario();
 
@@ -42,7 +44,7 @@ class BikeBDTest extends TestCase{
     public function testUpdatebike(){
         $bike = $this->bike;
 
-        $this->bike->setCor('vermelho');
+        $this->bike->setCor('#501b12');
         $atualizado = $this->bike->update();
 
         $this->assertTrue($atualizado);

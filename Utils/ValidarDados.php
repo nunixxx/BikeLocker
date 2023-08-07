@@ -4,30 +4,10 @@ function validarCPF($cpf) {
     $cpf = preg_replace('/[^0-9]/', '', $cpf);
     // Verifica se o CPF tem 11 dígitos
     if (strlen($cpf) != 11) {
-        return false;
+        return false; 
     }
     // Verifica se todos os dígitos são iguais, o que torna o CPF inválido
     if (preg_match('/(\d)\1{10}/', $cpf)) {
-        return false;
-    }
-    // Calcula o primeiro dígito verificador
-    for ($i = 9, $j = 0, $soma = 0; $i > 0; $i--, $j++) {
-        $soma += $cpf[$j] * $i;
-    }
-    $resto = $soma % 11;
-    $dv1 = $resto < 2 ? 0 : 11 - $resto;
-    // Verifica o primeiro dígito verificador
-    if ($dv1 != $cpf[9]) {
-        return false;
-    }
-    // Calcula o segundo dígito verificador
-    for ($i = 10, $j = 0, $soma = 0; $i > 0; $i--, $j++) {
-        $soma += $cpf[$j] * $i;
-    }
-    $resto = $soma % 11;
-    $dv2 = $resto < 2 ? 0 : 11 - $resto;
-    // Verifica o segundo dígito verificador
-    if ($dv2 != $cpf[10]) {
         return false;
     }
     return true;
@@ -49,7 +29,7 @@ function validarSenha($senha) {
     $senha = trim($senha);
 
     // Verifica se a senha tem pelo menos 8 caracteres
-    if (strlen($senha) < 5) {
+    if (strlen($senha) < 4) {
         return false;
     }
     
@@ -57,11 +37,15 @@ function validarSenha($senha) {
     if (!preg_match('/[a-z]/', $senha)) {
         return false;
     }
-    
-    // Verifica se a senha contém pelo menos um caractere especial
-    if (!preg_match('/[^a-zA-Z0-9]/', $senha)) {
-        return false;
-    }
 
     return true;
+}
+
+function validarCor($cor) {
+    // Verificar se a cor começa com '#' e possui 6 caracteres hexadecimais
+    if (preg_match('/^#([a-fA-F0-9]{6})$/', $cor)) {
+        return true; // Cor válida
+    } else {
+        return false; // Cor inválida
+    }
 }

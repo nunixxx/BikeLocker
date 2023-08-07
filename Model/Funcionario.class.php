@@ -15,7 +15,12 @@ class Funcionario {
 
     public function setEmail($email) 
     {
-        $this->email = $email;
+        if(validarEmail($email) == true){
+            $this->email = $email;
+            return true;
+        }else{
+            return false;
+        } 
     }
     public function getCPF() 
     {
@@ -24,7 +29,12 @@ class Funcionario {
 
     public function setCPF($cpf) 
     {
-        $this->cpf = $cpf;
+        if(validarCpf($cpf) == true){
+            $this->cpf = $cpf;
+            return true;
+        }else{
+            return false;
+        } 
     }
 
     public function getNome() 
@@ -44,7 +54,12 @@ class Funcionario {
 
     public function setSenha($senha) 
     {
-        $this->senha = $senha;
+        if(validarSenha($senha) == true){
+            $this->senha = $senha;
+            return true;
+        }else{
+            return false;
+        } 
     }
 
     public function getPapel() 

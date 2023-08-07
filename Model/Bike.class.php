@@ -1,5 +1,6 @@
 <?php
-include_once './Utils/ValidarDados';
+require __DIR__ . "..\..\DataBase\Conexao.php";
+include_once __DIR__ . "..\..\/Utils/ValidarDados.php";
 
 class Bike {
     private $cor;
@@ -14,10 +15,10 @@ class Bike {
     {
         if(validarCpf($cpf) == true){
             $this->cpf = $cpf;
+            return true;
         }else{
             return false;
-        }
-        
+        } 
     }
     public function getCor() 
     {
@@ -25,7 +26,12 @@ class Bike {
     }
     public function setCor($cor)
     {
-        $this->cor = $cor;
+        if(validarCor($cor) == true){
+            $this->cor = $cor;
+            return true;
+        }else{
+            return false;
+        }
     }
     public function getId() 
     {
