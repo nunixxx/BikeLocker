@@ -89,7 +89,7 @@ class Funcionario {
             $pdo->beginTransaction();
 
             $stmt = $pdo->prepare('INSERT INTO FUNCIONARIO (cpf, nome, senha, papel, email) VALUES (:cpf, :nome, :senha, :papel, :email)');
-            $stmt->execute([
+            $res =$stmt->execute([
                 ':cpf' => $this->cpf,
                 ':nome' => $this->nome,
                 ':senha' => $this->senha,
@@ -97,10 +97,10 @@ class Funcionario {
                 ':email' => $this->email
             ]);
             $pdo->commit();
-            
+            return $res;
         } catch (PDOException $e) {
             $pdo->rollBack();
-            throw $e;
+            return $e->getMessage();
         }
     }
 
@@ -109,9 +109,10 @@ class Funcionario {
         global $pdo;
 
         $stmt = $pdo->prepare('DELETE FROM FUNCIONARIO WHERE CPF = :cpf');
-        $stmt->execute([
+        $res = $stmt->execute([
             ':cpf' => $cpf
         ]); 
+        return $res;
     }
     public static function getAll()
     {
@@ -135,14 +136,14 @@ class Funcionario {
         try{
         $stmt = $pdo->prepare('UPDATE FUNCIONARIO SET nome = :nome, papel = :papel, senha = :senha, email = :email WHERE cpf = :cpf');
 
-        $stmt->execute([
+        $res =$stmt->execute([
             ':nome' => $this->nome,
             ':senha' => $this->senha,
             ':papel' => $this->papel,
             ':cpf' => $this->cpf,
             ':email' => $this->email
         ]);
-        return true;
+        return $res;
         } catch (Exception $e){
             return false;
         }
@@ -155,6 +156,7 @@ class Funcionario {
             $this->setNome($linha['nome']);
             $this->setPapel($linha['papel']);
             $this->setSenha($linha['senha']);
+            $this->setEmail($linha['email']);
             }
 
         return $this;

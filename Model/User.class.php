@@ -30,15 +30,16 @@ class Usuario {
             $pdo->beginTransaction();
 
             $stmt = $pdo->prepare('INSERT INTO USUARIO (cpf, nome) VALUES (:cpf, :nome)');
-            $stmt->execute([
+            $res = $stmt->execute([
                 ':cpf' => $this->cpf,
                 ':nome' => $this->nome,
             ]);
             $pdo->commit();
-            
+            return $res;
+
         } catch (PDOException $e) {
             $pdo->rollBack();
-            throw $e;
+            return "Erro ao salvar dados! ".$e->getCode(). ", ".($e::class);
         }
     }
 
@@ -47,9 +48,10 @@ class Usuario {
         global $pdo;
 
         $stmt = $pdo->prepare('DELETE FROM USUARIO WHERE CPF = :cpf');
-        $stmt->execute([
+        $res = $stmt->execute([
             ':cpf' => $cpf
         ]); 
+        return $res;
     }
     public static function getAll()
     {
@@ -70,14 +72,15 @@ class Usuario {
         try{
         $stmt = $pdo->prepare('UPDATE Usuario SET nome = :nome WHERE cpf = :cpf');
 
-        $stmt->execute([
+        $res = $stmt->execute([
             ':nome' => $this->nome,
             ':cpf' => $this->cpf,
         ]);
-        $pdo->commit();
-        return true;
+        echo $res;
+
+        return $res;
         } catch (Exception $e){
-            return false;
+            return $e->getMessage();
         }
     }
     public  function load()
