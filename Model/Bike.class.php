@@ -1,4 +1,6 @@
 <?php
+include_once './Utils/ValidarDados';
+
 class Bike {
     private $cor;
     private $id;
@@ -10,7 +12,12 @@ class Bike {
     }
     public function setCpf($cpf)
     {
-        $this->cpf = $cpf;
+        if(validarCpf($cpf) == true){
+            $this->cpf = $cpf;
+        }else{
+            return false;
+        }
+        
     }
     public function getCor() 
     {
@@ -37,13 +44,15 @@ public function save()
         $pdo->beginTransaction();
 
         $stmt = $pdo->prepare('INSERT INTO Bike (cor, CPF) VALUES (:cor, :CPF)');
-        $stmt->execute([
+        $res = $stmt->execute([
         ':cor' => $this->cor,
         ':CPF' => $this->cpf
         ]);
         $this->setId($pdo->lastInsertId());
 
         $pdo->commit();
+
+        return $res;
         } catch (PDOException $e) 
         {
             $pdo->rollBack();
@@ -59,10 +68,11 @@ public static function delete($id)
         $pdo->beginTransaction(); 
 
         $stmt = $pdo->prepare('DELETE FROM BIKE WHERE CPF = :id');
-        $stmt->execute([
+        $res = $stmt->execute([
             ':id' => $id
         ]); 
         $pdo->commit();
+        return $res;
     } catch (PDOException $e) 
     {
         $pdo->rollBack();
@@ -101,11 +111,11 @@ public function update()
         
     $stmt = $pdo->prepare('UPDATE BIKE SET cor = :cor WHERE id_bike = :id');
 
-    $stmt->execute([
+    $res = $stmt->execute([
         ':cor' => $this->cor,
         ':id' => $this->id
     ]);
-    return true;
+    return $res;
         } catch (Exception $e){
             return false;
         }

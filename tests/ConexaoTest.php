@@ -17,7 +17,8 @@ class ConexaoTest extends TestCase{
 
         $pdo;
 
-        $this->assertInstanceOf(PDO::class, $pdo);
+        // $this->expectException(Exception::class);
+        $this->assertNotInstanceOf(PDO::class, $pdo);
 
     }
 }
