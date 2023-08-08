@@ -1,73 +1,75 @@
 <?php
- require __DIR__ . "..\..\DataBase\Conexao.php";
+require __DIR__ . "..\..\DataBase\Conexao.php";
+include_once __DIR__ . "..\..\/Utils/ValidarDados.php";
 
-class Funcionario {
+class Funcionario
+{
     private $cpf;
     private $nome;
     private $senha;
     private $email;
     private $papel;
 
-    public function getEmail() 
+    public function getEmail()
     {
         return $this->email;
     }
 
-    public function setEmail($email) 
+    public function setEmail($email)
     {
-        if(validarEmail($email) == true){
+        if (validarEmail($email) == true) {
             $this->email = $email;
             return true;
-        }else{
+        } else {
             return false;
-        } 
+        }
     }
-    public function getCPF() 
+    public function getCPF()
     {
         return $this->cpf;
     }
 
-    public function setCPF($cpf) 
+    public function setCPF($cpf)
     {
-        if(validarCpf($cpf) == true){
+        if (validarCpf($cpf) == true) {
             $this->cpf = $cpf;
             return true;
-        }else{
+        } else {
             return false;
-        } 
+        }
     }
 
-    public function getNome() 
+    public function getNome()
     {
         return $this->nome;
     }
 
-    public function setNome($nome) 
+    public function setNome($nome)
     {
         $this->nome = $nome;
     }
 
-    public function getSenha() 
+    public function getSenha()
     {
         return $this->senha;
     }
 
-    public function setSenha($senha) 
+    public function setSenha($senha)
     {
-        if(validarSenha($senha) == true){
+        if (validarSenha($senha) == true) {
             $this->senha = $senha;
             return true;
-        }else{
+        } else {
             return false;
-        } 
+        }
     }
 
-    public function getPapel() 
+    public function getPapel()
     {
         return $this->papel;
     }
 
-    public function setPapel($papel) 
+    public function setPapel($papel)
     {
         $this->papel = $papel;
     }
@@ -76,23 +78,24 @@ class Funcionario {
     {
         global $pdo;
 
-        $stmt= $pdo->prepare("SELECT * FROM funcionario WHERE CPF = :cpf AND senha = :senha");
+        $stmt = $pdo->prepare(
+            "SELECT * FROM funcionario WHERE CPF = :cpf AND senha = :senha"
+        );
         $stmt->execute([
-            ':cpf' => $cpf,
-            ':senha' => $senha,
+            ":cpf" => $cpf,
+            ":senha" => $senha,
         ]);
 
-            if($stmt->rowCount() == 1){
-                $dado = $stmt->fetch();
+        if ($stmt->rowCount() == 1) {
+            $dado = $stmt->fetch();
 
-                $_SESSION['cpfFunc'] = $dado['CPF'];
-                $_SESSION['papel']= $dado['papel'];
+            $_SESSION["cpfFunc"] = $dado["CPF"];
+            $_SESSION["papel"] = $dado["papel"];
 
-                return true;
-            }else{
-                return false;
-            }
-
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function save()
@@ -100,16 +103,17 @@ class Funcionario {
         global $pdo;
 
         try {
-            
             $pdo->beginTransaction();
 
-            $stmt = $pdo->prepare('INSERT INTO FUNCIONARIO (cpf, nome, senha, papel, email) VALUES (:cpf, :nome, :senha, :papel, :email)');
-            $res =$stmt->execute([
-                ':cpf' => $this->cpf,
-                ':nome' => $this->nome,
-                ':senha' => $this->senha,
-                ':papel' => $this->papel,
-                ':email' => $this->email
+            $stmt = $pdo->prepare(
+                "INSERT INTO FUNCIONARIO (cpf, nome, senha, papel, email) VALUES (:cpf, :nome, :senha, :papel, :email)"
+            );
+            $res = $stmt->execute([
+                ":cpf" => $this->cpf,
+                ":nome" => $this->nome,
+                ":senha" => $this->senha,
+                ":papel" => $this->papel,
+                ":email" => $this->email,
             ]);
             $pdo->commit();
             return $res;
@@ -123,63 +127,72 @@ class Funcionario {
     {
         global $pdo;
 
-        $stmt = $pdo->prepare('DELETE FROM FUNCIONARIO WHERE CPF = :cpf');
+        $stmt = $pdo->prepare("DELETE FROM FUNCIONARIO WHERE CPF = :cpf");
         $res = $stmt->execute([
-            ':cpf' => $cpf
-        ]); 
+            ":cpf" => $cpf,
+        ]);
         return $res;
     }
     public static function getAll()
     {
         global $pdo;
         $lista = [];
-        foreach($pdo->query('SELECT * FROM FUNCIONARIO') as $linha){
+        foreach ($pdo->query("SELECT * FROM FUNCIONARIO") as $linha) {
             $funcs = new Funcionario();
-            $funcs->setNome($linha['nome']);
-            $funcs->setSenha($linha['senha']);
-            $funcs->setCPF($linha['CPF']);
-            $funcs->setPapel($linha['papel']);
-            $funcs->setEmail($linha['email']);
+            $funcs->setNome($linha["nome"]);
+            $funcs->setSenha($linha["senha"]);
+            $funcs->setCPF($linha["CPF"]);
+            $funcs->setPapel($linha["papel"]);
+            $funcs->setEmail($linha["email"]);
 
             $lista[] = $funcs;
         }
-    return $lista;
+        return $lista;
     }
     public function update()
     {
         global $pdo;
-        try{
-        $stmt = $pdo->prepare('UPDATE FUNCIONARIO SET nome = :nome, papel = :papel, senha = :senha, email = :email WHERE cpf = :cpf');
+        try {
+            $stmt = $pdo->prepare(
+                "UPDATE FUNCIONARIO SET nome = :nome, papel = :papel, senha = :senha, email = :email WHERE cpf = :cpf"
+            );
 
-        $res =$stmt->execute([
-            ':nome' => $this->nome,
-            ':senha' => $this->senha,
-            ':papel' => $this->papel,
-            ':cpf' => $this->cpf,
-            ':email' => $this->email
-        ]);
-        return $res;
-        } catch (Exception $e){
+            $res = $stmt->execute([
+                ":nome" => $this->nome,
+                ":senha" => $this->senha,
+                ":papel" => $this->papel,
+                ":cpf" => $this->cpf,
+                ":email" => $this->email,
+            ]);
+            return $res;
+        } catch (Exception $e) {
             return false;
         }
     }
-    public  function load()
+    public function load()
     {
         global $pdo;
         #TODO ver que esse código cheira mal...
-        foreach($pdo->query('SELECT * FROM FUNCIONARIO WHERE CPF = ' . $this->cpf) as $linha){
-            $this->setNome($linha['nome']);
-            $this->setPapel($linha['papel']);
-            $this->setSenha($linha['senha']);
-            $this->setEmail($linha['email']);
-            }
+        foreach (
+            $pdo->query("SELECT * FROM FUNCIONARIO WHERE CPF = " . $this->cpf)
+            as $linha
+        ) {
+            $this->setNome($linha["nome"]);
+            $this->setPapel($linha["papel"]);
+            $this->setSenha($linha["senha"]);
+            $this->setEmail($linha["email"]);
+        }
 
         return $this;
     }
 
-public function __toString()
+    public function __toString()
     {
-        return $this->getNome() ." // ". $this->getEmail() ." // ". $this->getPapel();
+        return $this->getNome() .
+            " // " .
+            $this->getEmail() .
+            " // " .
+            $this->getPapel();
     }
 }
 ?>

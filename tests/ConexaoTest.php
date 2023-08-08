@@ -15,9 +15,8 @@ class ConexaoTest extends TestCase{
 
     public function testConexaoFalha(){
 
-        $pdo;
+        $pdo = null;
 
-        // $this->expectException(Exception::class);
         $this->assertNotInstanceOf(PDO::class, $pdo);
 
     }
