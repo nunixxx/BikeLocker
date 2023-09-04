@@ -1,16 +1,15 @@
 <?php
 include_once '../Model/Funcionario.class.php';
+require_once __DIR__ . "/../Utils/Message.php";
    
     if(isset($_POST['cpf']) && !empty($_POST['cpf']) && isset($_POST['senha']) && !empty($_POST['senha'])){
 
         require '../DataBase/Conexao.php';
 
-        $func = new Funcionario();
+        $cpf = $_POST['cpf'];
+        $senha = $_POST['senha'];
 
-        $cpf = addslashes($_POST['cpf']);
-        $senha = addslashes($_POST['senha']);
-
-        if($func->login($cpf, $senha) == true)
+        if(Funcionario::login($cpf, $senha) == true)
         {
             if($_SESSION['papel'] == 'func')
             {
@@ -19,12 +18,20 @@ include_once '../Model/Funcionario.class.php';
             {
                 header('Location:../View/Adm/Gere.Func.php');
             }
-
+        
         }else{
-            header('Location:../View/Login.php');
-        }
+            $message = new Message();
+            $message->setTipo("danger");
+            $message->setConteudo("Credenciais inválidas");
+
+            header('Location:../View/Login.php?message=' . $message->__toString());
+        }   
 
     }else{
-        header('Location:../View/Login.php');
-    }
+        $message = new Message();
+        $message->setTipo("danger");
+        $message->setConteudo("Preencha os Dados!");
+
+        header('Location:../View/Login.php?message=' . $message->__toString());
+    }   
 ?>

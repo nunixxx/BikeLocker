@@ -56,9 +56,15 @@ class Funcionario
 
     public function setSenha($senha)
     {
-        if (validarSenha($senha) == true) {
-            $this->senha = $senha;
-            return true;
+        $boo = validarSenha($senha);
+        if ($boo == true) {
+            if(password_needs_rehash($senha, PASSWORD_DEFAULT)){
+                $this->senha =  password_hash($senha, PASSWORD_DEFAULT);
+            } else {
+                $this->senha = $senha;
+            }
+        
+        return true;    
         } else {
             return false;
         }
@@ -74,25 +80,25 @@ class Funcionario
         $this->papel = $papel;
     }
 
-    public function login($cpf, $senha)
+    public static function login($cpf, $senha)
     {
         global $pdo;
 
         $stmt = $pdo->prepare(
-            "SELECT * FROM funcionario WHERE CPF = :cpf AND senha = :senha"
+            "SELECT * FROM funcionario WHERE CPF = :cpf"
         );
         $stmt->execute([
             ":cpf" => $cpf,
-            ":senha" => $senha,
         ]);
 
-        if ($stmt->rowCount() == 1) {
+        if ($stmt->rowCount() == 1 ) {
             $dado = $stmt->fetch();
-
-            $_SESSION["cpfFunc"] = $dado["CPF"];
-            $_SESSION["papel"] = $dado["papel"];
-
-            return true;
+            if(password_verify($senha, $dado["senha"])){
+                $_SESSION["cpfFunc"] = $dado["CPF"];
+                $_SESSION["papel"] = $dado["papel"];
+                return true;
+            }            
+            return false;
         } else {
             return false;
         }

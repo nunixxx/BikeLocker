@@ -1,7 +1,7 @@
 <?php
     include_once '../Model/Funcionario.class.php';
     require_once __DIR__ . "..\..\DataBase\Conexao.php";
-
+    include_once '../Utils/Message.php';    
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -30,5 +30,19 @@
             <input type="submit" class="btn btn-primary btn-block mb-4" style="background-color: green; border: 0px;">
         </form>
     </div>
+
+    <?php
+            if (!empty($_GET["message"])) {
+                $message = new Message($_GET["message"]);
+
+                echo "
+                    <div id='messageBox' class='alert alert-" . $message->getTipo() . "' role='alert'>
+                        " . $message->getConteudo() . "
+                    </div>
+                ";
+            }
+        ?>
+
+    <script src="../JavaScript/Message.js"></script>
 </body>
 </html> 

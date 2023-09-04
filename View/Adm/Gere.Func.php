@@ -34,11 +34,11 @@
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Gerenciar
           </a>
-          <ul class="dropdown-menu">
+          <!-- <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">Bicicletário</a></li>
             <li><a class="dropdown-item" href="#">Usuário</a></li>
             <li><a class="dropdown-item" href="#">Bicicletas</a></li>
-          </ul>
+          </ul> -->
         </li>
       </ul>
       <div class="d-flex" role="search">

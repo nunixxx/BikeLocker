@@ -1,12 +1,13 @@
 .loginPanel{
     background-color: rgba(145, 145, 145, 0.4);
-    position:absolute; 
-    position:left;
+    position: absolute; 
+    position: left;
     top: 50%;
     left: 50%;  
     text-align: center;
     transform: translate(-50%, -50%);
-    border-radius: 10px;
     padding: 50px;
-    box-shadow: 10px 10px 30px;
+    border-radius: 39px;
+    background: linear-gradient(145deg, #f0f0f0, #cacaca);
+    box-shadow:  26px 26px 14px #929292, -26px -26px 14px #ffffff;
 }
