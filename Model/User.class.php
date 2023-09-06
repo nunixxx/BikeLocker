@@ -1,20 +1,19 @@
 <?php
-require __DIR__ . "..\..\DataBase\Conexao.php";
-include_once __DIR__ . "..\..\/Utils/ValidarDados.php";
+require_once __DIR__ .'/../Utils/autoload.php';
 
-class Usuario
+class User
 {
     private $cpf;
     private $nome;
 
-    public function getCPF()
+    public function getCpf()
     {
         return $this->cpf;
     }
 
-    public function setCPF($cpf)
+    public function setCpf($cpf)
     {
-        if (validarCpf($cpf) == true) {
+        if (Validador::validarCpf($cpf) == true) {
             $this->cpf = $cpf;
             return true;
         } else {
@@ -34,7 +33,7 @@ class Usuario
 
     public function save()
     {
-        global $pdo;
+        $pdo = Conexao::conexao();
 
         try {
             $pdo->beginTransaction();
@@ -56,7 +55,7 @@ class Usuario
 
     public static function delete($cpf)
     {
-        global $pdo;
+        $pdo = Conexao::conexao();
 
         $stmt = $pdo->prepare("DELETE FROM USUARIO WHERE CPF = :cpf");
         $res = $stmt->execute([
@@ -66,12 +65,12 @@ class Usuario
     }
     public static function getAll()
     {
-        global $pdo;
+        $pdo = Conexao::conexao();
         $lista = [];
         foreach ($pdo->query("SELECT * FROM USUARIO") as $linha) {
-            $user = new Usuario();
+            $user = new User();
             $user->setNome($linha["NOME"]);
-            $user->setCPF($linha["CPF"]);
+            $user->setCpf($linha["CPF"]);
 
             $lista[] = $user;
         }
@@ -79,7 +78,7 @@ class Usuario
     }
     public function update()
     {
-        global $pdo;
+        $pdo = Conexao::conexao();
         try {
             $stmt = $pdo->prepare(
                 "UPDATE Usuario SET nome = :nome WHERE cpf = :cpf"
@@ -98,7 +97,7 @@ class Usuario
     }
     public function load()
     {
-        global $pdo;
+        $pdo = Conexao::conexao();
         #TODO ver que esse código cheira mal...
         foreach (
             $pdo->query("SELECT * FROM Usuario WHERE CPF = " . $this->cpf)
@@ -112,6 +111,6 @@ class Usuario
 
     public function __toString()
     {
-        return $this->getNome() . " // " . $this->getCPF();
+        return $this->getNome() . " // " . $this->getCpf();
     }
 }

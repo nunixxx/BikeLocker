@@ -1,7 +1,8 @@
 <?php
-    include_once '../../Model/Funcionario.class.php';
-
-    if(isset($_SESSION['cpfFunc']) && !empty($_SESSION['cpfFunc']) && $_SESSION['papel']=='adm'):
+    require_once __DIR__ . '/../../Utils/autoload.php';
+    Conexao::conexao();
+    
+    if(isset($_SESSION["cpfFunc"]) && !empty($_SESSION["cpfFunc"]) && $_SESSION["papel"]=="adm"):
 
     $acao = 'cadastrar';
     $funcionarios = Funcionario::getAll();
@@ -86,7 +87,7 @@
             <?php foreach($funcionarios as $funcionario){?>
                 <tr>
                     <th scope="col">
-                        <?php echo $funcionario->getCPF();?>
+                        <?php echo $funcionario->getCpf();?>
                     </th>
                     <td>
                         <?php echo $funcionario->getNome();?>
@@ -98,7 +99,7 @@
                         <?php echo $funcionario->getSenha();?>
                     </td>
                     <td>
-                        <a href="../../Controller/Func.controller.php?acao=deletar&id=<?= $funcionario->getCPF() ?>" class="btn btn-danger">Excluir</a>
+                        <a href="../../Controller/Func.controller.php?acao=deletar&id=<?= $funcionario->getCpf() ?>" class="btn btn-danger">Excluir</a>
                     </td>
 
                     <br>
@@ -114,6 +115,7 @@
 </html>
 <?php 
 else: 
-    header('Location: ../../View/Login.php');
+    var_dump ($_SESSION);
+    // header('Location: ../../View/Login.php');
 endif;
  ?>

@@ -34,7 +34,7 @@ CREATE TABLE `bikelocker`.`bike` (
 --
 
 CREATE TABLE `bikelocker`.`funcionario` (
-  `CPF` BIGINT(11) NOT NULL,
+  `CPF` Varchar(20) NOT NULL,
   `nome` text NOT NULL,
   `senha` text NOT NULL,
   `papel` text NOT NULL,

@@ -1,6 +1,5 @@
 <?php
-require __DIR__ . "..\..\DataBase\Conexao.php";
-include_once __DIR__ . "..\..\/Utils/ValidarDados.php";
+require_once __DIR__ . '/../Utils/autoload.php';
 
 class Funcionario
 {
@@ -17,21 +16,21 @@ class Funcionario
 
     public function setEmail($email)
     {
-        if (validarEmail($email) == true) {
+        if (Validador::validarEmail($email) == true) {
             $this->email = $email;
             return true;
         } else {
             return false;
         }
     }
-    public function getCPF()
+    public function getCpf()
     {
         return $this->cpf;
     }
 
-    public function setCPF($cpf)
+    public function setCpf($cpf)
     {
-        if (validarCpf($cpf) == true) {
+        if (Validador::validarCpf($cpf) == true) {
             $this->cpf = $cpf;
             return true;
         } else {
@@ -56,7 +55,7 @@ class Funcionario
 
     public function setSenha($senha)
     {
-        $boo = validarSenha($senha);
+        $boo = Validador::validarSenha($senha);
         if ($boo == true) {
             if(password_needs_rehash($senha, PASSWORD_DEFAULT)){
                 $this->senha =  password_hash($senha, PASSWORD_DEFAULT);
@@ -82,7 +81,7 @@ class Funcionario
 
     public static function login($cpf, $senha)
     {
-        global $pdo;
+        $pdo = Conexao::conexao();
 
         $stmt = $pdo->prepare(
             "SELECT * FROM funcionario WHERE CPF = :cpf"
@@ -106,7 +105,7 @@ class Funcionario
 
     public function save()
     {
-        global $pdo;
+        $pdo = Conexao::conexao();
 
         try {
             $pdo->beginTransaction();
@@ -131,7 +130,7 @@ class Funcionario
 
     public static function delete($cpf)
     {
-        global $pdo;
+        $pdo = Conexao::conexao();
 
         $stmt = $pdo->prepare("DELETE FROM FUNCIONARIO WHERE CPF = :cpf");
         $res = $stmt->execute([
@@ -141,13 +140,13 @@ class Funcionario
     }
     public static function getAll()
     {
-        global $pdo;
+        $pdo = Conexao::conexao();
         $lista = [];
         foreach ($pdo->query("SELECT * FROM FUNCIONARIO") as $linha) {
             $funcs = new Funcionario();
             $funcs->setNome($linha["nome"]);
             $funcs->setSenha($linha["senha"]);
-            $funcs->setCPF($linha["CPF"]);
+            $funcs->setCpf($linha["CPF"]);
             $funcs->setPapel($linha["papel"]);
             $funcs->setEmail($linha["email"]);
 
@@ -157,7 +156,7 @@ class Funcionario
     }
     public function update()
     {
-        global $pdo;
+        $pdo = Conexao::conexao();
         try {
             $stmt = $pdo->prepare(
                 "UPDATE FUNCIONARIO SET nome = :nome, papel = :papel, senha = :senha, email = :email WHERE cpf = :cpf"
@@ -177,7 +176,7 @@ class Funcionario
     }
     public function load()
     {
-        global $pdo;
+        $pdo = Conexao::conexao();
         #TODO ver que esse código cheira mal...
         foreach (
             $pdo->query("SELECT * FROM FUNCIONARIO WHERE CPF = " . $this->cpf)

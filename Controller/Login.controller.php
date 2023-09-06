@@ -1,11 +1,10 @@
 <?php
-include_once '../Model/Funcionario.class.php';
-require_once __DIR__ . "/../Utils/Message.php";
+require_once '../Utils/autoload.php';
    
     if(isset($_POST['cpf']) && !empty($_POST['cpf']) && isset($_POST['senha']) && !empty($_POST['senha'])){
 
-        require '../DataBase/Conexao.php';
-
+        Conexao::conexao();
+        
         $cpf = $_POST['cpf'];
         $senha = $_POST['senha'];
 

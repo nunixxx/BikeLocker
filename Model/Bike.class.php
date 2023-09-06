@@ -1,6 +1,5 @@
 <?php
-require __DIR__ . "..\..\DataBase\Conexao.php";
-include_once __DIR__ . "..\..\/Utils/ValidarDados.php";
+require_once __DIR__ .'/../Utils/autoload.php';
 
 class Bike {
     private $cor;
@@ -13,7 +12,7 @@ class Bike {
     }
     public function setCpf($cpf)
     {
-        if(validarCpf($cpf) == true){
+        if(Validador::validarCpf($cpf) == true){
             $this->cpf = $cpf;
             return true;
         }else{
@@ -26,7 +25,7 @@ class Bike {
     }
     public function setCor($cor)
     {
-        if(validarCor($cor) == true){
+        if(Validador::validarCor($cor) == true){
             $this->cor = $cor;
             return true;
         }else{
@@ -44,7 +43,7 @@ class Bike {
 
 public function save()
 {        
-    global $pdo;
+    $pdo = Conexao::conexao();
     try {
             
         $pdo->beginTransaction();
@@ -68,7 +67,7 @@ public function save()
 
 public static function delete($id)
 {
-    global $pdo;
+    $pdo = Conexao::conexao();
     try {
             
         $pdo->beginTransaction(); 
@@ -87,7 +86,7 @@ public static function delete($id)
 }
 public static function getAll()
 {
-    global $pdo;
+    $pdo = Conexao::conexao();
     $lista = [];
     try{
 
@@ -112,7 +111,7 @@ return $lista;
 
 public function update()
 {
-    global $pdo;
+    $pdo = Conexao::conexao();
     try{
         
     $stmt = $pdo->prepare('UPDATE BIKE SET cor = :cor WHERE id_bike = :id');
@@ -128,7 +127,7 @@ public function update()
     }
     
     public  function load(){
-        global $pdo;
+        $pdo = Conexao::conexao();
         #TODO ver que esse código cheira mal...
         foreach($pdo->query('SELECT * FROM bike WHERE cpf = ' . $this->cpf) as $linha){
             $this->setCor($linha['cor']);

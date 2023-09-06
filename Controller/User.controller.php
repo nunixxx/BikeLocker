@@ -1,6 +1,6 @@
 <?php
-include_once '../Model/User.class.php';
-include_once '../Model/Bike.class.php';
+require_once __DIR__ .'/../Utils/autoload.php';
+include_once __DIR__ . '/../Model/User.class.php';
 
 $acao = $_GET['acao'];
 
@@ -12,7 +12,7 @@ $imagePath = $_FILES['imagem']['tmp_name'];
 
 
 if ($acao == 'cadastrar'){
-    $user = new Usuario();
+    $user = new User();
     $user->setCpf($_POST['cpf']);
     $user->setNome($_POST['nome']);
     
@@ -28,11 +28,11 @@ if ($acao == 'cadastrar'){
 }
 else if($acao == 'deletar'){
     Bike::delete($_REQUEST['id']);
-    Usuario::delete($_REQUEST['id']);    
+    User::delete($_REQUEST['id']);    
     header('Location:../View/Func/Gere.User.php');
 } else if($acao == 'atualizar'){
-    $user = new Usuario();
-    $user->setCPF($_POST['cpf']);
+    $user = new User();
+    $user->setCpf($_POST['cpf']);
     $user->setNome($_POST['nome']);
 
     move_uploaded_file($imagePath,$savePath);

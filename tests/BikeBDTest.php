@@ -18,7 +18,7 @@ class BikeBDTest extends TestCase{
         $this->bike->setCpf(60082177058);
         $this->bike->setCor('#501b1b');
 
-        $this->user = new Usuario();
+        $this->user = new User();
 
         $this->user->setNome("Caio");
         $this->user->setCpf(60082177058);

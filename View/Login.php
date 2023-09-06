@@ -1,7 +1,8 @@
 <?php
-    include_once '../Model/Funcionario.class.php';
-    require_once __DIR__ . "..\..\DataBase\Conexao.php";
-    include_once '../Utils/Message.php';    
+    require_once '../Utils/autoload.php'; 
+    Conexao::conexao();
+    var_dump ($_SESSION);
+    session_destroy();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

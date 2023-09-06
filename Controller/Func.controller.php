@@ -1,7 +1,7 @@
 <?php
 $acao = $_GET['acao'];
 
-include_once '../model/Funcionario.class.php';
+require_once '../Utils/autoload.php';
 
 //Cadastrar no banco
 if ($acao == 'cadastrar'){
@@ -16,7 +16,7 @@ if ($acao == 'cadastrar'){
     header('Location:../View/Adm/Gere.Func.php ');
 }
 else if($acao == 'deletar'){
-    funcionario::delete($_REQUEST['id']);
+    Funcionario::delete($_REQUEST['id']);
     header('Location:../View/Adm/Gere.Func.php ');
 }
 // } else if($acao =='atualizar'){

@@ -1,5 +1,6 @@
 <?php
     require __DIR__ . '../../../DataBase/Conexao.php';
+    Conexao::conexao();
     if(isset($_SESSION['cpfFunc']) && !empty($_SESSION['cpfFunc']) && $_SESSION['papel']=='func'):
 ?>
 

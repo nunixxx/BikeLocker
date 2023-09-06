@@ -1,22 +1,23 @@
 <?php
-    include_once __DIR__ . '../../../Model/User.class.php';
-    include_once __DIR__ . '../../../Model/Bike.class.php';
+    require_once __DIR__ . '/../../Utils/autoload.php';
+    include_once __DIR__ . '/../../Model/User.class.php';
+    Conexao::conexao();
 
     if(isset($_SESSION['cpfFunc']) && !empty($_SESSION['cpfFunc']) && $_SESSION['papel']=='func'):
-      $acao = 'cadastrar';
-      $usuarios = Usuario::getAll();
+        $users = User::getAll();
+        $acao = 'cadastrar';
 
       if(isset($_GET['cpf'])){
-        $usuario = new Usuario();
-        $usuario->setCPF($_REQUEST['cpf']);
+        $user = new User();
+        $user->setCpf($_REQUEST['cpf']);
         $bike = new Bike();
         $bike->setCpf($_REQUEST['cpf']);
-        $usuario->load(); 
+        $user->load(); 
         $bike->load();
         $acao = 'atualizar';
 
     }else{
-        $usuario = new Usuario();
+        $user = new User();
         $bike = new Bike();
     }
 
@@ -64,11 +65,11 @@
         <br>
         <form action= "../../controller/User.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
             <div class="inputBox">
-                <input type="text" name="cpf" id="cpf" placeholder="CPF" class="form-control" value="<?= $usuario->getCPF();?>"/>
+                <input type="text" name="cpf" id="cpf" placeholder="CPF" class="form-control" value="<?= $user->getCpf();?>"/>
             </div>
             <br>
             <div class="inputBox">
-                <input type="text" name="nome" id="nome" placeholder="Nome" class="form-control" value="<?= $usuario->getNome();?>"/>
+                <input type="text" name="nome" id="nome" placeholder="Nome" class="form-control" value="<?= $user->getNome();?>"/>
             </div>
             <br>
             <div>
@@ -94,17 +95,17 @@
                 </tr>
             </thead>    
         <tbody>
-            <?php foreach($usuarios as $usuario){?>
+            <?php foreach($users as $user){?>
                 <tr>
                     <th scope="col">
-                        <?php echo $usuario->getCPF();?>
+                        <?php echo $user->getCpf();?>
                     </th>
                     <td>
-                        <?php echo $usuario->getNome();?>
+                        <?php echo $user->getNome();?>
                     </td>
                     <td>
-                        <a href="../../Controller/User.controller.php?acao=deletar&id=<?= $usuario->getCPF() ?>" class="btn btn-danger">Excluir</a>
-                        <a href="?cpf=<?= $usuario->getCPF() ?>" class="btn btn-success">Editar</a>
+                        <a href="../../Controller/User.controller.php?acao=deletar&id=<?= $user->getCpf() ?>" class="btn btn-danger">Excluir</a>
+                        <a href="?cpf=<?= $user->getCpf() ?>" class="btn btn-success">Editar</a>
                      </td>
 
                     <br>
