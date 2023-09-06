@@ -42,6 +42,9 @@ CREATE TABLE `bikelocker`.`funcionario` (
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+INSERT INTO `bikelocker`. `funcionario` (`CPF`, `nome`, `senha`, `papel`, `email`) VALUES
+(11111111111, 'adm', '$2y$10$sQBza4MoQpAISgF.qJTfouOTpt3IWdFSfAknB5HDUt7arkEKvQRGa', 'adm', 'adm@gmail.com');
+
 -- --------------------------------------------------------
 
 --
@@ -143,6 +146,5 @@ ALTER TABLE `bikelocker`.`bicicletario`
 ALTER TABLE `bikelocker`.`historicobicicletario`
   ADD CONSTRAINT `fk_hist_bicicletario_usuario1` FOREIGN KEY (`usuario_CPF`) REFERENCES `usuario` (`CPF`),
   ADD CONSTRAINT `fk_hist_Bicicletario_bike` FOREIGN KEY (`bike_id`) REFERENCES `bike` (`ID_BIKE`);
-
 
 COMMIT;
