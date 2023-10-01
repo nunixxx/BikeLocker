@@ -11,9 +11,7 @@
         $user = new User();
         $user->setCpf($_REQUEST['cpf']);
         $bike = new Bike();
-        $bike->setCpf($_REQUEST['cpf']);
         $user->load(); 
-        $bike->load();
         $acao = 'atualizar';
 
     }else{

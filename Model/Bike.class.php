@@ -25,12 +25,13 @@ class Bike {
     }
     public function setCor($cor)
     {
-        if(Validador::validarCor($cor) == true){
-            $this->cor = $cor;
-            return true;
-        }else{
-            return false;
-        }
+        $this->cor = $cor;
+        // if(Validador::validarCor($cor) == true){
+        //     $this->cor = $cor;
+        //     return true;
+        // }else{
+        //     return false;
+        // }
     }
     public function getId() 
     {
@@ -72,7 +73,7 @@ public static function delete($id)
             
         $pdo->beginTransaction(); 
 
-        $stmt = $pdo->prepare('DELETE FROM BIKE WHERE CPF = :id');
+        $stmt = $pdo->prepare('DELETE FROM BIKE WHERE Id_Bike = :id');
         $res = $stmt->execute([
             ':id' => $id
         ]); 
@@ -88,40 +89,33 @@ public static function getAll()
 {
     $pdo = Conexao::conexao();
     $lista = [];
-    try{
+    foreach ($pdo->query("SELECT * FROM bike") as $linha) {
+        $bike = new Bike();
+        $bike->setId($linha["Id_Bike"]);
+        $bike->setCor($linha["cor"]);
+        $bike->setCpf($linha["cpf"]);
 
-        $pdo->beginTransaction();
-
-        foreach($pdo->query('SELECT * FROM BIKE') as $linha){
-            $bike = new Bike();
-            $bike->setCor($linha['cor']);
-            $bike->setId($linha['Id_Bike']);
-            $bike->setCpf($linha['cpf']);
-
-            $pdo->commit();
-            $lista[] = $bike;
-        }
-    } catch (PDOException $e) 
-    {
-        $pdo->rollBack();
-        throw $e;
-    } 
-return $lista;
+        $lista[] = $bike;
+    }
+    return $lista;
 }
 
-public function update()
-{
-    $pdo = Conexao::conexao();
-    try{
-        
-    $stmt = $pdo->prepare('UPDATE BIKE SET cor = :cor WHERE id_bike = :id');
+    public function update()
+    {
+        $pdo = Conexao::conexao();
+        try{
+            $stmt = $pdo->prepare(
+                'UPDATE BIKE SET cor = :cor WHERE id_bike = :id'
+            );
 
-    $res = $stmt->execute([
-        ':cor' => $this->cor,
-        ':id' => $this->id
-    ]);
-    return $res;
+            $res = $stmt->execute([
+                ':cor' => $this->cor,
+                ':id' => $this->id
+            ]);
+            echo $res;
+            return $res;
         } catch (Exception $e){
+            throw $e;
             return false;
         }
     }
@@ -129,9 +123,10 @@ public function update()
     public  function load(){
         $pdo = Conexao::conexao();
         #TODO ver que esse código cheira mal...
-        foreach($pdo->query('SELECT * FROM bike WHERE cpf = ' . $this->cpf) as $linha){
+        foreach($pdo->query('SELECT * FROM bike WHERE Id_Bike = ' . $this->id) as $linha){
             $this->setCor($linha['cor']);
-            $this->setId($linha['Id_Bike']);
+            $this->setCpf($linha['cpf']);
+            // $this->setId($linha['Id_Bike']);
             }
 
         return $this;
