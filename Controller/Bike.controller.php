@@ -40,5 +40,8 @@ else if($_GET['acao']== 'deletar'){
     $bike->update(); 
     header('Location:../View/Func/Gere.Bike.php');
 
+} else if($_GET['acao'] == 'pesquisar'){
+    
 }
+
 ?>

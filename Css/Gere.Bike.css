@@ -17,3 +17,12 @@
     top: 50%;
     left: 40%;
 } 
+    .col-lg-4 {
+        flex: 0 0 auto;
+        width: 100% !important;
+    }
+
+
+    .col-lg-4 > span {
+        width: 100% !important;
+}
