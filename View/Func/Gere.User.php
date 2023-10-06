@@ -1,6 +1,7 @@
 <?php
     require_once __DIR__ . '/../../Utils/autoload.php';
     include_once __DIR__ . '/../../Model/User.class.php';
+    include_once __DIR__ . '/../../Model/Bike.class.php';
     Conexao::conexao();
 
     if(isset($_SESSION['cpfFunc']) && !empty($_SESSION['cpfFunc']) && $_SESSION['papel']=='func'):
