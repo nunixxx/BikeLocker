@@ -1,7 +1,25 @@
 <?php
   require_once __DIR__ . '/../../Utils/autoload.php';
+  include_once __DIR__ . '/../../Model/User.class.php';
+  include_once __DIR__ . '/../../Model/Bike.class.php';
+
   Conexao::conexao();
     if(isset($_SESSION['cpfFunc']) && !empty($_SESSION['cpfFunc']) && $_SESSION['papel']=='func'):
+      
+      $users = User::getAll();
+      $acao = 'cadastrar';
+
+      if(isset($_GET['cpf'])){
+        $user = new User();
+        $user->setCpf($_REQUEST['cpf']);
+        $bike = new Bike();
+        $user->load(); 
+        $acao = 'atualizar';
+
+    }else{
+        $user = new User();
+        $bike = new Bike();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +29,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" type="text/css" href="../../Css/Bicicletario.css" media="screen" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css"/>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
 
@@ -59,33 +79,46 @@
   <div class="formBicicletario">
     <h3>Bicicletario</h3>
     <br>
-    <div class="inputBox">
-      <input type="text" name="cpf" id="cpf" placeholder="CPF" class="form-control" value="<?= $user->getCpf();?>"/>
-    </div>
+    <form action="../../Controller/Bicicletario.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
+    <select class="form-select" aria-label="Default select example" id="cpf" name="cpf">
+        <option><?= $bike->getCpf();?></option>
+        <?php 
+          foreach ($users as $user){
+            ?>
+        <option value=<?= $user->getCpf();?>><?= $user->getCpf();?></option>
+        <?php
+          }
+          ?>
+    </select>
     <br>
-    <form action="" method="post" enctype="multipart/form-data">
       <div class="inputBox">
         <select class="form-select" aria-label="Default select example" id="locker" name="locker">
-          <option>lockers</option>
+          <option></option>
+          <?php
+            for ($i = 1; $i <= 50; $i++){
 
-          <option value=""></option>
+          ?>
+          <option value=""><?= $i?></option>
+          <?php
+            }
+            ?>
         </select>
       </div>
       <br>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="possui">
-        <label class="form-check-label" for="possui">
+        <input class="form-check-input" type="radio" name="cadeado" id="cadeado">
+        <label class="form-check-label" for="cadeado">
           Possui
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="naoPossui" checked>
-        <label class="form-check-label" for="naoPossui">
+        <input class="form-check-input" type="radio" name="cadeado" id="cadeado" checked>
+        <label class="form-check-label" for="cadeado">
           Não Possui
         </label>
       </div>
 
-      <input type="submit" class="btn btn-primary btn-block mb-4" value="Cadastrar">
+      <input type="submit" class="btn btn-primary btn-block mb-4" value="cadastrar">
     </form>
 
   </div>
@@ -100,6 +133,9 @@
                 </tr>
             </thead>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="../../JavaScript/Bicicletario.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
     crossorigin="anonymous"></script>

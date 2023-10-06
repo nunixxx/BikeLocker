@@ -5,6 +5,8 @@ class Bike {
     private $cor;
     private $id;
     private $cpf;
+    private $data;
+    private $bike_id;
 
     public function getCpf() 
     {
