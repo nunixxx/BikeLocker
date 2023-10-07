@@ -68,6 +68,7 @@
   <div class="formBike">
     <h3> Cadastro Bicicletas</h3>
     <br>
+    <?= $bike->getId();?>
     <form action="../../Controller/Bike.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
       <div class="inputBox">
         <input type="text" name="id" id="id" placeholder="ID" class="form-control" value="<?= $bike->getId();?>" readonly />

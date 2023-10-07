@@ -2,7 +2,7 @@
 require_once __DIR__ .'/../Utils/autoload.php';
 include_once __DIR__ . '/../Model/Bicicletario.class.php';
 date_default_timezone_set('America/Sao_Paulo');
-  $horarioAtual = date('Y-m-d H:i');
+  $horarioAtual = date('Y-m-d H:i:s');
 
 if ($_GET['acao']== 'cadastrar'){
     $bicicletario = new Bicicletario();
@@ -15,11 +15,11 @@ if ($_GET['acao']== 'cadastrar'){
 
     $bicicletario->save();
 
-    // header('Location:../View/Func/Bicicletario.php');
+    header('Location:../View/Func/Bicicletario.php');
 }
 
 else if($_GET['acao']== 'deletar'){
-    Bike::delete($_REQUEST['id']);  
+    Bicicletario::delete($_REQUEST['locker']);  
     header('Location:../View/Func/Bicicletario.php');
     
 } else if($_GET['acao']== 'atualizar'){

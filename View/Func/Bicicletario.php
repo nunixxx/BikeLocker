@@ -1,24 +1,25 @@
 <?php
-  require_once __DIR__ . '/../../Utils/autoload.php';
   include_once __DIR__ . '/../../Model/User.class.php';
   include_once __DIR__ . '/../../Model/Bike.class.php';
+  include_once __DIR__ . '/../../Model/Bicicletario.class.php';
 
   Conexao::conexao();
     if(isset($_SESSION['cpfFunc']) && !empty($_SESSION['cpfFunc']) && $_SESSION['papel']=='func'):
       
+      $bicicletarios = Bicicletario::getAll();
       $users = User::getAll();
+      $bikes = Bike::getAll();
       $acao = 'cadastrar';
 
-      if(isset($_GET['cpf'])){
-        $user = new User();
-        $user->setCpf($_REQUEST['cpf']);
-        $bike = new Bike();
-        $user->load(); 
+      if(isset($_GET['locker'])){
+        $bicicletario = new Bicicletario();
+        $bicicletario->setLocker($_REQUEST['locker']);
+
+        $bicicletario->load(); 
         $acao = 'atualizar';
 
     }else{
-        $user = new User();
-        $bike = new Bike();
+        $bicicletario = new Bicicletario();
     }
 ?>
 
@@ -75,13 +76,12 @@
       </div>
     </div>
   </nav>
-
   <div class="formBicicletario">
     <h3>Bicicletario</h3>
     <br>
     <form action="../../Controller/Bicicletario.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
     <select class="form-select" aria-label="Default select example" id="cpf" name="cpf">
-        <option><?= $bike->getCpf();?></option>
+        <option><?= $bicicletario->getCpf();?></option>
         <?php 
           foreach ($users as $user){
             ?>
@@ -91,14 +91,25 @@
           ?>
     </select>
     <br>
+    <select class="form-select" aria-label="Default select example" id="bike_id" name="bike_id">
+        <option><?= $bicicletario->getBikeId();?></option>
+        <?php 
+          foreach ($bikes as $bike){
+            ?>
+        <option value=<?= $bike->getId();?>><?= $bike->getId();?></option>
+        <?php
+          }
+          ?>
+    </select>
+    <br>
       <div class="inputBox">
         <select class="form-select" aria-label="Default select example" id="locker" name="locker">
-          <option></option>
+          <option><?= $bicicletario->getLocker();?></option>
           <?php
             for ($i = 1; $i <= 50; $i++){
 
           ?>
-          <option value=""><?= $i?></option>
+          <option value=<?= $i ?>><?= $i?></option>
           <?php
             }
             ?>
@@ -106,14 +117,14 @@
       </div>
       <br>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="cadeado" id="cadeado">
-        <label class="form-check-label" for="cadeado">
+        <input class="form-check-input" type="radio" name="cadeado" id="1" value="1">
+        <label class="form-check-label" for="1">
           Possui
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="cadeado" id="cadeado" checked>
-        <label class="form-check-label" for="cadeado">
+        <input class="form-check-input" type="radio" name="cadeado" id="0" value="0">
+        <label class="form-check-label" for="0">
           Não Possui
         </label>
       </div>
@@ -124,14 +135,39 @@
   </div>
 
   <div class = "tableBicicletario">
-        <table class = "table table-white table-striped-columns table-bordered">
-            <thead>
+    <table class = "table table-white table-striped-columns table-bordered">
+              <thead>
+                  <tr>
+                      <th scope="col">Locker</th>
+                      <th scope="col">Usuário</th>
+                      <th scope="col" styler="width:30px;">Funcionalidades</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <?php foreach($bicicletarios as $bicicletario){?>
                 <tr>
-                    <th scope="col">Locker</th>
-                    <th scope="col">Usuário</th>
-                    <th scope="col" styler="width:30px;">Funcionalidades</th>
+                  <th scope="col">
+                    <?php echo $bicicletario->getLocker();?>
+                  </th>
+                  <td>
+                    <?php echo $bicicletario->getCpf();?>
+                  </td>
+                  <td>
+                    <?php echo $bicicletario->getChegada();?>
+                  </td>
+                  <td>
+                    <a href="../../Controller/Bicicletario.controller.php?acao=deletar&locker=<?= $bicicletario->getlocker() ?>"
+                      class="btn btn-danger">Excluir</a>
+                    <a href="?locker=<?= $bicicletario->getLocker() ?>" class="btn btn-success">Editar</a>
+                  </td>
+
+                  <br>
                 </tr>
-            </thead>
+                <?php } ?>
+              </tbody>
+    </table>
+  </div>
+
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>

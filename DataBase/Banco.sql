@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `bikelocker`.`bike` (
   `Id_Bike` int(11) NOT NULL,
   `cor` text NOT NULL,
-  `cpf` BIGINT(11) NOT NULL
+  `cpf` Varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -52,7 +52,7 @@ INSERT INTO `bikelocker`. `funcionario` (`CPF`, `nome`, `senha`, `papel`, `email
 --
 
 CREATE TABLE `bikelocker`.`usuario` (
-  `CPF` BIGINT(11) NOT NULL,
+  `CPF` Varchar(20) NOT NULL,
   `NOME` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -64,7 +64,7 @@ CREATE TABLE `bikelocker`.`usuario` (
 
 CREATE TABLE IF NOT EXISTS `bikelocker`.`bicicletario` (
   `LOCKER` INT NOT NULL,
-  `usuario_CPF` BIGINT(11) NOT NULL,
+  `usuario_CPF` Varchar(20) NOT NULL,
   `CADEADO` TINYINT NOT NULL,
   `CHEGADA` DATE NOT NULL,
   `Bike_ID` INT(11) NOT NULL,
@@ -81,7 +81,7 @@ ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 CREATE TABLE IF NOT EXISTS `bikelocker`.`historicoBicicletario` (
   `DATACONSULTA` DATE NOT NULL,
   `LOCKER` INT NOT NULL,
-  `usuario_CPF` BIGINT(11) NOT NULL,
+  `usuario_CPF` Varchar(20) NOT NULL,
   `CHEGADA` DATE NOT NULL,
   `SAIDA` DATE NOT NULL,
   `BIKE_ID` INT(11) NOT NULL,

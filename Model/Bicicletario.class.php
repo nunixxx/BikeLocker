@@ -3,11 +3,11 @@ require_once __DIR__ .'/../Utils/autoload.php';
 
 class Bicicletario{
 
-    private $locker;
-    private $cpf;
-    private $cadeado;
-    private $chegada;
-    private $bikeId;
+        private $locker;
+        private $cpf;
+        private $cadeado;
+        private $chegada;
+        private $bikeId;
     
     public function getLocker() {
         return $this->locker;
@@ -17,11 +17,11 @@ class Bicicletario{
         $this->locker = $locker; 
     }
 
-    public function getcpf() {
+    public function getCpf() {
         return $this->cpf;
     }
 
-    public function setcpf($cpf) {
+    public function setCpf($cpf) {
         $this->cpf = $cpf;
     }
 
@@ -56,13 +56,13 @@ class Bicicletario{
                 
             $pdo->beginTransaction();
 
-            $stmt = $pdo->prepare('INSERT INTO bicicletario (locker, cpf, cadeado, chegada, bike_id) VALUES (:locker, :cpf, :cadeado, :chegada, :bikeId)');
+            $stmt = $pdo->prepare('INSERT INTO bicicletario (LOCKER, usuario_CPF, CADEADO, CHEGADA, Bike_ID) VALUES (:locker, :cpf, :cadeado, :chegada, :bikeId)');
             $res = $stmt->execute([
             ':locker' => $this->locker,
             ':cpf' => $this->cpf,
             ':cadeado' => $this->cadeado,
             ':chegada' => $this->chegada,
-            ':biekId' => $this->bikeId
+            ':bikeId' => $this->bikeId
             ]);
 
             $pdo->commit();
@@ -75,14 +75,14 @@ class Bicicletario{
             }
     }
 
-    public static function delete($id)
+    public static function delete($locker)
     {
         $pdo = Conexao::conexao();
         try {
                 
             $pdo->beginTransaction(); 
 
-            $stmt = $pdo->prepare('DELETE FROM Bicicletario WHERE locker = :locker');
+            $stmt = $pdo->prepare('DELETE FROM Bicicletario WHERE LOCKER = :locker');
             $res = $stmt->execute([
                 ':locker' => $locker
             ]); 
@@ -100,15 +100,38 @@ class Bicicletario{
         $lista = [];
         foreach ($pdo->query("SELECT * FROM bicicletario") as $linha) {
             $bicicletario = new Bicicletario();
-            $bicicletario->setlocker($linha["locker"]);
-            $bicicletario->setCpf($linha["cpf"]);
-            $bicicletario->setCadeado($linha["cadeado"]);
-            $bicicletario->setChegada($linha["chegada"]);
-            $bicicletario->setBikeId($linha["bike_id"]);
+            $bicicletario->setlocker($linha["LOCKER"]);
+            $bicicletario->setCpf($linha["usuario_CPF"]);
+            $bicicletario->setCadeado($linha["CADEADO"]);
+            $bicicletario->setChegada($linha["CHEGADA"]);
+            $bicicletario->setBikeId($linha["Bike_ID"]);
 
             $lista[] = $bicicletario;
         }
         return $lista;
+    }
+
+    public function load(){
+        $pdo = Conexao::conexao();
+        #TODO ver que esse código cheira mal...
+        foreach($pdo->query('SELECT * FROM bicicletario WHERE locker = ' . $this->locker) as $linha){
+            $this->setlocker($linha["LOCKER"]);
+            $this->setCpf($linha["usuario_CPF"]);
+            $this->setCadeado($linha["CADEADO"]);
+            $this->setChegada($linha["CHEGADA"]);
+            $this->setBikeId($linha["Bike_ID"]);
+            // $this->setId($linha['Id_Bike']);
+            }
+
+        return $this;
+    }
+
+    public function __toString() {
+        return "Locker: " . $this->locker . "<br>" .
+               "CPF: " . $this->cpf . "<br>" .
+               "Cadeado: " . $this->cadeado . "<br>" .
+               "Chegada: " . $this->chegada . "<br>" .
+               "Bike ID: " . $this->bikeId . "<br>";
     }
 
 }
