@@ -10,19 +10,90 @@
     padding: 50px;
     box-shadow: 10px 10px 30px;
 }
-.table{
-    max-width: 1000px;
-    position:absolute; 
+
+#color-box {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+}
+
+.tableBike{
+    position: absolute; 
     position: right;
-    top: 50%;
-    left: 40%;
+    top: 30%;
+    left: 50%;
+    width: 600px; 
+    max-height: 400px;
+    overflow-y: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: rgb(245,242,242);
+    box-shadow: 3px 3px 3px 3px rgba(50, 50, 50, 0.77);
+    border-radius: 5px;
+    
 } 
-    .col-lg-4 {
-        flex: 0 0 auto;
-        width: 100% !important;
-    }
 
+.tableBike .cabecalho{
+    position: sticky;
+    height: 50px;
+    top: 0;
+    background-color:  rgb(74, 122, 74);
+}
+.tableBike table{
+    width: 100%;
+    border-collapse: collapse;
+}
 
-    .col-lg-4 > span {
-        width: 100% !important;
+.tableBike table tr th{
+    height: 56px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: .25px;
+    text-align: left;
+    padding: 0 10px;
+}
+.tableBike table tr.item td{
+    border-bottom: 1px solid #c8cacc;
+    padding: 0 10px;
+}
+.tableBike table tr.item{
+    height: 60px;
+}
+.tableBike table tr td {
+    vertical-align: middle;
+    width: 20%;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.25px;
+}
+.tableBike table tr td .button{
+    font-size: 14px;
+    max-width: 90px;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #0019ff;
+    border: 2px solid #0019ff;
+    border-radius: 5px;
+    background-color: transparent;
+    padding: 8px 10px;
+    min-height: 20px;
+}
+
+.tableBike table tr td .button:hover{
+    background-color: #dbdef6;
+}
+
+.negativo{
+    color: #ed0818;
+}
+.positivo{
+    color: #00a971;
+}
+.right{
+    text-align: right;
 }

@@ -1,7 +1,6 @@
 <?php
     require_once '../Utils/autoload.php'; 
     Conexao::conexao();
-    var_dump ($_SESSION);
     session_destroy();
 ?>
 <!DOCTYPE html>
@@ -16,7 +15,6 @@
     <title>Document</title>
 </head>
 <body>
-    <p> LOGIN ADMIN = 11111111111 senha = adm </p>
     <div class="loginPanel">
         <h3>Login</h3>
         <br>

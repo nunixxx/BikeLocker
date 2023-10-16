@@ -59,7 +59,7 @@
   </div>
 </nav>
 
-<div class="formUser">
+    <div class="formUser">
         <h3>Cadastro Usuários</h3>
         <br>
         <form action= "../../controller/User.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
@@ -82,36 +82,36 @@
             <br><br>
             <input type="submit" class="btn btn-primary btn-block mb-4" value="Cadastrar">
         </form>
-</div>
+    </div>
 
-<div class = "tableUser">
-        <table class = "table table-white table-striped-columns table-bordered">
+    <div class="tableUser">
+        <table class="cabecalho">
             <thead>
                 <tr>
-                    <th scope="col">CPF</th>
-                    <th scope="col">nome</th>
-                    <th scope="col" styler="width:50px;">Funcionalidades</th>
+                    <th>CPF</th>
+                    <th>nome</th>
+                    <th>Funcionalidades</th>
                 </tr>
-            </thead>    
-        <tbody>
-            <?php foreach($users as $user){?>
-                <tr>
-                    <th scope="col">
-                        <?php echo $user->getCpf();?>
-                    </th>
+            </thead> 
+        </table>   
+        <table>
+            <tbody>
+                <?php foreach($users as $user){?>
+                <tr class="item">
+                    <td>
+                        <strong><?php echo $user->getCpf();?></strong>
+                    </td>
                     <td>
                         <?php echo $user->getNome();?>
                     </td>
                     <td>
                         <a href="../../Controller/User.controller.php?acao=deletar&id=<?= $user->getCpf() ?>" class="btn btn-danger">Excluir</a>
                         <a href="?cpf=<?= $user->getCpf() ?>" class="btn btn-success">Editar</a>
-                     </td>
-
-                    <br>
+                    </td>
                 </tr>
-            <?php } ?>
-        </tbody>
-            </table>
+                <?php } ?>
+            </tbody>
+        </table>
     </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>

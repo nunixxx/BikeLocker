@@ -30,7 +30,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" type="text/css" href="../../Css/Bicicletario.css" media="screen" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
@@ -79,42 +79,61 @@
   <div class="formBicicletario">
     <h3>Bicicletario</h3>
     <br>
-    <form action="../../Controller/Bicicletario.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
-    <select class="form-select" aria-label="Default select example" id="cpf" name="cpf">
-        <option><?= $bicicletario->getCpf();?></option>
+    <form action="../../Controller/Bicicletario.controller.php?acao=<?= $acao ?>" method="post"
+      enctype="multipart/form-data">
+      <label> Usuário </label><br>
+      <select class="form-select" aria-label="Default select example" id="cpf" name="cpf">
+        <option>
+          <?= $bicicletario->getCpf();?>
+        </option>
         <?php 
           foreach ($users as $user){
             ?>
-        <option value=<?= $user->getCpf();?>><?= $user->getCpf();?></option>
+        <option value=<?=$user->getCpf();?>>
+          <?= $user->getCpf();?>
+        </option>
         <?php
           }
           ?>
-    </select>
-    <br>
-    <select class="form-select" aria-label="Default select example" id="bike_id" name="bike_id">
-        <option><?= $bicicletario->getBikeId();?></option>
+      </select>
+      <br>
+      <label> Bicicleta </label><br>
+      <select class="form-select" aria-label="Default select example" id="bike_id" name="bike_id">
+        <option>
+          <?= $bicicletario->getBikeId();?>
+        </option>
         <?php 
           foreach ($bikes as $bike){
             ?>
-        <option value=<?= $bike->getId();?>><?= $bike->getId();?></option>
+        <option value=<?=$bike->getId();?>>
+          <?= $bike->getId();?>
+        </option>
         <?php
           }
           ?>
-    </select>
-    <br>
+      </select>
+      <br>
+      <label> Locker </label>
+      <br>
       <div class="inputBox">
         <select class="form-select" aria-label="Default select example" id="locker" name="locker">
-          <option><?= $bicicletario->getLocker();?></option>
+          <option>
+            <?= $bicicletario->getLocker();?>
+          </option>
           <?php
             for ($i = 1; $i <= 50; $i++){
 
           ?>
-          <option value=<?= $i ?>><?= $i?></option>
+          <option value=<?=$i ?>>
+            <?= $i?>
+          </option>
           <?php
             }
             ?>
         </select>
       </div>
+      <br>
+      <label> Cadeado </label>
       <br>
       <div class="form-check">
         <input class="form-check-input" type="radio" name="cadeado" id="1" value="1">
@@ -134,37 +153,43 @@
 
   </div>
 
-  <div class = "tableBicicletario">
-    <table class = "table table-white table-striped-columns table-bordered">
-              <thead>
-                  <tr>
-                      <th scope="col">Locker</th>
-                      <th scope="col">Usuário</th>
-                      <th scope="col" styler="width:30px;">Funcionalidades</th>
-                  </tr>
-              </thead>
-              <tbody>
-                <?php foreach($bicicletarios as $bicicletario){?>
-                <tr>
-                  <th scope="col">
-                    <?php echo $bicicletario->getLocker();?>
-                  </th>
-                  <td>
-                    <?php echo $bicicletario->getCpf();?>
-                  </td>
-                  <td>
-                    <?php echo $bicicletario->getChegada();?>
-                  </td>
-                  <td>
-                    <a href="../../Controller/Bicicletario.controller.php?acao=deletar&locker=<?= $bicicletario->getlocker() ?>"
-                      class="btn btn-danger">Excluir</a>
-                    <a href="?locker=<?= $bicicletario->getLocker() ?>" class="btn btn-success">Editar</a>
-                  </td>
+  <div class="tableBicicletario">
+    <table class="cabecalho">
+      <thead>
+        <tr>
+          <th>Locker</th>
+          <th>Usuário</th>
+          <th>Bike</th>
+          <th>Horario</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+    </table>
 
-                  <br>
-                </tr>
-                <?php } ?>
-              </tbody>
+    <table>
+      <tbody>
+        <?php foreach($bicicletarios as $bicicletario){?>
+        <tr class="item">
+          <th>
+            <?php echo $bicicletario->getLocker();?>
+          </th>
+          <td>
+            <?php echo $bicicletario->getCpf();?>
+          </td>
+          <td>
+            <?php echo $bicicletario->getBikeId();?>
+          </td>
+          <td>
+            <?php echo $bicicletario->getChegada();?>
+          </td>
+          <td>
+            <a href="../../Controller/Bicicletario.controller.php?acao=deletar&locker=<?= $bicicletario->getlocker() ?>"
+              class="btn btn-danger">Excluir</a>
+            <a href="?locker=<?= $bicicletario->getLocker() ?>" class="btn btn-success">Editar</a>
+          </td>
+        </tr>
+        <?php } ?>
+      </tbody>
     </table>
   </div>
 

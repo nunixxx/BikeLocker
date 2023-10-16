@@ -68,6 +68,26 @@ public function save()
         }
 }
 
+public static function deleteUser($id)
+{
+    $pdo = Conexao::conexao();
+    try {
+            
+        $pdo->beginTransaction(); 
+
+        $stmt = $pdo->prepare('DELETE FROM BIKE WHERE cpf = :id');
+        $res = $stmt->execute([
+            ':id' => $id
+        ]); 
+        $pdo->commit();
+        return $res;
+    } catch (PDOException $e) 
+    {
+        $pdo->rollBack();
+        throw $e;
+    }    
+}
+
 public static function delete($id)
 {
     $pdo = Conexao::conexao();

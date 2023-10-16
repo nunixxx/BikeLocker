@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ .'/../Utils/autoload.php';
 include_once __DIR__ . '/../Model/Bike.class.php';
+include_once __DIR__ . '/../Model/Bicicletario.class.php';
 
 
 if ($_GET['acao']== 'cadastrar'){
@@ -20,8 +21,20 @@ if ($_GET['acao']== 'cadastrar'){
 }
 
 else if($_GET['acao']== 'deletar'){
+    $temp = Bicicletario::loadByBike($_REQUEST['id']);
+    if($temp == false){
+        Bike::delete($_REQUEST['id']);  
+        header('Location:../View/Func/Gere.Bike.php');
+    }else{
+        $message = new Message();
+        $message->setTipo("danger");
+        $message->setConteudo("Bicicleta cadastrada no Bicicletario: ");
+
+        header('Location:../View/Func/Gere.Bike.php?message=' . $message->__toString());
+    }
     Bike::delete($_REQUEST['id']);  
     header('Location:../View/Func/Gere.Bike.php');
+
     
 } else if($_GET['acao']== 'atualizar'){
     $bike = new Bike();

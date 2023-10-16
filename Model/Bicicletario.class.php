@@ -111,6 +111,24 @@ class Bicicletario{
         return $lista;
     }
 
+    public static function loadByBike($id){
+        $pdo = Conexao::conexao();
+        try {
+                
+            $pdo->beginTransaction(); 
+
+            $stmt = $pdo->prepare('SELECT * FROM bicicletario WHERE Bike_ID = :id');
+            $res = $stmt->execute([
+                ':id' => $id
+            ]); 
+            $pdo->commit();
+            return $res;
+        } catch (PDOException $e) 
+        {
+            $pdo->rollBack();
+            throw $e;
+        }
+    }
     public function load(){
         $pdo = Conexao::conexao();
         #TODO ver que esse código cheira mal...

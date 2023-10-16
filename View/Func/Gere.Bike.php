@@ -71,15 +71,20 @@
     <?= $bike->getId();?>
     <form action="../../Controller/Bike.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
       <div class="inputBox">
-        <input type="text" name="id" id="id" placeholder="ID" class="form-control" value="<?= $bike->getId();?>" readonly />
+        <input type="text" name="id" id="id" placeholder="ID" class="form-control" value="<?= $bike->getId();?>"
+          readonly />
       </div>
       <br>
       <select class="form-select" aria-label="Default select example" id="cpf" name="cpf">
-        <option><?= $bike->getCpf();?></option>
+        <option>
+          <?= $bike->getCpf();?>
+        </option>
         <?php 
           foreach ($users as $user){
             ?>
-        <option value=<?= $user->getCpf();?>><?= $user->getCpf();?></option>
+        <option value=<?=$user->getCpf();?>>
+          <?= $user->getCpf();?>
+        </option>
         <?php
           }
           ?>
@@ -100,41 +105,56 @@
   </div>
 
   <div class="tableBike">
-    <table class="table table-white table-striped-columns table-bordered">
+    <table class="cabecalho">
       <thead>
         <tr>
-          <th scope="col">CPF</th>
-          <th scope="col">nome</th>
-          <th scope="col" styler="width:50px;">Funcionalidades</th>
+          <th>CPF</th>
+          <th>nome</th>
+          <th>Funcionalidades</th>
         </tr>
       </thead>
+    </table>
+
+    <table>
       <tbody>
         <?php foreach($bikes as $bike){?>
-        <tr>
-          <th scope="col">
-            <?php echo $bike->getCpf();?>
-          </th>
+        <tr class="item">
           <td>
-            <?php echo $bike->getCor();?>
+            <strong><?php echo $bike->getCpf();?></strong>
           </td>
           <td>
-            <a href="../../Controller/Bike.controller.php?acao=deletar&id=<?= $bike->getId() ?>"
-              class="btn btn-danger">Excluir</a>
+          <div id="color-box" style="background-color: <?php echo $bike->getCor(); ?>"></div>
+          </td>
+          <td>
+            <a href="../../Controller/Bike.controller.php?acao=deletar&id=<?= $bike->getId() ?>" class="btn btn-danger">Excluir</a>
             <a href="?id=<?= $bike->getId() ?>" class="btn btn-success">Editar</a>
           </td>
-
-          <br>
         </tr>
         <?php } ?>
       </tbody>
     </table>
   </div>
-  
+
+
+  <?php
+            if (!empty($_GET["message"])) {
+                $message = new Message($_GET["message"]);
+
+                echo "
+                    <div id='messageBox' class='alert alert-" . $message->getTipo() . "' role='alert'>
+                        " . $message->getConteudo() . "
+                    </div>
+                ";
+            }
+  ?>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="../../JavaScript/Message.js"></script>
   <script src="../../JavaScript/Gere.Bike.js"></script>
-  <script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity = "sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin = "anonymous" ></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>

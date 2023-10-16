@@ -29,7 +29,7 @@ if ($acao == 'cadastrar'){
 }
 
 else if($acao == 'deletar'){
-    Bike::delete($_REQUEST['id']);
+    Bike::deleteUser($_REQUEST['id']);
     User::delete($_REQUEST['id']);    
     header('Location:../View/Func/Gere.User.php');
     

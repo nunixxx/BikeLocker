@@ -33,8 +33,6 @@ else if($_GET['acao']== 'deletar'){
     $imagePath = $_FILES['imagem']['tmp_name'];
 
     move_uploaded_file($imagePath,$savePath);
-    
-    move_uploaded_file($imagePath,$savePath);
 
     $bike->update(); 
     header('Location:../View/Func/Bicicletario.php');
