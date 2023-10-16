@@ -26,15 +26,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="../../Css/Gere.Bike.css" media="screen" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="../../Css/Gere.Bike.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="../../Css/Geral.css" media="screen" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css">
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <title>Bicicletas</title>
 </head>
 
-<body>
+<body >
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <label>
@@ -65,19 +66,19 @@
     </div>
   </nav>
 
-  <div class="formBike">
+  <div class="form">
     <h3> Cadastro Bicicletas</h3>
     <br>
     <?= $bike->getId();?>
     <form action="../../Controller/Bike.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
-      <div class="inputBox">
+      <div class="inputBox" styler = "witdh: 20px">
         <input type="text" name="id" id="id" placeholder="ID" class="form-control" value="<?= $bike->getId();?>"
           readonly />
       </div>
       <br>
-      <select class="form-select" aria-label="Default select example" id="cpf" name="cpf">
+      <select class="form-select" aria-label="Default select example" id="cpf" name="cpf" placeholder = "cpf" >
         <option>
-          <?= $bike->getCpf();?>
+          CPF
         </option>
         <?php 
           foreach ($users as $user){
@@ -95,16 +96,18 @@
           value="<?= $bike->getCor();?>" />
       </div>
       <br>
-      <div class="btn btn-primary btn-rounded">
-        <label class="form-label text-white m-1" for="imagem">Choose file</label>
-        <input type="file" class="form-control d-none" id="imagem" name="imagem" value="" />
+      <div class="btn btn-primary btn-rounded" style ="background-color: #0c945de3; border: none;">
+        
+        <img src="../../Images/nuvemUpload.png" for="imagem" style="width: 30px; height: 30px;"/>
+        <label class="imageButton" for="imagem"> <strong>Choose file</strong></label>
+        <input type="file" class="form-control d-none" id="imagem" name="imagem" />
       </div>
       <br><br>
-      <input type="submit" class="btn btn-primary btn-block mb-4" value="Cadastrar">
+      <input type="submit" class="btn btn-primary btn-block " value="Cadastrar" style="background-color: #0c945de3; border: none; border-radius: 0px; font-weight: bold;" >
     </form>
   </div>
 
-  <div class="tableBike">
+  <div class="tabela">
     <table class="cabecalho">
       <thead>
         <tr>

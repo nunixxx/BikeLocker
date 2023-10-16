@@ -1,92 +1,10 @@
-.formBicicletario{
-    background-color: rgba(145, 145, 145, 0.4);
-    position:absolute; 
-    position:left;
-    top: 50%;
-    left: 30%;  
-    text-align: center;
-    transform: translate(-50%, -50%);
-    border-radius: 10px;
-    padding: 50px;
-    box-shadow: 10px 10px 30px;
-}
-
-.tableBicicletario{
-    position: absolute; 
-    position: right;
-    top: 30%;
-    left: 50%;
-    width: 700px; 
-    max-height: 400px;
-    overflow-y: scroll;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    background-color: rgb(245,242,242);
-    box-shadow: 3px 3px 3px 3px rgba(50, 50, 50, 0.77);
-    border-radius: 5px;
-    
-} 
-
-.tableBicicletario .cabecalho{
-    position: sticky;
-    height: 50px;
-    top: 0;
-    background-color:  rgb(74, 122, 74);
-}
-.tableBicicletario table{
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.tableBicicletario table tr th{
-    height: 56px;
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: .25px;
-    text-align: left;
-    padding: 0 10px;
-}
-.tableBicicletario table tr.item td{
-    border-bottom: 1px solid #c8cacc;
-    padding: 0 10px;
-}
-.tableBicicletario table tr.item{
+.bikeImg{
+    width: 60px;
     height: 60px;
-}
-.tableBicicletario table tr td {
-    vertical-align: middle;
-    width: 20%;
-    font-size: 16px;
-    font-weight: 400;
-    letter-spacing: 0.25px;
-}
-.tableBicicletario table tr td .button{
-    font-size: 14px;
-    max-width: 90px;
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: #0019ff;
-    border: 2px solid #0019ff;
-    border-radius: 5px;
-    background-color: transparent;
-    padding: 8px 10px;
-    min-height: 20px;
+    object-fit: contain;
+    transition: all 0.2s ease-in-out;
 }
 
-.tableBicicletario table tr td .button:hover{
-    background-color: #dbdef6;
-}
-
-.negativo{
-    color: #ed0818;
-}
-.positivo{
-    color: #00a971;
-}
-.right{
-    text-align: right;
+.bikeImg:hover{
+    transform: scale(4);
 }

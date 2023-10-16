@@ -30,6 +30,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" type="text/css" href="../../Css/Bicicletario.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="../../Css/Geral.css" media="screen" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -76,7 +77,7 @@
       </div>
     </div>
   </nav>
-  <div class="formBicicletario">
+  <div class="form">
     <h3>Bicicletario</h3>
     <br>
     <form action="../../Controller/Bicicletario.controller.php?acao=<?= $acao ?>" method="post"
@@ -152,8 +153,7 @@
     </form>
 
   </div>
-
-  <div class="tableBicicletario">
+  <div class="tabela">
     <table class="cabecalho">
       <thead>
         <tr>
@@ -177,7 +177,7 @@
             <?php echo $bicicletario->getCpf();?>
           </td>
           <td>
-            <?php echo $bicicletario->getBikeId();?>
+          <img class= "bikeImg" src="../../Arquivos/<?php echo $bicicletario->getBikeId();?>.png" for="imagem"/>
           </td>
           <td>
             <?php echo $bicicletario->getChegada();?>
