@@ -69,7 +69,6 @@
   <div class="form">
     <h3> Cadastro Bicicletas</h3>
     <br>
-    <?= $bike->getId();?>
     <form action="../../Controller/Bike.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
       <div class="inputBox" styler = "witdh: 20px">
         <input type="text" name="id" id="id" placeholder="ID" class="form-control" value="<?= $bike->getId();?>"
@@ -78,7 +77,7 @@
       <br>
       <select class="form-select" aria-label="Default select example" id="cpf" name="cpf" placeholder = "cpf" >
         <option>
-          CPF
+          <?php if(null == $bike->getCpf() ){echo "CPF";} else{echo $bike->getCpf();}  ?>
         </option>
         <?php 
           foreach ($users as $user){

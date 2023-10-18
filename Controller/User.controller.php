@@ -17,7 +17,7 @@ if ($acao == 'cadastrar'){
     $bike = new Bike();
     $bike->setCor($_POST['cor']);
     $bike->setCpf($user->getCpf());
-    $bike->save();
+    // $bike->save();
 
     $imageName = $bike->getId();
 

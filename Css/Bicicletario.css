@@ -8,3 +8,59 @@
 .bikeImg:hover{
     transform: scale(4);
 }
+.toggles {
+    color: black;
+    margin: 0 0 1.5rem;
+    box-sizing: border-box;
+    font-size: 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+  .toggles .cadeado {
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: -9999px;
+  }
+  .toggles .cadeado + label {
+    margin: 0;
+    padding: 0.75rem 2rem;
+    box-sizing: border-box;
+    position: relative;
+    display: inline-block;
+    border: solid 1px #DDD;
+    background-color: #FFF;
+    font-size: 1rem;
+    line-height: 140%;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+    transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, box-shadow 0.15s ease-out;
+    /* ADD THESE PROPERTIES TO SWITCH FROM AUTO WIDTH TO FULL WIDTH */
+    /*flex: 0 0 50%; display: flex; justify-content: center; align-items: center;*/
+    /* ----- */
+  }
+  .toggles .cadeado + label:first-of-type {
+    border-radius: 6px 0 0 6px;
+    border-right: none;
+  }
+  .toggles .cadeado + label:last-of-type {
+    border-radius: 0 6px 6px 0;
+    border-left: none;
+  }
+  .toggles .cadeado:hover + label {
+    border-color: #213140;
+  }
+  .toggles .cadeado:checked + label {
+    background-color: rgb(155, 249, 155);
+    color: #FFF;
+    box-shadow: 0 0 10px rgba(3, 255, 49, 0.575);
+    border-color: #000;
+    z-index: 1;
+  }
+  .toggles .cadeado:focus + label {
+    outline: dotted 1px #CCC;
+    outline-offset: 0.45rem;
+  }

@@ -29,13 +29,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" type="text/css" href="../../Css/Bicicletario.css" media="screen" />
-  <link rel="stylesheet" type="text/css" href="../../Css/Geral.css" media="screen" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
-
+    <link rel="stylesheet" type="text/css" href="../../Css/Bicicletario.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="../../Css/Geral.css" media="screen" />
   <title>Tela Incial</title>
 </head>
 
@@ -77,7 +76,7 @@
       </div>
     </div>
   </nav>
-  <div class="form">
+  <div class="form" style = "color: white">
     <h3>Bicicletario</h3>
     <br>
     <form action="../../Controller/Bicicletario.controller.php?acao=<?= $acao ?>" method="post"
@@ -85,7 +84,7 @@
       <label> Usuário </label><br>
       <select class="form-select" aria-label="Default select example" id="cpf" name="cpf">
         <option>
-          <?= $bicicletario->getCpf();?>
+          <?php if(null == $bicicletario->getCpf() ){echo "CPF";} else{echo $bicicletario->getCpf();}  ?>
         </option>
         <?php 
           foreach ($users as $user){
@@ -101,7 +100,7 @@
       <label> Bicicleta </label><br>
       <select class="form-select" aria-label="Default select example" id="bike_id" name="bike_id">
         <option>
-          <?= $bicicletario->getBikeId();?>
+          <?php if(null == $bicicletario->getBikeId() ){echo "ID";} else{echo $bicicletario->getBikeId();}  ?>
         </option>
         <?php 
           foreach ($bikes as $bike){
@@ -119,7 +118,7 @@
       <div class="inputBox">
         <select class="form-select" aria-label="Default select example" id="locker" name="locker">
           <option>
-            <?= $bicicletario->getLocker();?>
+          <?php if(null == $bicicletario->getLocker () ){echo "Locker";} else{echo $bicicletario->getLocker();}  ?>
           </option>
           <?php
             for ($i = 1; $i <= 50; $i++){
@@ -136,19 +135,12 @@
       <br>
       <label> Cadeado </label>
       <br>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="cadeado" id="1" value="1">
-        <label class="form-check-label" for="1">
-          Possui
-        </label>
+      <div class="toggles">
+        <input class="cadeado" type="radio" name="cadeado" id="1" value="1" <?php if($bicicletario->getCadeado() == 1){echo "checked";} ?>>
+          <label for="1">Possui</label>
+        <input class="cadeado" type="radio" name="cadeado" id="0" value="0" <?php if($bicicletario->getCadeado() !== null && $bicicletario->getCadeado() == 0){echo "checked";}?>>
+          <label for="0">Não Possui </label>
       </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="cadeado" id="0" value="0">
-        <label class="form-check-label" for="0">
-          Não Possui
-        </label>
-      </div>
-
       <input type="submit" class="btn btn-primary btn-block mb-4" value="cadastrar">
     </form>
 
