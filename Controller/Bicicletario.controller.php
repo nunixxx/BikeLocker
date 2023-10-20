@@ -1,11 +1,13 @@
 <?php
 require_once __DIR__ .'/../Utils/autoload.php';
 include_once __DIR__ . '/../Model/Bicicletario.class.php';
+include_once __DIR__ . '/../Model/Historico.class.php';
 date_default_timezone_set('America/Sao_Paulo');
-  $horarioAtual = date('Y-m-d H:i:s');
+    
+    $bicicletario = new Bicicletario();
+    $horarioAtual = date('Y-m-d H:i:s');
 
 if ($_GET['acao']== 'cadastrar'){
-    $bicicletario = new Bicicletario();
 
     $bicicletario->setlocker($_POST['locker']);
     $bicicletario->setCpf($_POST['cpf']);
@@ -19,6 +21,20 @@ if ($_GET['acao']== 'cadastrar'){
 }
 
 else if($_GET['acao']== 'deletar'){
+    $historico= new Historico();
+    $bicicletario->setLocker($_REQUEST['locker']);
+
+    $bicicletario->load(); 
+
+    $historico->setlocker($bicicletario->getLocker());
+    $historico->setCpf($bicicletario->getCpf());
+    $historico->setCadeado($bicicletario->getCadeado());
+    $historico->setChegada($bicicletario->getChegada());
+    $historico->setBikeId($bicicletario->getBikeId());
+    $historico->setSaida($horarioAtual);
+
+    $historico->save();
+
     Bicicletario::delete($_REQUEST['locker']);  
     header('Location:../View/Func/Bicicletario.php');
     

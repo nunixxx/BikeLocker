@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `bikelocker`.`bicicletario` (
   `LOCKER` INT NOT NULL,
   `usuario_CPF` Varchar(20) NOT NULL,
   `CADEADO` TINYINT NOT NULL,
-  `CHEGADA` DATE NOT NULL,
+  `CHEGADA` DATETIME NOT NULL,
   `Bike_ID` INT(11) NOT NULL,
   PRIMARY KEY (`LOCKER`)
 )
@@ -75,17 +75,16 @@ ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `historicoBicicletario`
+-- Estrutura da tabela `historico`
 --
 
-CREATE TABLE IF NOT EXISTS `bikelocker`.`historicoBicicletario` (
-  `DATACONSULTA` DATE NOT NULL,
-  `LOCKER` INT NOT NULL,
-  `usuario_CPF` Varchar(20) NOT NULL,
-  `CHEGADA` DATE NOT NULL,
-  `SAIDA` DATE NOT NULL,
-  `BIKE_ID` INT(11) NOT NULL,
-  PRIMARY KEY (`DATACONSULTA`))
+  CREATE TABLE IF NOT EXISTS `bikelocker`.`historico` (
+    `LOCKER` INT NOT NULL,
+    `usuario_CPF` Varchar(20) NOT NULL,
+    `CADEADO` TINYINT NOT NULL,
+    `CHEGADA` DATETIME NOT NULL,
+    `SAIDA` DATETIME NOT NULL,
+    `BIKE_ID` INT(11) NOT NULL)
 ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -143,7 +142,7 @@ ALTER TABLE `bikelocker`.`bicicletario`
 --
 -- Limitadores para a tabela `hitoricobicicletarios`
 --
-ALTER TABLE `bikelocker`.`historicobicicletario`
+ALTER TABLE `bikelocker`.`historico`
   ADD CONSTRAINT `fk_hist_bicicletario_usuario1` FOREIGN KEY (`usuario_CPF`) REFERENCES `usuario` (`CPF`),
   ADD CONSTRAINT `fk_hist_Bicicletario_bike` FOREIGN KEY (`bike_id`) REFERENCES `bike` (`ID_BIKE`);
 

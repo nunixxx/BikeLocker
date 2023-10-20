@@ -39,7 +39,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <label>
         <h5>BikeLocker</h5>
@@ -172,7 +172,8 @@
           <img class= "bikeImg" src="../../Arquivos/<?php echo $bicicletario->getBikeId();?>.png" for="imagem"/>
           </td>
           <td>
-            <?php echo $bicicletario->getChegada();?>
+            <?php $dataFormat = date("d/m H:i", strtotime($bicicletario->getChegada()));
+             echo $dataFormat;?>
           </td>
           <td>
             <a href="../../Controller/Bicicletario.controller.php?acao=deletar&locker=<?= $bicicletario->getlocker() ?>"
