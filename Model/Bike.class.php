@@ -148,7 +148,6 @@ public static function getAll()
         foreach($pdo->query('SELECT * FROM bike WHERE Id_Bike = ' . $this->id) as $linha){
             $this->setCor($linha['cor']);
             $this->setCpf($linha['cpf']);
-            // $this->setId($linha['Id_Bike']);
             }
 
         return $this;

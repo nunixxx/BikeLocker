@@ -144,6 +144,27 @@ class Bicicletario{
         return $this;
     }
 
+    public static function loadCheck($locker){
+        $pdo = Conexao::conexao();
+        
+        $pdo = Conexao::conexao();
+        try {
+                
+            $pdo->beginTransaction(); 
+
+            $stmt = $pdo->prepare('SELECT * FROM bicicletario WHERE locker = :id');
+            $res = $stmt->execute([
+                ':id' => $locker
+            ]); 
+            $pdo->commit();
+            return $res;
+        } catch (PDOException $e) 
+        {
+            $pdo->rollBack();
+            throw $e;
+        }
+    }
+
     public function __toString() {
         return "Locker: " . $this->locker . "<br>" .
                "CPF: " . $this->cpf . "<br>" .

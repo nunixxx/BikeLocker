@@ -27,9 +27,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../../Css/Gere.User.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="../../Css/Geral.css" media="screen" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
     <title>Usuários</title>
 </head>
@@ -65,15 +65,15 @@
         <br>
         <form action= "../../controller/User.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
             <div class="inputBox">
-                <input type="text" name="cpf" id="cpf" placeholder="CPF" class="form-control" value="<?= $user->getCpf();?>"/>
+                <input type="text" name="cpf" id="cpf" placeholder="CPF" class="form-control" value="<?= $user->getCpf();?>" required/>
             </div>
             <br>
             <div class="inputBox">
-                <input type="text" name="nome" id="nome" placeholder="Nome" class="form-control" value="<?= $user->getNome();?>"/>
+                <input type="text" name="nome" id="nome" placeholder="Nome" class="form-control" value="<?= $user->getNome();?>"required/>
             </div>
             <br>
             <div>
-                <input type="color" class="form-control form-control-color" id="cor" name="cor" value="<?= $bike->getCor();?>"/>
+                <input type="color" class="form-control form-control-color" id="cor" name="cor" value="<?= $bike->getCor();?>" required/>
             </div>
             <br>
             <div class="btn btn-primary btn-rounded">

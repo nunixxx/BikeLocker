@@ -5,6 +5,7 @@ require_once '../Utils/autoload.php';
 
 //Cadastrar no banco
 if ($acao == 'cadastrar'){
+    
     $funcionario = new Funcionario();
     $funcionario->setCpf($_POST['cpf']);
     $funcionario->setNome($_POST['nome']);

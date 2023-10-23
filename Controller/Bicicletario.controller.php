@@ -8,17 +8,28 @@ date_default_timezone_set('America/Sao_Paulo');
     $horarioAtual = date('Y-m-d H:i:s');
 
 if ($_GET['acao']== 'cadastrar'){
+    $temp = Bicicletario::loadCheck($_POST['locker']);
 
-    $bicicletario->setlocker($_POST['locker']);
-    $bicicletario->setCpf($_POST['cpf']);
-    $bicicletario->setCadeado($_POST['cadeado']);
-    $bicicletario->setChegada($horarioAtual);
-    $bicicletario->setBikeId($_POST['bike_id']);
+    if($temp == false){
+        $bicicletario->setlocker($_POST['locker']);
+        $bicicletario->setCpf($_POST['cpf']);
+        $bicicletario->setCadeado($_POST['cadeado']);
+        $bicicletario->setChegada($horarioAtual);
+        $bicicletario->setBikeId($_POST['bike_id']);
 
-    $bicicletario->save();
+        $bicicletario->save();
 
-    header('Location:../View/Func/Bicicletario.php');
-}
+        header('Location:../View/Func/Bicicletario.php');
+    }else {
+        $message = new Message();
+        $message->setTipo("danger");
+        $message->setConteudo("Locker já ocupado");
+
+        header('Location:../View/Func/Bicicletario.php?message='. $message->__toString());
+    }
+
+
+    }
 
 else if($_GET['acao']== 'deletar'){
     $historico= new Historico();

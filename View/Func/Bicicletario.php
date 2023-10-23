@@ -75,15 +75,16 @@
         </div>
       </div>
     </div>
-  </nav>
+</nav>
+
   <div class="form" style = "color: white">
     <h3>Bicicletario</h3>
     <br>
     <form action="../../Controller/Bicicletario.controller.php?acao=<?= $acao ?>" method="post"
       enctype="multipart/form-data">
       <label> Usuário </label><br>
-      <select class="form-select" aria-label="Default select example" id="cpf" name="cpf">
-        <option>
+      <select class="form-select" aria-label="Default select example" id="cpf" name="cpf" required>
+        <option value="" disabled selected>
           <?php if(null == $bicicletario->getCpf() ){echo "CPF";} else{echo $bicicletario->getCpf();}  ?>
         </option>
         <?php 
@@ -98,8 +99,8 @@
       </select>
       <br>
       <label> Bicicleta </label><br>
-      <select class="form-select" aria-label="Default select example" id="bike_id" name="bike_id">
-        <option>
+      <select class="form-select" aria-label="Default select example" id="bike_id" name="bike_id" required>
+        <option value="" disabled selected>
           <?php if(null == $bicicletario->getBikeId() ){echo "ID";} else{echo $bicicletario->getBikeId();}  ?>
         </option>
         <?php 
@@ -116,8 +117,8 @@
       <label> Locker </label>
       <br>
       <div class="inputBox">
-        <select class="form-select" aria-label="Default select example" id="locker" name="locker">
-          <option>
+        <select class="form-select" aria-label="Default select example" id="locker" name="locker" required>
+          <option value="" disabled selected>
           <?php if(null == $bicicletario->getLocker () ){echo "Locker";} else{echo $bicicletario->getLocker();}  ?>
           </option>
           <?php
@@ -136,7 +137,7 @@
       <label> Cadeado </label>
       <br>
       <div class="toggles">
-        <input class="cadeado" type="radio" name="cadeado" id="1" value="1" <?php if($bicicletario->getCadeado() == 1){echo "checked";} ?>>
+        <input class="cadeado" type="radio" name="cadeado" id="1" value="1" <?php if($bicicletario->getCadeado() == 1){echo "checked";} ?> required>
           <label for="1">Possui</label>
         <input class="cadeado" type="radio" name="cadeado" id="0" value="0" <?php if($bicicletario->getCadeado() !== null && $bicicletario->getCadeado() == 0){echo "checked";}?>>
           <label for="0">Não Possui </label>
@@ -186,9 +187,19 @@
     </table>
   </div>
 
+  <?php
+            if (!empty($_GET["message"])) {
+                $message = new Message($_GET["message"]);
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+                echo "
+                    <div id='messageBox' class='alert alert-" . $message->getTipo() . "' role='alert'>
+                        " . $message->getConteudo() . "
+                    </div>
+                ";
+            }
+    ?>
+
+  <script src="../../JavaScript/Message.js"></script>
   <script src="../../JavaScript/Bicicletario.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"

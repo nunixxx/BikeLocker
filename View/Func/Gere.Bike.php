@@ -75,8 +75,8 @@
           readonly />
       </div>
       <br>
-      <select class="form-select" aria-label="Default select example" id="cpf" name="cpf" placeholder = "cpf" >
-        <option>
+      <select class="form-select" aria-label="Default select example" id="cpf" name="cpf" required>
+        <option value="" disabled selected>
           <?php if(null == $bike->getCpf() ){echo "CPF";} else{echo $bike->getCpf();}  ?>
         </option>
         <?php 
@@ -111,7 +111,7 @@
       <thead>
         <tr>
           <th>CPF</th>
-          <th>nome</th>
+          <th>Cor</th>
           <th>Funcionalidades</th>
         </tr>
       </thead>
