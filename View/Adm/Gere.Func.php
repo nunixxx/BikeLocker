@@ -18,7 +18,7 @@
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../../Css/Gere.Func.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="../../Css/Geral.css" media="screen" />
-    <title>Document</title>
+    <title>Administraçao</title>
 </head>
 
 <body>

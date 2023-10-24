@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ .'/../Utils/autoload.php';
+require('tcpdf/tcpdf.php');
 
 class Historico{
 
@@ -120,6 +121,40 @@ class Historico{
             $lista[] = $historico;
         }
         return $lista;
+    }
+
+    public static function createPdf(){
+
+        $pdo = Conexao::conexao();
+        $horarioAtual = date('d-m-Y');
+
+        try
+        {
+        $stmt = $pdo->query("SELECT * FROM HISTORICO");
+        $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $pdf = new TCPDF();
+        $pdf->SetTitle('Historico Bicicletario - ' . $horarioAtual);
+        $pdf->AddPage();
+
+        $header = array_keys($result[0]);
+        $data = array();
+            foreach ($result as $row) {
+                $data[] = array_values($row);
+            }
+        // Cria a tabela
+        $pdf->SetFont('helvetica', '', 12);
+        $pdf->SetFillColor(200, 220, 255);
+        $pdf->MultiCell(0, 10, 'Histórico', 0, 'C', 1);
+        $pdf->Ln();
+        $pdf->SetFont('helvetica', 'B');
+        $pdf->SetFontSize(10);
+        $pdf->Table($header, $data);
+
+        $pdf->Output('historico.pdf', 'I');
+        }  catch (PDOException $e) {
+            die("Erro na consulta SQL: " . $e->getMessage());
+        } 
     }
 
 }

@@ -67,7 +67,7 @@
   </nav>
 
   <div class="form">
-    <h3> Cadastro Bicicletas</h3>
+    <h3>Cadastro Bicicletas</h3>
     <br>
     <form action="../../Controller/Bike.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
       <div class="inputBox" styler = "witdh: 20px">
@@ -92,14 +92,13 @@
       <br>
       <div>
         <input type="color" class="form-control form-control-color" id="cor" name="cor"
-          value="<?= $bike->getCor();?>" />
+          value="<?= $bike->getCor();?>" required/>
       </div>
       <br>
       <div class="btn btn-primary btn-rounded" style ="background-color: #0c945de3; border: none;">
-        
         <img src="../../Images/nuvemUpload.png" for="imagem" style="width: 30px; height: 30px;"/>
         <label class="imageButton" for="imagem"> <strong>Choose file</strong></label>
-        <input type="file" class="form-control d-none" id="imagem" name="imagem" />
+        <input type="file" class="form-control d-none" id="imagem" name="imagem" required/>
       </div>
       <br><br>
       <input type="submit" class="btn btn-primary btn-block " value="Cadastrar" style="background-color: #0c945de3; border: none; border-radius: 0px; font-weight: bold;" >

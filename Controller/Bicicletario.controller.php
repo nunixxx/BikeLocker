@@ -9,7 +9,7 @@ date_default_timezone_set('America/Sao_Paulo');
 
 if ($_GET['acao']== 'cadastrar'){
     $temp = Bicicletario::loadCheck($_POST['locker']);
-
+    echo $temp;
     if($temp == false){
         $bicicletario->setlocker($_POST['locker']);
         $bicicletario->setCpf($_POST['cpf']);

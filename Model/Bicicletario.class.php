@@ -146,18 +146,16 @@ class Bicicletario{
 
     public static function loadCheck($locker){
         $pdo = Conexao::conexao();
-        
-        $pdo = Conexao::conexao();
-        try {
-                
-            $pdo->beginTransaction(); 
 
-            $stmt = $pdo->prepare('SELECT * FROM bicicletario WHERE locker = :id');
-            $res = $stmt->execute([
-                ':id' => $locker
+        try {
+
+
+            $stmt = $pdo->prepare('SELECT * FROM bicicletario WHERE locker = :locker');
+             $stmt->execute([
+                ':locker' => $locker
             ]); 
-            $pdo->commit();
-            return $res;
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return count($res) > 0;
         } catch (PDOException $e) 
         {
             $pdo->rollBack();
