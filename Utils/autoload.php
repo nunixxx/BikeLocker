@@ -25,6 +25,10 @@ function my_autoload ($pClassName) {
         include_once $file;
         return ; 
     }
-
+    $file =__DIR__ . "/" . $className . "/" . $className. ".php";
+    if(file_exists($file)){
+        include_once $file;
+        return ; 
+    }
 }
 spl_autoload_register("my_autoload");

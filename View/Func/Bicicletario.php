@@ -144,6 +144,7 @@
       </div>
       <input type="submit" class="btn btn-primary btn-block mb-4" value="cadastrar">
     </form>
+      <a href="../../Controller/Bicicletario.controller.php?acao=pdf" target="_blank" class="btn btn-success"> download PDF</a>
 
   </div>
   <div class="tabela">

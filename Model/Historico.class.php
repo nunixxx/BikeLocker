@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ .'/../Utils/autoload.php';
-require('tcpdf/tcpdf.php');
 
 class Historico{
 
@@ -116,7 +115,8 @@ class Historico{
             $historico->setCpf($linha["usuario_CPF"]);
             $historico->setCadeado($linha["CADEADO"]);
             $historico->setChegada($linha["CHEGADA"]);
-            $historico->setBikeId($linha["Bike_ID"]);
+            $historico->setSaida($linha["SAIDA"]);
+            $historico->setBikeId($linha["BIKE_ID"]);
 
             $lista[] = $historico;
         }
@@ -124,7 +124,7 @@ class Historico{
     }
 
     public static function createPdf(){
-
+        $historicos = Historico::getAll();
         $pdo = Conexao::conexao();
         $horarioAtual = date('d-m-Y');
 
@@ -133,25 +133,60 @@ class Historico{
         $stmt = $pdo->query("SELECT * FROM HISTORICO");
         $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $pdf = new TCPDF();
+        $pdf = new tcpdf();
         $pdf->SetTitle('Historico Bicicletario - ' . $horarioAtual);
         $pdf->AddPage();
 
-        $header = array_keys($result[0]);
-        $data = array();
-            foreach ($result as $row) {
-                $data[] = array_values($row);
-            }
-        // Cria a tabela
-        $pdf->SetFont('helvetica', '', 12);
-        $pdf->SetFillColor(200, 220, 255);
-        $pdf->MultiCell(0, 10, 'Histórico', 0, 'C', 1);
-        $pdf->Ln();
-        $pdf->SetFont('helvetica', 'B');
-        $pdf->SetFontSize(10);
-        $pdf->Table($header, $data);
-
-        $pdf->Output('historico.pdf', 'I');
+        $html = '<h1>Historico Bicicletario</h1>';
+        $html .= 
+        '<table class="cabecalho">
+            <thead>
+                <tr>
+                    <th>Locker</th>
+                    <th>Usuário</th>
+                    <th>Cadeado</th>
+                    <th>Bike</th>
+                    <th>Chegada</th>
+                    <th>Saida</th>
+                </tr>
+            </thead>
+        </table>
+        
+        <table>
+        <tbody>';
+        foreach($historicos as $historico)
+        {
+            $dataFormat = date("d/m H:i", strtotime($historico->getChegada()));
+            $dataFormat1 = date("d/m H:i", strtotime($historico->getSaida()));
+        $html .='
+            <tr class="item">
+              <th>'
+                 .$historico->getLocker(). '
+              </th>
+              <td>'
+                .$historico->getCpf().'
+              </td>
+              <td>'
+                .$historico->getCadeado().'
+              </td>
+              <td>'
+                .$historico->getBikeId().'
+              </td>
+              <td>'
+                .$dataFormat.'
+              </td>
+              <td>'
+                .$dataFormat1.'
+              </td>
+            </tr>';
+        }
+        $html .='
+          </tbody>
+        </table>';
+        
+        $pdf->writeHTML($html);
+        ob_end_clean();
+        $pdf->Output('Historicos.pdf', 'I');
         }  catch (PDOException $e) {
             die("Erro na consulta SQL: " . $e->getMessage());
         } 

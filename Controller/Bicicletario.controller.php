@@ -64,8 +64,8 @@ else if($_GET['acao']== 'deletar'){
     $bike->update(); 
     header('Location:../View/Func/Bicicletario.php');
 
-} else if($_GET['acao'] == 'pesquisar'){
-    
+} else if($_GET['acao'] == 'pdf'){
+    Historico::createPdf();
 }
 
 ?>
