@@ -5,8 +5,6 @@ class Bike {
     private $cor;
     private $id;
     private $cpf;
-    private $data;
-    private $bike_id;
 
     public function getCpf() 
     {
@@ -153,6 +151,13 @@ public static function getAll()
         return $this;
     }
 
+    public function jsonSerialize() {
+        return [
+            'cor' => $this->cor,
+            'id' => $this->id,
+            'cpf' => $this->cpf,
+        ];
+    }
     public static function loadByCpf($cpf){
         $pdo = Conexao::conexao();
         $lista = [];
@@ -162,8 +167,11 @@ public static function getAll()
             $bike->setCor($linha["cor"]);
             $bike->setCpf($linha["cpf"]);
 
-            $lista[] = $bike;
+            $dados = $bike->jsonSerialize();
+            // $lista[] = $linha["Id_Bike"];
+            $lista[] = $dados;
         }
+
         return $lista;
     }
 }

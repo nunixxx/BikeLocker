@@ -1,4 +1,6 @@
 setTimeout(() => {
     const messageElement = document.getElementById("messageBox");
-    messageElement.remove();
-}, 5000)
+    if (messageElement) {
+        messageElement.remove();
+    }
+}, 5000);

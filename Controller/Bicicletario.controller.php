@@ -67,12 +67,13 @@ else if(isset($_GET['acao']) && $_GET['acao']== 'deletar'){
 
 } else if(isset($_GET['acao']) && $_GET['acao'] == 'pdf'){
     Historico::createPdf();
-} else if(isset($_POST['acao'])&& $_POST['acao'] == 'selectedCpf') {
-    $cpf = $_POST['cpf'];   
 
-    $bikes = Bike::loadByCpf($cpf);
+} else if(isset($_GET['acao'])&& $_GET['acao'] == 'selectedCpf') {
+// } else if(isset($_GET['acao'])&& $_GET['acao'] == 'teste'){
 
-    return json_encode($bikes);
+    $bikes = Bike::loadByCpf($_GET['cpf']);    
+
+    echo json_encode($bikes);
 }
 
 ?>
