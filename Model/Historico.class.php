@@ -187,7 +187,7 @@ class Historico{
         $pdf->writeHTML($html);
         ob_end_clean();
         $pdf->Output('Historicos.pdf', 'I');
-        }  catch (PDOException $e) {
+        }  catch (PDOException $e) {    
             die("Erro na consulta SQL: " . $e->getMessage());
         } 
     }

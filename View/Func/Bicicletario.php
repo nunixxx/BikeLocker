@@ -29,12 +29,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" />
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
-    <link rel="stylesheet" type="text/css" href="../../Css/Bicicletario.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="../../Css/Bicicletario.css" media="screen" />
   <link rel="stylesheet" type="text/css" href="../../Css/Geral.css" media="screen" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <title>Tela Incial</title>
 </head>
 
@@ -80,10 +81,9 @@
   <div class="form" style = "color: white">
     <h3>Bicicletario</h3>
     <br>
-    <form action="../../Controller/Bicicletario.controller.php?acao=<?= $acao ?>" method="post"
-      enctype="multipart/form-data">
+    <form action="../../Controller/Bicicletario.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
       <label> Usuário </label><br>
-      <select class="form-select" aria-label="Default select example" id="cpf" name="cpf" required>
+      <select class="form-select" aria-label="Default select example" id="cpf" name="cpf" required onchange="updateBikeOptions()">
         <option value="" disabled selected>
           <?php if(null == $bicicletario->getCpf() ){echo "CPF";} else{echo $bicicletario->getCpf();}  ?>
         </option>
@@ -99,7 +99,7 @@
       </select>
       <br>
       <label> Bicicleta </label><br>
-      <select class="form-select" aria-label="Default select example" id="bike_id" name="bike_id" required>
+          <select class="form-select" aria-label="Default select example" id="bike_id" name="bike_id" required>
         <option value="" disabled selected>
           <?php if(null == $bicicletario->getBikeId() ){echo "ID";} else{echo $bicicletario->getBikeId();}  ?>
         </option>
@@ -200,11 +200,14 @@
             }
     ?>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script src="../../JavaScript/Message.js"></script>
   <script src="../../JavaScript/Bicicletario.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
     crossorigin="anonymous"></script>
+    
 </body>
 
 </html>

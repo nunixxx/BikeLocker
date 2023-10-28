@@ -2,12 +2,13 @@
 require_once __DIR__ .'/../Utils/autoload.php';
 include_once __DIR__ . '/../Model/Bicicletario.class.php';
 include_once __DIR__ . '/../Model/Historico.class.php';
+include_once __DIR__ . '/../Model/Bike.class.php';
 date_default_timezone_set('America/Sao_Paulo');
     
     $bicicletario = new Bicicletario();
     $horarioAtual = date('Y-m-d H:i:s');
 
-if ($_GET['acao']== 'cadastrar'){
+if (isset($_GET['acao']) && $_GET['acao']== 'cadastrar'){
     $temp = Bicicletario::loadCheck($_POST['locker']);
     echo $temp;
     if($temp == false){
@@ -31,7 +32,7 @@ if ($_GET['acao']== 'cadastrar'){
 
     }
 
-else if($_GET['acao']== 'deletar'){
+else if(isset($_GET['acao']) && $_GET['acao']== 'deletar'){
     $historico= new Historico();
     $bicicletario->setLocker($_REQUEST['locker']);
 
@@ -49,7 +50,7 @@ else if($_GET['acao']== 'deletar'){
     Bicicletario::delete($_REQUEST['locker']);  
     header('Location:../View/Func/Bicicletario.php');
     
-} else if($_GET['acao']== 'atualizar'){
+} else if(isset($_GET['acao']) && $_GET['acao']== 'atualizar'){
     $bike = new Bike();
     $bike->setCor($_POST['cor']);
     $bike->setCpf( $_POST['cpf']);
@@ -64,8 +65,14 @@ else if($_GET['acao']== 'deletar'){
     $bike->update(); 
     header('Location:../View/Func/Bicicletario.php');
 
-} else if($_GET['acao'] == 'pdf'){
+} else if(isset($_GET['acao']) && $_GET['acao'] == 'pdf'){
     Historico::createPdf();
+} else if(isset($_POST['acao'])&& $_POST['acao'] == 'selectedCpf') {
+    $cpf = $_POST['cpf'];   
+
+    $bikes = Bike::loadByCpf($cpf);
+
+    return json_encode($bikes);
 }
 
 ?>

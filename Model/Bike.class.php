@@ -153,5 +153,18 @@ public static function getAll()
         return $this;
     }
 
+    public static function loadByCpf($cpf){
+        $pdo = Conexao::conexao();
+        $lista = [];
+        foreach ($pdo->query("SELECT * FROM bike WHERE cpf = $cpf") as $linha) {
+            $bike = new Bike();
+            $bike->setId($linha["Id_Bike"]);
+            $bike->setCor($linha["cor"]);
+            $bike->setCpf($linha["cpf"]);
+
+            $lista[] = $bike;
+        }
+        return $lista;
+    }
 }
 ?>
