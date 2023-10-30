@@ -142,8 +142,8 @@ ALTER TABLE `bikelocker`.`bicicletario`
 --
 -- Limitadores para a tabela `hitoricobicicletarios`
 --
-ALTER TABLE `bikelocker`.`historico`
-  ADD CONSTRAINT `fk_hist_bicicletario_usuario1` FOREIGN KEY (`usuario_CPF`) REFERENCES `usuario` (`CPF`),
-  ADD CONSTRAINT `fk_hist_Bicicletario_bike` FOREIGN KEY (`bike_id`) REFERENCES `bike` (`ID_BIKE`);
+-- ALTER TABLE `bikelocker`.`historico`
+  -- ADD CONSTRAINT `fk_hist_bicicletario_usuario1` FOREIGN KEY (`usuario_CPF`) REFERENCES `usuario` (`CPF`),
+  -- ADD CONSTRAINT `fk_hist_Bicicletario_bike` FOREIGN KEY (`bike_id`) REFERENCES `bike` (`ID_BIKE`);
 
 COMMIT;

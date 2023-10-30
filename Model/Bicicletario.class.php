@@ -114,15 +114,14 @@ class Bicicletario{
     public static function loadByBike($id){
         $pdo = Conexao::conexao();
         try {
-                
-            $pdo->beginTransaction(); 
+
 
             $stmt = $pdo->prepare('SELECT * FROM bicicletario WHERE Bike_ID = :id');
             $res = $stmt->execute([
                 ':id' => $id
             ]); 
-            $pdo->commit();
-            return $res;
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return count($res) > 0;
         } catch (PDOException $e) 
         {
             $pdo->rollBack();
