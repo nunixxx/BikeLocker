@@ -144,15 +144,15 @@ class Bicicletario{
         return $this;
     }
 
-    public static function loadCheck($locker){
+    public function loadCheck(){
         $pdo = Conexao::conexao();
 
         try {
 
-
-            $stmt = $pdo->prepare('SELECT * FROM bicicletario WHERE locker = :locker');
+            $stmt = $pdo->prepare('SELECT * FROM bicicletario WHERE locker = :locker OR usuario_CPF = :cpf');
              $stmt->execute([
-                ':locker' => $locker
+                ':locker' => $this->locker,
+                ':cpf' => $this->cpf
             ]); 
             $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return count($res) > 0;

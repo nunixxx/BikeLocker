@@ -145,7 +145,6 @@
       <input type="submit" class="btn btn-primary btn-block mb-4" value="cadastrar">
     </form>
       <a href="../../Controller/Bicicletario.controller.php?acao=pdf" target="_blank" class="btn btn-success"> download PDF</a>
-      <a href="../../Controller/Bicicletario.controller.php?acao=teste&cpf=60082177058" target="_blank" class="btn btn-success"> aaaaaaaa</a>
 
   </div>
   <div class="tabela">

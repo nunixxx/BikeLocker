@@ -9,7 +9,10 @@ date_default_timezone_set('America/Sao_Paulo');
     $horarioAtual = date('Y-m-d H:i:s');
 
 if (isset($_GET['acao']) && $_GET['acao']== 'cadastrar'){
-    $temp = Bicicletario::loadCheck($_POST['locker']);
+    $bicicletario->setlocker($_POST['locker']);
+    $bicicletario->setCpf($_POST['cpf']);      
+
+    $temp = $bicicletario->loadCheck();
     echo $temp;
     if($temp == false){
         $bicicletario->setlocker($_POST['locker']);
@@ -24,7 +27,7 @@ if (isset($_GET['acao']) && $_GET['acao']== 'cadastrar'){
     }else {
         $message = new Message();
         $message->setTipo("danger");
-        $message->setConteudo("Locker já ocupado");
+        $message->setConteudo("Locker ou CPF já ocupado");
 
         header('Location:../View/Func/Bicicletario.php?message='. $message->__toString());
     }
@@ -67,13 +70,6 @@ else if(isset($_GET['acao']) && $_GET['acao']== 'deletar'){
 
 } else if(isset($_GET['acao']) && $_GET['acao'] == 'pdf'){
     Historico::createPdf();
-
-} else if(isset($_GET['acao'])&& $_GET['acao'] == 'selectedCpf') {
-// } else if(isset($_GET['acao'])&& $_GET['acao'] == 'teste'){
-
-    $bikes = Bike::loadByCpf($_GET['cpf']);    
-
-    echo json_encode($bikes);
 }
 
 ?>

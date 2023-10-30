@@ -19,7 +19,7 @@ function updateBikeOptions() {
         $.ajax({
             type: "POST",
             dataType: 'json',
-            url: `../../Controller/Bicicletario.controller.php?acao=selectedCpf&cpf=${selectedCpf}`,
+            url: `../../Controller/BicicletarioJs.controller.php?acao=selectedCpf&cpf=${selectedCpf}`,
             data: { cor: cor, id: bikeIdSelect.val(), cpf: selectedCpf },
             success: function(data) {
 
@@ -39,4 +39,3 @@ function updateBikeOptions() {
         });
     }
 }
-
