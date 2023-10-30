@@ -78,7 +78,7 @@
             <br>
             <div class="btn btn-primary btn-rounded">
                 <label class="form-label text-white m-1" for="imagem">Choose file</label>
-                <input type="file" class="form-control d-none" id="imagem" name="imagem" value=""/>
+                <input type="file" class="form-control d-none" id="imagem" name="imagem" value="" accept="image/jpeg, image/png"/>
             </div>
             <br><br>
             <input type="submit" class="btn btn-primary btn-block mb-4" value="Cadastrar">
