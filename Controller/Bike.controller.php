@@ -33,10 +33,6 @@ else if($_GET['acao']== 'deletar'){
 
         header('Location:../View/Func/Gere.Bike.php?message=' . $message->__toString());
     }
-    Bike::delete($_REQUEST['id']);  
-    header('Location:../View/Func/Gere.Bike.php');
-
-    
 } else if($_GET['acao']== 'atualizar'){
     $bike = new Bike();
     $bike->setCor($_POST['cor']);

@@ -32,8 +32,8 @@
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
-  <link rel="stylesheet" type="text/css" href="../../Css/Bicicletario.css" media="screen" />
   <link rel="stylesheet" type="text/css" href="../../Css/Geral.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="../../Css/Bicicletario.css" media="screen" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <title>Tela Incial</title>
@@ -147,15 +147,14 @@
       <a href="../../Controller/Bicicletario.controller.php?acao=pdf" target="_blank" class="btn btn-success"> download PDF</a>
 
   </div>
-  <div class="tabela">
+  <div class="tabela" style="width: 700px">
     <table class="cabecalho">
       <thead>
         <tr>
-          <th>Locker</th>
-          <th>Usuário</th>
-          <th>Bike</th>
-          <th>Horario</th>
-          <th>Ações</th>
+          <th style="width: 50px;">Locker</th>
+          <th style="width: 80px;">Usuário</th>
+          <th style="width: 60px;">Bike</th>
+          <th style="width: 150px;">Horario</th>
         </tr>
       </thead>
     </table>
@@ -164,14 +163,14 @@
       <tbody>
         <?php foreach($bicicletarios as $bicicletario){?>
         <tr class="item">
-          <th>
-            <?php echo $bicicletario->getLocker();?>
-          </th>
-          <td>
+          <td style="width: 50px; text-align: center;">
+            <strong><?php echo $bicicletario->getLocker();?></strong>
+          </td>
+          <td style="width: 80px;">
             <?php echo $bicicletario->getCpf();?>
           </td>
-          <td>
-          <img class= "bikeImg" src="../../Arquivos/<?php echo $bicicletario->getBikeId();?>.png" for="imagem"/>
+          <td style="width: 60px;">
+            <img class= "bikeImg" src="../../Arquivos/<?php echo $bicicletario->getBikeId();?>.png" for="imagem"/>
           </td>
           <td>
             <?php $dataFormat = date("d/m H:i", strtotime($bicicletario->getChegada()));

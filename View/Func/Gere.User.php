@@ -76,22 +76,22 @@
                 <input type="color" class="form-control form-control-color" id="cor" name="cor" value="<?= $bike->getCor();?>" required/>
             </div>
             <br>
-            <div class="btn btn-primary btn-rounded">
-                <label class="form-label text-white m-1" for="imagem">Choose file</label>
-                <input type="file" class="form-control d-none" id="imagem" name="imagem" value="" accept="image/jpeg, image/png"/>
+            <div class="btn btn-primary btn-rounded" style ="background-color: #0c945de3; border: none;">
+                <img src="../../Images/nuvemUpload.png" for="imagem" style="width: 30px; height: 30px;"/>
+                <label class="imageButton" for="imagem"> <strong>Choose file</strong></label>
+                <input type="file" class="form-control d-none" id="imagem" onclick="validateFile()" name="imagem" required accept="image/jpeg, image/png"/>
             </div>
             <br><br>
             <input type="submit" class="btn btn-primary btn-block mb-4" value="Cadastrar">
         </form>
     </div>
 
-    <div class="tabela">
+    <div class="tabela" style="width: 500px;">
         <table class="cabecalho">
             <thead>
                 <tr>
-                    <th>CPF</th>
-                    <th>nome</th>
-                    <th>Funcionalidades</th>
+                    <th style="width: 150px;">CPF</th>
+                    <th>Nome</th>
                 </tr>
             </thead> 
         </table>   
@@ -99,15 +99,23 @@
             <tbody>
                 <?php foreach($users as $user){?>
                 <tr class="item">
-                    <td>
+                    <td style="width: 150px;">
                         <strong><?php echo $user->getCpf();?></strong>
                     </td>
                     <td>
                         <?php echo $user->getNome();?>
                     </td>
                     <td>
-                        <a href="../../Controller/User.controller.php?acao=deletar&id=<?= $user->getCpf() ?>" class="btn btn-danger">Excluir</a>
-                        <a href="?cpf=<?= $user->getCpf() ?>" class="btn btn-success">Editar</a>
+                    <div class="btn btn-primary btn-rounded" style ="background-color: #c53302; border: none; padding: 5px;">
+                        <form method="post" action="../../Controller/User.controller.php?acao=deletar&id=<?= $user->getCpf() ?>">
+                            <input type="image" src="../../Images/Lixeira.png" title="deletar" alt="Submit" style="widht:25px; height:25px;">
+                        </form>
+                    </div>
+                    <div class="btn btn-primary btn-rounded" style ="background-color: #14bf25; border: none; padding: 5px;">
+                        <form method="post" action="?cpf=<?= $user->getCpf() ?>">
+                            <input type="image" src="../../Images/Editar.png" title="editar" alt="Submit" style="widht:25px; height:25px;">
+                        </form>
+                    </div>
                     </td>
                 </tr>
                 <?php } ?>

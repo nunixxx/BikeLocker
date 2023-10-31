@@ -2,6 +2,7 @@
 $acao = $_GET['acao'];
 
 require_once '../Utils/autoload.php';
+include_once '../Model/Funcionario.class.php';
 
 //Cadastrar no banco
 if ($acao == 'cadastrar'){

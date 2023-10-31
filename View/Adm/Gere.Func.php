@@ -24,7 +24,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <label>Navbar</label>
+            <label>BikeLocker</label>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -32,9 +32,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -77,11 +74,9 @@
         <table class="cabecalho">
             <thead>
                 <tr>
-                    <th>CPF</th>
-                    <th>nome</th>
+                    <th style="width: 150px">CPF</th>
+                    <th style=" width: 150px">nome</th>
                     <th>Email</th>
-                    <th>Senha</th>
-                    <th>Funcionalidades</th>
                 </tr>
             </thead>
         </tabel>
@@ -89,10 +84,10 @@
             <tbody>
                 <?php foreach($funcionarios as $funcionario){?>
                 <tr class="item">
-                    <td>
+                    <td style="width: 150px">
                         <strong><?php echo $funcionario->getCpf();?></strong>
                     </td>
-                    <td>
+                    <td style=" width: 150px">
                         <?php echo $funcionario->getNome();?>
                     </td>
                     <td>
@@ -102,8 +97,6 @@
                         <a href="../../Controller/Func.controller.php?acao=deletar&id=<?= $funcionario->getCpf() ?>"
                             class="btn btn-danger">Excluir</a>
                     </td>
-
-                    <br>
                 </tr>
                 <?php } ?>
             </tbody>

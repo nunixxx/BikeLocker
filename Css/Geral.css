@@ -1,69 +1,76 @@
-h3{
+h3 {
     color: #ffffff;
 }
 
-.form{
-    background-color: #006747 ;
-    position:absolute; 
-    position:left;
+.form {
+    background-color: #006747;
+    position: absolute;
+    position: left;
     top: 50%;
-    left: 30%;  
+    left: 30%;
     text-align: center;
     transform: translate(-50%, -50%);
     padding: 50px;
-    box-shadow: 3px 3px 3px 3px rgba(50, 50, 50, 0.77);  
+    box-shadow: 3px 3px 3px 3px rgba(50, 50, 50, 0.77);
 }
 
 .tabela::-webkit-scrollbar {
     width: 0.4vw;
 }
+
 .tabela::-webkit-scrollbar-track {
     background-color: transparent;
 }
+
 .tabela::-webkit-scrollbar-thumb {
     border-radius: 1rem;
     background-color: rgba(0, 0, 0, 0.3);
 }
+
 .tabela::-webkit-scrollbar-thumb:hover {
     background-color: rgba(0, 0, 0, 0.6);
 }
 
 #color-box {
+
+    right: 50%;
     width: 30px;
     height: 30px;
     border: 1px solid #ffffff;
     border-radius: 5px;
 }
 
-.tabela{
-    position: absolute; 
-    position: right;
+.tabela {
+    position: absolute;
     top: 30%;
     left: 50%;
-    width: 600px; 
+    width: 600px;
     max-height: 400px;
+    table-layout: auto;
     overflow: auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: rgb(245,242,242);
+    background-color: rgb(245, 242, 242);
     box-shadow: 3px 3px 3px 3px rgba(50, 50, 50, 0.77);
     border-radius: 5px;
-    
-} 
 
-.tabela .cabecalho{
+}
+
+.tabela .cabecalho {
     position: sticky;
     height: 50px;
     top: 0;
-    background-color:  rgb(74, 122, 74);
+    color: white;
+    background-color: rgb(74, 122, 74);
 }
-.tabela table{
+
+.tabela table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.tabela table tr th{
+.tabela table tr th {
     height: 56px;
     font-size: 16px;
     font-weight: 700;
@@ -71,46 +78,19 @@ h3{
     text-align: left;
     padding: 0 10px;
 }
-.tabela table tr.item td{
-    border-bottom: 1px solid #c8cacc;
+
+.tabela table tr.item td {
+    border-bottom: 1px solid #c8ccc8;
     padding: 0 10px;
 }
-.tabela table tr.item{
+
+.tabela table tr.item {
     height: 60px;
 }
+
 .tabela table tr td {
     vertical-align: middle;
-    width: 20%;
     font-size: 16px;
     font-weight: 400;
     letter-spacing: 0.25px;
-}
-.tabela table tr td .button{
-    font-size: 14px;
-    max-width: 90px;
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: #0019ff;
-    border: 2px solid #0019ff;
-    border-radius: 5px;
-    background-color: transparent;
-    padding: 8px 10px;
-    min-height: 20px;
-}
-
-.tabela table tr td .button:hover{
-    background-color: #dbdef6;
-}
-
-.negativo{
-    color: #ed0818;
-}
-.positivo{
-    color: #00a971;
-}
-.right{
-    text-align: right;
 }
