@@ -24,7 +24,7 @@ else if($_GET['acao']== 'deletar'){
     $temp = Bicicletario::loadByBike($_REQUEST['id']);
     if($temp == false){
         Bike::delete($_REQUEST['id']);  
-        // unlink('../Arquivos/'.$_REQUEST['id']);
+        // unlink('../Arquivos/'.$_REQUEST['id'].'.png');
         header('Location:../View/Func/Gere.Bike.php');
     }else{
         $message = new Message();

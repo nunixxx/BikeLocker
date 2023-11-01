@@ -128,6 +128,24 @@ class Bicicletario{
             throw $e;
         }
     }
+    
+    public static function loadByUser($id){
+        $pdo = Conexao::conexao();
+        try {
+
+
+            $stmt = $pdo->prepare('SELECT * FROM bicicletario WHERE usuario_CPF = :id');
+            $res = $stmt->execute([
+                ':id' => $id
+            ]); 
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return count($res) > 0;
+        } catch (PDOException $e) 
+        {
+            $pdo->rollBack();
+            throw $e;
+        }
+    }
     public function load(){
         $pdo = Conexao::conexao();
         #TODO ver que esse código cheira mal...

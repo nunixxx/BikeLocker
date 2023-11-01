@@ -138,7 +138,8 @@
       </tbody>
     </table>
   </div>
-
+<p> Fazer com que o delete tire todas as imagens das bicicleta com aquele cpf</p>
+<p> Aceitar apenas arquivos de imagem </p>
 
   <?php
             if (!empty($_GET["message"])) {
