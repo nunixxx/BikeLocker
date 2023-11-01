@@ -21,8 +21,6 @@ if ($acao == 'cadastrar'){
 
     $imageName = $bike->getId();
 
-
-
     $savePath = '../Arquivos/'.$imageName.'.png';
     $imagePath = $_FILES['imagem']['tmp_name'];
 
@@ -34,6 +32,12 @@ else if($acao == 'deletar'){
     $temp = Bicicletario::loadByUser($_REQUEST['id']);
     
     if($temp == false){
+        $bikes = Bike::loadByCpf($_REQUEST['id']);
+        var_dump($bikes);
+
+        foreach ($bikes as $bike) { 
+            unlink('../Arquivos/'.$bike['id'].'.png');
+        }
         Bike::deleteUser($_REQUEST['id']);
         User::delete($_REQUEST['id']); 
         

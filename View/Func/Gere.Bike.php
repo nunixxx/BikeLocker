@@ -130,15 +130,22 @@
           <div id="color-box" style="background-color: <?php echo $bike->getCor(); ?>"></div>
           </td>
           <td>
-            <a href="../../Controller/Bike.controller.php?acao=deletar&id=<?= $bike->getId() ?>" class="btn btn-danger">Excluir</a>
-            <a href="?id=<?= $bike->getId() ?>" class="btn btn-success">Editar</a>
+          <div class="btn btn-primary btn-rounded" style ="background-color: #c53302; border: none; padding: 5px;">
+            <form method="post" action="../../Controller/Bike.controller.php?acao=deletar&id=<?= $bike->getId() ?>">
+                <input type="image" src="../../Images/Lixeira.png" title="deletar" alt="Submit" style="widht:25px; height:25px;">
+            </form>
+          </div>
+          <div class="btn btn-primary btn-rounded" style ="background-color: #14bf25; border: none; padding: 5px;">
+              <form method="post" action="?id=<?= $bike->getId() ?>">
+                  <input type="image" src="../../Images/Editar.png" title="editar" alt="Submit" style="widht:25px; height:25px;">
+              </form>
+          </div>
           </td>
         </tr>
         <?php } ?>
       </tbody>
     </table>
   </div>
-<p> Fazer com que o delete tire todas as imagens das bicicleta com aquele cpf</p>
 <p> Aceitar apenas arquivos de imagem </p>
 
   <?php
