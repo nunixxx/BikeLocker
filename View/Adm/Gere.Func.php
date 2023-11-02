@@ -2,8 +2,12 @@
     require_once __DIR__ . '/../../Utils/autoload.php';
     Conexao::conexao();
     
-    if(isset($_SESSION["cpfFunc"]) && !empty($_SESSION["cpfFunc"]) && $_SESSION["papel"]=="adm"):
+    $session_timeout = 1800;
 
+    if(isset($_SESSION['loggedin']) && $_SESSION["papel"]=="adm" && time() - $_SESSION['loggedin'] < $session_timeout):
+
+    $_SESSION['loggedin'] = time();
+    
     $acao = 'cadastrar';
     $funcionarios = Funcionario::getAll();
 ?>
@@ -123,7 +127,11 @@
 </html>
 <?php 
 else: 
-    // var_dump ($_SESSION);
-    header('Location: ../../View/Login.php');
+
+    $message = new Message();
+    $message->setTipo("danger");
+    $message->setConteudo("Sessão expirada!");
+
+    header('Location:../../View/Login.php?message=' . $message->__toString());
 endif;
  ?>

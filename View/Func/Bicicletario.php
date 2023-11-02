@@ -1,10 +1,16 @@
 <?php
+  require_once __DIR__ . '/../../Utils/autoload.php';
   include_once __DIR__ . '/../../Model/User.class.php';
   include_once __DIR__ . '/../../Model/Bike.class.php';
   include_once __DIR__ . '/../../Model/Bicicletario.class.php';
 
   Conexao::conexao();
-    if(isset($_SESSION['cpfFunc']) && !empty($_SESSION['cpfFunc']) && $_SESSION['papel']=='func'):
+
+  $session_timeout = 1800;
+
+  if(isset($_SESSION['loggedin']) && $_SESSION["papel"]=="func" && time() - $_SESSION['loggedin'] < $session_timeout):
+
+  $_SESSION['loggedin'] = time();
       
       $bicicletarios = Bicicletario::getAll();
       $users = User::getAll();
@@ -211,7 +217,11 @@
 
 </html>
 <?php 
-else: 
-    header('Location: ../../View/Login.php');
+else:     
+  $message = new Message();
+  $message->setTipo("danger");
+  $message->setConteudo("Sessão expirada!");
+
+  header('Location:../../View/Login.php?message=' . $message->__toString());
 endif;
  ?>

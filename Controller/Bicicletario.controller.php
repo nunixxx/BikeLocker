@@ -1,5 +1,8 @@
 <?php
 require_once __DIR__ .'/../Utils/autoload.php';
+
+if(time() - $_SESSION['loggedin'] < $session_timeout){
+
 include_once __DIR__ . '/../Model/Bicicletario.class.php';
 include_once __DIR__ . '/../Model/Historico.class.php';
 include_once __DIR__ . '/../Model/Bike.class.php';
@@ -71,5 +74,12 @@ else if(isset($_GET['acao']) && $_GET['acao']== 'deletar'){
 } else if(isset($_GET['acao']) && $_GET['acao'] == 'pdf'){
     Historico::createPdf();
 }
+}else{
 
+    $message = new Message();
+    $message->setTipo("danger");
+    $message->setConteudo("Sessão expirada!");
+
+    header('Location:../View/Login.php?message=' . $message->__toString());
+}
 ?>

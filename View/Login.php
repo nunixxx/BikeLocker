@@ -1,7 +1,10 @@
 <?php
     require_once '../Utils/autoload.php'; 
     Conexao::conexao();
+    
     session_destroy();
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

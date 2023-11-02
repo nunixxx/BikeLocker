@@ -7,6 +7,7 @@ require_once '../Utils/autoload.php';
         
         $cpf = $_POST['cpf'];
         $senha = $_POST['senha'];
+        $_SESSION['loggedin'] = time();
 
         if(Funcionario::login($cpf, $senha) == true)
         {
