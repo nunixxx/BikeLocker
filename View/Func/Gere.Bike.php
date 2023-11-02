@@ -98,7 +98,7 @@
       <div class="btn btn-primary btn-rounded" style ="background-color: #0c945de3; border: none;">
         <img src="../../Images/nuvemUpload.png" for="imagem" style="width: 30px; height: 30px;"/>
         <label class="imageButton" for="imagem"> <strong>Choose file</strong></label>
-        <input type="file" class="form-control d-none" id="imagem" onclick="validateFile()" name="imagem" required accept="image/jpeg, image/png"/>
+        <input type="file" class="form-control d-none" id="imagem" onchange="validateFile()" name="imagem" required accept="image/jpeg, image/png"/>
       </div>
       <br><br>
       <input type="submit" class="btn btn-primary btn-block " value="Cadastrar" style="background-color: #0c945de3; border: none; border-radius: 0px; font-weight: bold;" >
@@ -146,7 +146,6 @@
       </tbody>
     </table>
   </div>
-<p> Aceitar apenas arquivos de imagem </p>
 
   <?php
             if (!empty($_GET["message"])) {
