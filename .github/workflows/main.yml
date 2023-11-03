@@ -1,5 +1,5 @@
+name: Deploy via ftp
 on: 
-  name: Deploy via ftp
   push:
     branches:
      - main
