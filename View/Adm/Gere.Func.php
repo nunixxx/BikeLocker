@@ -24,7 +24,6 @@
     <link rel="stylesheet" type="text/css" href="../../Css/Geral.css" media="screen" />
     <title>Administraçao</title>
 </head>
-
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
