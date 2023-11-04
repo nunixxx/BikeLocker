@@ -13,4 +13,4 @@ jobs:
         host: ${{ secrets.HOST }} 
         user: ${{ secrets.USER }}
         password: ${{ secrets.PASS }}
-        localDir: "/home/bikelockerprovis1/"
+        localDir: "C:\xampp\htdocs\BikeLocker"
