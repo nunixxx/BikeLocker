@@ -13,10 +13,10 @@ require_once '../Utils/autoload.php';
         {
             if($_SESSION['papel'] == 'func')
             {
-                header('Location:../View/Func/Bicicletario.php');
+                header('Location:../public_html/Func/Bicicletario.php');
             }else
             {
-                header('Location:../View/Adm/Gere.Func.php');
+                header('Location:../public_html/Adm/Gere.Func.php');
             }
         
         }else{
@@ -24,7 +24,7 @@ require_once '../Utils/autoload.php';
             $message->setTipo("danger");
             $message->setConteudo("Credenciais inválidas");
 
-            header('Location:../View/Login.php?message=' . $message->__toString());
+            header('Location:../public_html/Login.php?message=' . $message->__toString());
         }   
 
     }else{
@@ -32,6 +32,6 @@ require_once '../Utils/autoload.php';
         $message->setTipo("danger");
         $message->setConteudo("Preencha os Dados!");
 
-        header('Location:../View/Login.php?message=' . $message->__toString());
+        header('Location:../public_html/Login.php?message=' . $message->__toString());
     }   
 ?>

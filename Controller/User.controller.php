@@ -26,7 +26,7 @@ if ($acao == 'cadastrar'){
     $imagePath = $_FILES['imagem']['tmp_name'];
 
     move_uploaded_file($imagePath,$savePath);
-    header('Location:../View/Func/Gere.User.php');
+    header('Location:../public_html/Func/Gere.User.php');
 }
 
 else if($acao == 'deletar'){
@@ -42,14 +42,14 @@ else if($acao == 'deletar'){
         Bike::deleteUser($_REQUEST['id']);
         User::delete($_REQUEST['id']); 
         
-        header('Location:../View/Func/Gere.User.php');
+        header('Location:../public_html/Func/Gere.User.php');
 
     }else{
         $message = new Message();
         $message->setTipo("danger");
         $message->setConteudo("Usuario cadastrado no Bicicletario");
 
-        header('Location:../View/Func/Gere.User.php?message=' . $message->__toString());
+        header('Location:../public_html/Func/Gere.User.php?message=' . $message->__toString());
     }   
     
     
@@ -62,7 +62,7 @@ else if($acao == 'deletar'){
 
     $user->update();
 
-    header('Location:../View/Func/Gere.User.php');
+    header('Location:../public_html/Func/Gere.User.php');
 
 }
 }else{
@@ -71,6 +71,6 @@ else if($acao == 'deletar'){
     $message->setTipo("danger");
     $message->setConteudo("Sessão expirada!");
 
-    header('Location:../View/Login.php?message=' . $message->__toString());
+    header('Location:../public_html/Login.php?message=' . $message->__toString());
 }
 ?>

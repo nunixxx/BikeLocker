@@ -2,6 +2,6 @@
     session_start();
     unset($_SESSION['cpfFunc']);
 
-    header('Location:../View/Login.php');
+    header('Location:../public_html/Login.php');
 
 ?>

@@ -20,7 +20,7 @@ if ($_GET['acao']== 'cadastrar'){
     $imagePath = $_FILES['imagem']['tmp_name'];
 
     move_uploaded_file($imagePath,$savePath);
-    header('Location:../View/Func/Gere.Bike.php');
+    header('Location:../public_html/Func/Gere.Bike.php');
 }
 
 else if($_GET['acao']== 'deletar'){
@@ -29,13 +29,13 @@ else if($_GET['acao']== 'deletar'){
         Bike::delete($_REQUEST['id']);  
         unlink('../Arquivos/'.$_REQUEST['id'].'.png');
         
-        header('Location:../View/Func/Gere.Bike.php');
+        header('Location:../public_html/Func/Gere.Bike.php');
     }else{
         $message = new Message();
         $message->setTipo("danger");
         $message->setConteudo("Bicicleta cadastrada no Bicicletario: ");
 
-        header('Location:../View/Func/Gere.Bike.php?message=' . $message->__toString());
+        header('Location:../public_html/Func/Gere.Bike.php?message=' . $message->__toString());
     }
 } else if($_GET['acao']== 'atualizar'){
     $bike = new Bike();
@@ -52,7 +52,7 @@ else if($_GET['acao']== 'deletar'){
     move_uploaded_file($imagePath,$savePath);
 
     $bike->update(); 
-    header('Location:../View/Func/Gere.Bike.php');
+    header('Location:../public_html/Func/Gere.Bike.php');
 
 } else if($_GET['acao'] == 'pesquisar'){
     
@@ -63,7 +63,7 @@ else if($_GET['acao']== 'deletar'){
     $message->setTipo("danger");
     $message->setConteudo("Sessão expirada!");
 
-    header('Location:../View/Login.php?message=' . $message->__toString());
+    header('Location:../public_html/Login.php?message=' . $message->__toString());
 }
 
 ?>
