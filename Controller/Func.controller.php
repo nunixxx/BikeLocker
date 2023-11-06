@@ -18,11 +18,11 @@ if(time() - $_SESSION['loggedin'] < $session_timeout){
         $funcionario->setPapel($_POST['papel']);
         
         $funcionario->save();
-        header('Location:../public_html/Adm/Gere.Func.php ');
+        header('Location:../View/Adm/Gere.Func.php ');
     }
     else if($acao == 'deletar'){
         Funcionario::delete($_REQUEST['id']);
-        header('Location:../public_html/Adm/Gere.Func.php ');
+        header('Location:../View/Adm/Gere.Func.php ');
     }
 }else{
 
@@ -30,7 +30,7 @@ if(time() - $_SESSION['loggedin'] < $session_timeout){
     $message->setTipo("danger");
     $message->setConteudo("Sessão expirada!");
 
-    header('Location:../public_html/Login.php?message=' . $message->__toString());
+    header('Location:../View/Login.php?message=' . $message->__toString());
 }
 
 // } else if($acao =='atualizar'){
@@ -43,7 +43,7 @@ if(time() - $_SESSION['loggedin'] < $session_timeout){
     
 //     $funcionario->update();
 
-//     header('Location:../public_html/Adm/Gere.Func.php ');
+//     header('Location:../View/Adm/Gere.Func.php ');
 
 // }
 

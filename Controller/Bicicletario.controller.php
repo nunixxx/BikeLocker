@@ -26,13 +26,13 @@ if (isset($_GET['acao']) && $_GET['acao']== 'cadastrar'){
 
         $bicicletario->save();
 
-        header('Location:../public_html/Func/Bicicletario.php');
+        header('Location:../View/Func/Bicicletario.php');
     }else {
         $message = new Message();
         $message->setTipo("danger");
         $message->setConteudo("Locker ou CPF já ocupado");
 
-        header('Location:../public_html/Func/Bicicletario.php?message='. $message->__toString());
+        header('Location:../View/Func/Bicicletario.php?message='. $message->__toString());
     }
 
 
@@ -54,7 +54,7 @@ else if(isset($_GET['acao']) && $_GET['acao']== 'deletar'){
     $historico->save();
 
     Bicicletario::delete($_REQUEST['locker']);  
-    header('Location:../public_html/Func/Bicicletario.php');
+    header('Location:../View/Func/Bicicletario.php');
     
 } else if(isset($_GET['acao']) && $_GET['acao']== 'atualizar'){
     $bike = new Bike();
@@ -69,7 +69,7 @@ else if(isset($_GET['acao']) && $_GET['acao']== 'deletar'){
     move_uploaded_file($imagePath,$savePath);
 
     $bike->update(); 
-    header('Location:../public_html/Func/Bicicletario.php');
+    header('Location:../View/Func/Bicicletario.php');
 
 } else if(isset($_GET['acao']) && $_GET['acao'] == 'pdf'){
     Historico::createPdf();
@@ -80,6 +80,6 @@ else if(isset($_GET['acao']) && $_GET['acao']== 'deletar'){
     $message->setTipo("danger");
     $message->setConteudo("Sessão expirada!");
 
-    header('Location:../public_html/Login.php?message=' . $message->__toString());
+    header('Location:../View/Login.php?message=' . $message->__toString());
 }
 ?>

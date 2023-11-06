@@ -12,5 +12,4 @@ jobs:
       with:
         host: ${{ secrets.HOST }} 
         user: ${{ secrets.USER }}
-        password: ${{ secrets.PASS }}
-        localDir: "../../../BikeLocker"
+        password: ${{ secrets.PASS }}        
