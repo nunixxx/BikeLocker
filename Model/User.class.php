@@ -39,7 +39,7 @@ class User
             $pdo->beginTransaction();
 
             $stmt = $pdo->prepare(
-                "INSERT INTO USUARIO (cpf, nome) VALUES (:cpf, :nome)"
+                "INSERT INTO usuario (cpf, nome) VALUES (:cpf, :nome)"
             );
             $res = $stmt->execute([
                 ":cpf" => $this->cpf,
@@ -57,7 +57,7 @@ class User
     {
         $pdo = Conexao::conexao();
 
-        $stmt = $pdo->prepare("DELETE FROM USUARIO WHERE CPF = :cpf");
+        $stmt = $pdo->prepare("DELETE FROM usuario WHERE CPF = :cpf");
         $res = $stmt->execute([
             ":cpf" => $cpf,
         ]);
@@ -67,7 +67,7 @@ class User
     {
         $pdo = Conexao::conexao();
         $lista = [];
-        foreach ($pdo->query("SELECT * FROM USUARIO") as $linha) {
+        foreach ($pdo->query("SELECT * FROM usuario") as $linha) {
             $user = new User();
             $user->setNome($linha["NOME"]);
             $user->setCpf($linha["CPF"]);
@@ -81,7 +81,7 @@ class User
         $pdo = Conexao::conexao();
         try {
             $stmt = $pdo->prepare(
-                "UPDATE Usuario SET nome = :nome WHERE cpf = :cpf"
+                "UPDATE usuario SET nome = :nome WHERE cpf = :cpf"
             );
 
             $res = $stmt->execute([
@@ -100,7 +100,7 @@ class User
         $pdo = Conexao::conexao();
         #TODO ver que esse código cheira mal...
         foreach (
-            $pdo->query("SELECT * FROM Usuario WHERE CPF = " . $this->cpf)
+            $pdo->query("SELECT * FROM usuario WHERE CPF = " . $this->cpf)
             as $linha
         ) {
             $this->setNome($linha["NOME"]);

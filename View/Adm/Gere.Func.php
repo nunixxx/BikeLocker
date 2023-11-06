@@ -52,7 +52,7 @@
     <div class="form">
         <h3>Cadastro</h3>
         <br>
-        <form action="../../controller/Func.controller.php?acao=<?= $acao ?>" method="post">
+        <form action="../../Controller/Func.controller.php?acao=<?= $acao ?>" method="post">
             <div class="inputBox">
                 <input type="text" name="cpf" id="cpf" placeholder="CPF" class="form-control" />
             </div>

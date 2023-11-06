@@ -10,9 +10,9 @@ class Conexao{
         
         try {
             $pdo = new PDO(
-                "mysql:host=localhost;dbname=bikelocker;charset=utf8",
-                "root",
-                ""
+                "mysql:host=bikelocker.mysql.dbaas.com.br;dbname=bikelocker;charset=utf8",
+                "bikelocker",
+                "Claro@16102004"
             );
         
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

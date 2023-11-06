@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ .'/../Utils/autoload.php';
+require_once __DIR__ . '/../Utils/tcpdf/tcpdf.php';
 
 class Historico{
 
@@ -130,7 +131,7 @@ class Historico{
 
         try
         {
-        $stmt = $pdo->query("SELECT * FROM HISTORICO");
+        $stmt = $pdo->query("SELECT * FROM historico");
         $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $pdf = new tcpdf();

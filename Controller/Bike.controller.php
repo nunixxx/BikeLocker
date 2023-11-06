@@ -1,6 +1,10 @@
 <?php
 require_once __DIR__ .'/../Utils/autoload.php';
 
+session_start();
+
+$session_timeout= 1800;
+
 if(time() - $_SESSION['loggedin'] < $session_timeout){
 
 include_once __DIR__ . '/../Model/Bike.class.php';

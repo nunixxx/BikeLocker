@@ -1,10 +1,13 @@
 <?php
 require_once '../Utils/autoload.php';
 
+session_start();
+
+$session_timeout= 1800;
+
 if(time() - $_SESSION['loggedin'] < $session_timeout){
     $acao = $_GET['acao'];
-
-
+ 
     include_once '../Model/Funcionario.class.php';
     
     //Cadastrar no banco

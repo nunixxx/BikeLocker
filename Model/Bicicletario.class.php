@@ -82,7 +82,7 @@ class Bicicletario{
                 
             $pdo->beginTransaction(); 
 
-            $stmt = $pdo->prepare('DELETE FROM Bicicletario WHERE LOCKER = :locker');
+            $stmt = $pdo->prepare('DELETE FROM bicicletario WHERE LOCKER = :locker');
             $res = $stmt->execute([
                 ':locker' => $locker
             ]); 

@@ -49,7 +49,7 @@ public function save()
             
         $pdo->beginTransaction();
 
-        $stmt = $pdo->prepare('INSERT INTO Bike (cor, CPF) VALUES (:cor, :CPF)');
+        $stmt = $pdo->prepare('INSERT INTO bike (cor, cpf) VALUES (:cor, :CPF)');
         $res = $stmt->execute([
         ':cor' => $this->cor,
         ':CPF' => $this->cpf
@@ -73,7 +73,7 @@ public static function deleteUser($id)
             
         $pdo->beginTransaction(); 
 
-        $stmt = $pdo->prepare('DELETE FROM BIKE WHERE cpf = :id');
+        $stmt = $pdo->prepare('DELETE FROM bike WHERE cpf = :id');
         $res = $stmt->execute([
             ':id' => $id
         ]); 
@@ -93,7 +93,7 @@ public static function delete($id)
             
         $pdo->beginTransaction(); 
 
-        $stmt = $pdo->prepare('DELETE FROM BIKE WHERE Id_Bike = :id');
+        $stmt = $pdo->prepare('DELETE FROM bike WHERE Id_Bike = :id');
         $res = $stmt->execute([
             ':id' => $id
         ]); 
@@ -125,7 +125,7 @@ public static function getAll()
         $pdo = Conexao::conexao();
         try{
             $stmt = $pdo->prepare(
-                'UPDATE BIKE SET cor = :cor WHERE id_bike = :id'
+                'UPDATE bike SET cor = :cor WHERE id_bike = :id'
             );
 
             $res = $stmt->execute([
