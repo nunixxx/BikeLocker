@@ -153,6 +153,15 @@
       <a href="../../Controller/Bicicletario.controller.php?acao=pdf" target="_blank" class="btn btn-success"> download PDF</a>
 
   </div>
+
+  <div id="ConfDel" class="popup" style="display: none;">
+    <div class="popup-conteudo">
+        <span class="fechar" id="fecharPopup" onclick="fecharPopup()">&times;</span>
+        <p>Deseja mesmo Deletar?</p>
+        <input class="btn btn-primary btn-rounded" style ="background-color: #c53302; border: none;" type="submit" id="enviarFormulario" value="Sim" onclick="enviarFormulario()">
+    </div>
+  </div>
+
   <div class="tabela" style="width: 700px">
     <table class="cabecalho">
       <thead>
@@ -183,9 +192,16 @@
              echo $dataFormat;?>
           </td>
           <td>
-            <a href="../../Controller/Bicicletario.controller.php?acao=deletar&locker=<?= $bicicletario->getlocker() ?>"
-              class="btn btn-danger">Excluir</a>
-            <a href="?locker=<?= $bicicletario->getLocker() ?>" class="btn btn-success">Editar</a>
+          <div class="btn btn-primary btn-rounded" style ="background-color: #c53302; border: none; padding: 5px;">
+              <form id= "deletar" method="post" action="../../Controller/Bicicletario.controller.php?acao=deletar&locker=<?= $bicicletario->getlocker() ?>">
+                  <input type="image" src="../../Images/Lixeira.png" title="deletar" alt="Submit" style="widht:25px; height:25px;">
+              </form>
+          </div>
+          <div class="btn btn-primary btn-rounded" style ="background-color: #14bf25; border: none; padding: 5px;">
+              <form method="post" action="?locker=<?= $bicicletario->getLocker() ?>">
+                  <input type="image" src="../../Images/Editar.png" title="editar" alt="Submit" style="widht:25px; height:25px;">
+              </form>
+          </div>
           </td>
         </tr>
         <?php } ?>
