@@ -111,6 +111,14 @@
     </form>
   </div>
 
+  <div id="ConfDel" class="popup" style="display: none;">
+        <div class="popup-conteudo">
+            <span class="fechar" id="fecharPopup" onclick="fecharPopup()">&times;</span>
+            <p>Deseja mesmo Deletar?</p>
+            <input class="btn btn-primary btn-rounded" style ="background-color: #c53302; border: none;" type="submit" id="enviarFormulario" value="Sim" onclick="enviarFormulario()">
+        </div>
+  </div>
+
   <div class="tabela" style="width: 450px;">
     <table class="cabecalho">
       <thead>
@@ -137,7 +145,7 @@
           </td>
           <td>
           <div class="btn btn-primary btn-rounded" style ="background-color: #c53302; border: none; padding: 5px;">
-            <form method="post" action="../../Controller/Bike.controller.php?acao=deletar&id=<?= $bike->getId() ?>">
+            <form id="deletar" method="post" action="../../Controller/Bike.controller.php?acao=deletar&id=<?= $bike->getId() ?>">
                 <input type="image" src="../../Images/Lixeira.png" title="deletar" alt="Submit" style="widht:25px; height:25px;">
             </form>
           </div>
