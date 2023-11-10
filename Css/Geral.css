@@ -125,3 +125,10 @@ h3 {
     font-size: 20px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 1030px) {
+    .tabela{
+        width: 500px;
+    }
+
+}

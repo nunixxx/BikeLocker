@@ -11,3 +11,25 @@
     background: linear-gradient(145deg, #f0f0f0, #cacaca);
     box-shadow:  26px 26px 14px #929292, -26px -26px 14px #ffffff;
 }
+
+@media screen and (max-width: 400px) {
+    body {
+        font-family: 8px;
+    }
+    
+    .loginPanel {
+        border-radius: 15px;
+        padding: 30px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    body {
+        font-family: 8px;
+    }
+    
+    .loginPanel {
+        border-radius: 15px;
+        padding: 30px;
+    }
+}

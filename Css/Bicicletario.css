@@ -64,3 +64,16 @@
     outline: dotted 1px #CCC;
     outline-offset: 0.45rem;
   }
+
+  .tabela {
+    width: 700px;
+  }
+
+  @media screen and (max-width: 1030px) {
+    .tabela{
+        width: 500px;
+    }
+    .form{
+      padding: 30px;
+    }
+}

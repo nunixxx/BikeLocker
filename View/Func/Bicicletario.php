@@ -148,7 +148,7 @@
         <input class="cadeado" type="radio" name="cadeado" id="0" value="0" <?php if($bicicletario->getCadeado() !== null && $bicicletario->getCadeado() == 0){echo "checked";}?>>
           <label for="0">Não Possui </label>
       </div>
-      <input type="submit" class="btn btn-primary btn-block mb-4" value="cadastrar">
+      <input type="submit" class="btn btn-primary btn-block mb-4" value="Cadastrar" style="background-color: #0c945de3; border: none; border-radius: 0px; font-weight: bold;">
     </form>
       <a href="../../Controller/Bicicletario.controller.php?acao=pdf" target="_blank" class="btn btn-success"> download PDF</a>
 
@@ -162,7 +162,7 @@
     </div>
   </div>
 
-  <div class="tabela" style="width: 700px">
+  <div class="tabela">
     <table class="cabecalho">
       <thead>
         <tr>

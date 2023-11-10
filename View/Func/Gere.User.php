@@ -87,7 +87,7 @@
                 <input type="file" class="form-control d-none" id="imagem" onclick="validateFile()" name="imagem" required accept="image/jpeg, image/png"/>
             </div>
             <br><br>
-            <input type="submit" class="btn btn-primary btn-block mb-4" value="Cadastrar">
+            <input type="submit" class="btn btn-primary btn-block " value="Cadastrar" style="background-color: #0c945de3; border: none; border-radius: 0px; font-weight: bold;">
         </form>
     </div>
 

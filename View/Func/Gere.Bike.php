@@ -36,8 +36,8 @@
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../../Css/Geral.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="../../Css/Gere.Bike.css" media="screen" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <title>Bicicletas</title>
 </head>
 
@@ -117,7 +117,7 @@
             <p>Deseja mesmo Deletar?</p>
             <input class="btn btn-primary btn-rounded" style ="background-color: #c53302; border: none;" type="submit" id="enviarFormulario" value="Sim" onclick="enviarFormulario()">
         </div>
-  </div>
+    </div>
 
   <div class="tabela" style="width: 450px;">
     <table class="cabecalho">
