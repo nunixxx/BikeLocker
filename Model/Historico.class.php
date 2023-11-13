@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ .'/../Utils/autoload.php';
 require_once __DIR__ . '/../Utils/tcpdf/tcpdf.php';
+require_once __DIR__ . '/../Model/Bicicletario.class.php';
 
 class Historico{
 
@@ -123,9 +124,22 @@ class Historico{
         }
         return $lista;
     }
+    public static function deleteAll(){
+        $pdo = Conexao::conexao();
+        try{
 
+            $pdo->beginTransaction();
+
+            $pdo->execute("DELETE * FROM HISTORICO");
+
+            return true;
+        }catch(PDOException $e){
+            return false;
+        }
+    }
     public static function createPdf(){
         $historicos = Historico::getAll();
+        $bicicletarios = Bicicletario::getAll();
         $pdo = Conexao::conexao();
         $horarioAtual = date('d-m-Y');
 
@@ -133,7 +147,7 @@ class Historico{
         {
         $stmt = $pdo->query("SELECT * FROM historico");
         $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+        
         $pdf = new tcpdf();
         $pdf->SetTitle('Historico Bicicletario - ' . $horarioAtual);
         $pdf->AddPage();
@@ -189,10 +203,63 @@ class Historico{
         $html .='
           </tbody>
         </table>';
+        $html.='<h2>Passaram a noite no Bicicletario</h2>';
         
+        $html.='<table class="cabecalho">
+        <thead>
+            <tr>
+                <th>Locker</th>
+                <th>Usuário</th>
+                <th>Cadeado</th>
+                <th>Bike</th>
+                <th>Chegada</th>
+                <th>Saida</th>
+            </tr>
+        </thead>
+        </table>
+                
+        <table>
+        <tbody>';
+        foreach($bicicletarios as $bicicletario)
+        {
+            $dataFormat = date("d/m H:i", strtotime($bicicletario->getChegada()));
+        $html .='
+            <tr class="item">
+              <th>'
+                 .$bicicletario->getLocker(). '
+              </th>
+              <td>'
+                .$bicicletario->getCpf().'
+              </td>
+              <td>';
+                if ($bicicletario->getCadeado() == 1){
+                    $html .='possui';
+                } else{
+                    $html .='não possui';
+                }
+        $html .='
+              </td>
+              <td>'
+                .$bicicletario->getBikeId().'
+              </td>
+              <td>'
+                .$dataFormat.'
+              </td>
+              <td>
+              NULL
+              </td>
+            </tr>';
+        }
+        $html .='
+          </tbody>
+        </table>';
         $pdf->writeHTML($html);
         ob_end_clean();
-        $pdf->Output('Historicos.pdf', 'I');
+        $pdf->Output('../HistoricosPdf/'.$horarioAtual.'.pdf', 'F');
+        
+        // $savePath = '../HistoricosPdf/'.$pdf;
+
+        // move_uploaded_file($pdf,$savePath);
         }  catch (PDOException $e) {    
             die("Erro na consulta SQL: " . $e->getMessage());
         } 
