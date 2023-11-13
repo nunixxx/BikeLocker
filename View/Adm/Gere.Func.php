@@ -26,30 +26,28 @@
     <title>Administraçao</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <label>BikeLocker</label>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Gerenciar
-                        </a>
-                    </li>
-                </ul>
-                <div class="d-flex" role="search">
-                    <button class="btn btn-outline-danger" type="submit"
-                        onclick="window.location.href='../../Controller/Logout.controller.php'">Sair</button>
-                </div>
-            </div>
-        </div>
-    </nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <img src="../../Images/Logo.png" style="width:60px; margin-right:10px; margin-left:10px;">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alterna navegação">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="Gere.Func.php"><strong>Funcionários</strong></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Histórico</a>
+      </li>
+    </ul>
+  </div>
+  <div class="d-flex" role="search">
+    <button class="btn btn-outline-danger" type="submit"
+      onclick="window.location.href='../../Controller/Logout.controller.php'">
+      Sair
+    </button>
+  </div>
+</nav>
     <div class="form">
         <h3>Cadastro</h3>
         <br>

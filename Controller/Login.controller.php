@@ -13,7 +13,7 @@ require_once '../Utils/autoload.php';
         {
             if($_SESSION['papel'] == 'func')
             {
-                header('Location:../View/Func/Bicicletario.php');
+                header('Location:../View/Func/Gere.User.php');
             }else
             {
                 header('Location:../View/Adm/Gere.Func.php');

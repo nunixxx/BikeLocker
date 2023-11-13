@@ -47,42 +47,33 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <label>
-        <h5>BikeLocker</h5>
-      </label>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Gerenciar
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <a class="dropdown-item" href="Bicicletario.php">Bicicletário</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="Gere.User.php">Usuário</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="Gere.Bike.php">Bicicletas</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <div class="d-flex" role="search">
-          <button class="btn btn-outline-danger" type="submit"
-            onclick="window.location.href='../../Controller/Logout.controller.php'">
-            Sair
-          </button>
-        </div>
-      </div>
-    </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <img src="../../Images/Logo.png" style="width:60px; margin-right:10px; margin-left:10px;">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alterna navegação">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="Bicicletario.php"><strong>Bicicletário</strong></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="Gere.User.php">Usuário</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="Gere.Bike.php">Bicicletas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Histórico</a>
+      </li>
+    </ul>
+  </div>
+  <div class="d-flex" role="search">
+    <button class="btn btn-outline-danger" type="submit"
+      onclick="window.location.href='../../Controller/Logout.controller.php'">
+      Sair
+    </button>
+  </div>
 </nav>
 
   <div class="form" style = "color: white">
@@ -167,10 +158,10 @@
     <table class="cabecalho">
       <thead>
         <tr>
-          <th style="width: 50px;">Locker</th>
-          <th style="width: 80px;">Usuário</th>
-          <th style="width: 60px;">Bike</th>
-          <th style="width: 150px;">Horario</th>
+          <th style="width: 10%;">Locker</th>
+          <th style="width: 30%;">Usuário</th>
+          <th style="width: 20%;">Bicicleta</th>
+          <th style="width: 50%;">Horario</th>
         </tr>
       </thead>
     </table>
@@ -179,20 +170,22 @@
       <tbody>
         <?php foreach($bicicletarios as $bicicletario){?>
         <tr class="item">
-          <td style="width: 50px; text-align: center;">
+          <td style="width: 10%; text-align: center;">
             <strong><?php echo $bicicletario->getLocker();?></strong>
           </td>
-          <td style="width: 80px;">
+          <td style="width: 30%; margin-left: 40px;">
             <?php echo User::loadByCpf($bicicletario->getCpf());?>
           </td>
-          <td style="width: 60px;">
+          <td style="width: 20%;">
+          <div style="width: 70px;">
             <img class= "bikeImg" src="../../Arquivos/<?php echo $bicicletario->getBikeId();?>.png" for="imagem"/>
+          </div>
           </td>
-          <td>
+          <td style="width: 20%;">
             <?php $dataFormat = date("d/m H:i", strtotime($bicicletario->getChegada()));
              echo $dataFormat;?>
           </td>
-          <td>
+          <td style="width: 30%;">
           <div class="btn btn-primary btn-rounded" style ="background-color: #c53302; border: none; padding: 5px;">
               <form id= "deletar" method="post" action="../../Controller/Bicicletario.controller.php?acao=deletar&locker=<?= $bicicletario->getlocker() ?>">
                   <input type="image" src="../../Images/Lixeira.png" title="deletar" alt="Submit" style="widht:25px; height:25px;">
