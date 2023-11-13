@@ -42,7 +42,8 @@
   <link rel="stylesheet" type="text/css" href="../../Css/Bicicletario.css" media="screen" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-  <title>Tela Incial</title>
+  <link rel="shortcut icon" href="../../Images/Logo.png" />
+  <title>Bicicletario</title>
 </head>
 
 <body>
@@ -182,7 +183,7 @@
             <strong><?php echo $bicicletario->getLocker();?></strong>
           </td>
           <td style="width: 80px;">
-            <?php echo $bicicletario->getCpf();?>
+            <?php echo User::loadByCpf($bicicletario->getCpf());?>
           </td>
           <td style="width: 60px;">
             <img class= "bikeImg" src="../../Arquivos/<?php echo $bicicletario->getBikeId();?>.png" for="imagem"/>

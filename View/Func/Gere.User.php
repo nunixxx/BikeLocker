@@ -35,7 +35,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../../Css/Gere.User.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="../../Css/Geral.css" media="screen" />
-
+    <link rel="shortcut icon" href="../../Images/Logo.png" />
     <title>Usuários</title>
 </head>
 <body>
@@ -70,15 +70,15 @@
         <br>
         <form action= "../../controller/User.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
             <div class="inputBox">
-                <input type="text" name="cpf" id="cpf" placeholder="CPF" class="form-control" value="<?= $user->getCpf();?>" required/>
+                <input type="text" name="cpf" id="cpf" placeholder="CPF" value="<?= $user->getCpf();?>" required/>
             </div>
             <br>
             <div class="inputBox">
-                <input type="text" name="nome" id="nome" placeholder="Nome" class="form-control" value="<?= $user->getNome();?>"required/>
+                <input type="text" name="nome" id="nome" placeholder="Nome" value="<?= $user->getNome();?>"required/>
             </div>
             <br>
             <div>
-                <input type="color" class="form-control form-control-color" id="cor" name="cor" value="<?= $bike->getCor();?>" required/>
+                <input type="color" id="cor" name="cor" value="<?= $bike->getCor();?>" required/>
             </div>
             <br>
             <div class="btn btn-primary btn-rounded" style ="background-color: #0c945de3; border: none;">
@@ -87,7 +87,7 @@
                 <input type="file" class="form-control d-none" id="imagem" onclick="validateFile()" name="imagem" required accept="image/jpeg, image/png"/>
             </div>
             <br><br>
-            <input type="submit" class="btn btn-primary btn-block " value="Cadastrar" style="background-color: #0c945de3; border: none; border-radius: 0px; font-weight: bold;">
+            <input type="submit" value="Cadastrar">
         </form>
     </div>
 

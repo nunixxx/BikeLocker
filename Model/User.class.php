@@ -109,6 +109,20 @@ class User
         return $this;
     }
 
+    public static function loadByCpf($cpf)
+    {
+        $pdo = Conexao::conexao();
+        #TODO ver que esse código cheira mal...
+        foreach (
+            $pdo->query("SELECT * FROM usuario WHERE CPF = " . $cpf)
+            as $linha
+        ) {
+            $nome = $linha["NOME"];
+        }
+
+        return $nome;
+    }
+
     public function __toString()
     {
         return $this->getNome() . " // " . $this->getCpf();

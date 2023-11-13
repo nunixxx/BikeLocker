@@ -34,11 +34,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../../Css/Geral.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="../../Css/Gere.Bike.css" media="screen" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-  <title>Bicicletas</title>
+    <link rel="stylesheet" type="text/css" href="../../Css/Geral.css" media="screen" />
+    <link rel="shortcut icon" href="../../Images/Logo.png" />
+    <title>Bicicletas</title>
 </head>
 
 <body >
@@ -77,7 +78,7 @@
     <br>
     <form action="../../Controller/Bike.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
       <div class="inputBox" styler = "witdh: 20px">
-        <input type="text" name="id" id="id" placeholder="ID" class="form-control" value="<?= $bike->getId();?>"
+        <input type="text" name="id" id="id" placeholder="ID" value="<?= $bike->getId();?>"
           readonly />
       </div>
       <br>
@@ -96,9 +97,9 @@
           ?>
       </select>
       <br>
+      <br>
       <div>
-        <input type="color" class="form-control form-control-color" id="cor" name="cor"
-          value="<?= $bike->getCor();?>" required/>
+        <input type="color" id="cor" name="cor" value="<?= $bike->getCor();?>" required/>
       </div>
       <br>
       <div class="btn btn-primary btn-rounded" style ="background-color: #0c945de3; border: none;">
@@ -107,7 +108,7 @@
         <input type="file" class="form-control d-none" id="imagem" onchange="validateFile()" name="imagem" required accept="image/jpeg, image/png"/>
       </div>
       <br><br>
-      <input type="submit" class="btn btn-primary btn-block " value="Cadastrar" style="background-color: #0c945de3; border: none; border-radius: 0px; font-weight: bold;" >
+      <input type="submit"  value="Cadastrar" >
     </form>
   </div>
 

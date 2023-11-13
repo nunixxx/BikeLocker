@@ -22,6 +22,7 @@
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../../Css/Gere.Func.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="../../Css/Geral.css" media="screen" />
+    <link rel="shortcut icon" href="../../Images/Logo.png" />
     <title>Administraçao</title>
 </head>
 <body>
@@ -52,25 +53,17 @@
     <div class="form">
         <h3>Cadastro</h3>
         <br>
-        <form action="../../Controller/Func.controller.php?acao=<?= $acao ?>" method="post">
-            <div class="inputBox">
-                <input type="text" name="cpf" id="cpf" placeholder="CPF" class="form-control" />
-            </div>
+        <form action="../../Controller/Func.controller.php?acao=<?= $acao ?>" method="post" style="padding: 30px">
+                <input type="text" name="cpf" id="cpf" placeholder="CPF" />
             <br>
-            <div class="inputBox">
-                <input type="text" name="nome" id="nome" placeholder="Nome" class="form-control" />
-            </div>
+                <input type="text" name="nome" id="nome" placeholder="Nome" />
             <br>
-            <div class="inputBox">
-                <input type="email" name="email" id="email" placeholder="E-mail" class="form-control" />
-            </div>
+                <input type="email" name="email" id="email" placeholder="E-mail" />
             <br>
-            <div class="inputBox">
-                <input type="password" name="senha" id="senha" placeholder="Senha" class="form-control" />
-            </div>
+                <input type="password" name="senha" id="senha" placeholder="Senha" />
             <input type="hidden" name="papel" id="papel" value='func' />
             <br>
-            <input type="submit" class="btn btn-primary btn-block mb-4" value="Cadastrar">
+            <input type="submit" value="Cadastrar">
         </form>
     </div>
     <div class="tabela">
@@ -85,7 +78,8 @@
         </tabel>
         <table>
             <tbody>
-                <?php foreach($funcionarios as $funcionario){?>
+                <?php foreach($funcionarios as $funcionario){
+                    if($funcionario->getPapel() =="func"){?>
                 <tr class="item">
                     <td style="width: 150px">
                         <strong><?php echo $funcionario->getCpf();?></strong>
@@ -101,7 +95,8 @@
                             class="btn btn-danger">Excluir</a>
                     </td>
                 </tr>
-                <?php } ?>
+                <?php }
+                } ?>
             </tbody>
         </table>
     </div>

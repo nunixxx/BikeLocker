@@ -167,8 +167,13 @@ class Historico{
               <td>'
                 .$historico->getCpf().'
               </td>
-              <td>'
-                .$historico->getCadeado().'
+              <td>';
+                if ($historico->getCadeado() == 1){
+                    $html .='possui';
+                } else{
+                    $html .='não possui';
+                }
+        $html .='
               </td>
               <td>'
                 .$historico->getBikeId().'
