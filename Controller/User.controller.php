@@ -63,8 +63,6 @@ else if($acao == 'deletar'){
     $user->setCpf($_POST['cpf']);
     $user->setNome($_POST['nome']);
 
-    move_uploaded_file($imagePath,$savePath);
-
     $user->update();
 
     header('Location:../View/Func/Gere.User.php');

@@ -73,13 +73,23 @@
         <br>
         <form action= "../../controller/User.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
             <div class="inputBox">
-                <input type="text" name="cpf" id="cpf" placeholder="CPF" value="<?= $user->getCpf();?>" required/>
+                <input type="text" name="cpf" id="cpf" placeholder="CPF" value="<?= $user->getCpf();?>" <?php
+            if(isset($_GET['cpf'])==false){
+            ?>required <?php
+        }else{?>
+            readonly
+        <?php
+        }
+        ?>/>
             </div>
             <br>
             <div class="inputBox">
                 <input type="text" name="nome" id="nome" placeholder="Nome" value="<?= $user->getNome();?>"required/>
             </div>
             <br>
+            <?php
+            if(isset($_GET['cpf'])==false){
+            ?>
             <div>
                 <input type="color" id="cor" name="cor" value="<?= $bike->getCor();?>" required/>
             </div>
@@ -89,6 +99,9 @@
                 <label class="imageButton" for="imagem"> <strong>Choose file</strong></label>
                 <input type="file" class="form-control d-none" id="imagem" onclick="validateFile()" name="imagem" required accept="image/jpeg, image/png"/>
             </div>
+            <?php
+            }
+            ?>
             <br><br>
             <input type="submit" value="Cadastrar">
         </form>
