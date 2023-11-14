@@ -130,18 +130,23 @@ class Historico{
 
             $pdo->beginTransaction();
 
-            $pdo->execute("DELETE * FROM HISTORICO");
+            $stmt = $pdo->prepare("DELETE FROM historico");
+            $stmt->execute();
+    
+            $pdo->commit();
 
             return true;
         }catch(PDOException $e){
+            $pdo->rollBack();
             return false;
         }
     }
     public static function createPdf(){
+        date_default_timezone_set('America/Sao_Paulo');
         $historicos = Historico::getAll();
         $bicicletarios = Bicicletario::getAll();
         $pdo = Conexao::conexao();
-        $horarioAtual = date('d-m-Y');
+        $horarioAtual = date('d_m_Y');
 
         try
         {
@@ -255,14 +260,10 @@ class Historico{
         </table>';
         $pdf->writeHTML($html);
         ob_end_clean();
-        $pdf->Output('../HistoricosPdf/'.$horarioAtual.'.pdf', 'F');
+        $pdf->Output(__DIR__ . '/../HistoricosPdf/'.$horarioAtual.".pdf", 'F');
         
-        // $savePath = '../HistoricosPdf/'.$pdf;
-
-        // move_uploaded_file($pdf,$savePath);
         }  catch (PDOException $e) {    
             die("Erro na consulta SQL: " . $e->getMessage());
         } 
     }
-
-}
+}   

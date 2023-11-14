@@ -142,7 +142,7 @@
       </div>
       <input type="submit" class="btn btn-primary btn-block mb-4" value="Cadastrar" style="background-color: #0c945de3; border: none; border-radius: 0px; font-weight: bold;">
     </form>
-      <a href="../../Controller/Bicicletario.controller.php?acao=pdf" target="_blank" class="btn btn-success"> download PDF</a>
+      <!-- <a href="../../Utils/SalvarHist.php" target="_blank" class="btn btn-success"> download PDF</a> -->
 
   </div>
 
