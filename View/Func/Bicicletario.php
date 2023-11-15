@@ -63,6 +63,9 @@
       <li class="nav-item">
         <a class="nav-link" href="Gere.Bike.php">Bicicletas</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Histórico</a>
+      </li>
     </ul>
   </div>
   <div class="d-flex" role="search">
@@ -74,13 +77,13 @@
 </nav>
 
   <div class="form" style = "color: white">
-    <h3>Bicicletário</h3>
+    <h3>Bicicletario</h3>
     <br>
     <form action="../../Controller/Bicicletario.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
       <label> Usuário </label><br>
       <select class="form-select" aria-label="Default select example" id="cpf" name="cpf" required onchange="updateBikeOptions()">
         <option value="" disabled selected>
-          <?php if(null == $bicicletario->getCpf() ){echo "CPF";} else{echo $bicicletario->getCpf();}  ?>
+          <?php if(!isset($_GET['locker']) ){echo "CPF";} else{echo $bicicletario->getCpf();}  ?>
         </option>
         <?php 
           foreach ($users as $user){
@@ -96,7 +99,7 @@
       <label> Bicicleta </label><br>
           <select class="form-select" aria-label="Default select example" id="bike_id" name="bike_id" required>
         <option value="" disabled selected>
-          <?php if(null == $bicicletario->getBikeId() ){echo "ID";} else{echo $bicicletario->getBikeId();}  ?>
+          <?php if((!isset($_GET['locker']) )){echo "ID";} else{echo $bicicletario->getBikeId();}  ?>
         </option>
         <?php 
           foreach ($bikes as $bike){
@@ -114,7 +117,7 @@
       <div class="inputBox">
         <select class="form-select" aria-label="Default select example" id="locker" name="locker" required>
           <option value="" disabled selected>
-          <?php if(null == $bicicletario->getLocker () ){echo "Locker";} else{echo $bicicletario->getLocker();}  ?>
+          <?php if(!isset($_GET['locker']) ){echo "Locker";} else{echo $bicicletario->getLocker();}  ?>
           </option>
           <?php
             for ($i = 1; $i <= 50; $i++){
@@ -139,8 +142,11 @@
       </div>
       <input type="submit" class="btn btn-primary btn-block mb-4" value="Cadastrar" style="background-color: #0c945de3; border: none; border-radius: 0px; font-weight: bold;">
     </form>
-      <!-- <a href="../../Utils/SalvarHist.php" target="_blank" class="btn btn-success"> download PDF</a> -->
 
+    <?php if(isset($_GET['locker'])){?>
+        <button id="limparURL">Cancelar</button>
+    <?php }?>
+    <label style="position: fixed; bottom: 10px; right: 10px;"> *Todos os campos devem ser preenchidos</label>
   </div>
 
   <div id="ConfDel" class="popup" style="display: none;">
@@ -150,7 +156,13 @@
         <input class="btn btn-primary btn-rounded" style ="background-color: #c53302; border: none;" type="submit" id="enviarFormulario" value="Sim" onclick="enviarFormulario()">
     </div>
   </div>
-
+  <div id="ConfEdit" class="popup" style="display: none;">
+    <div class="popup-conteudo">
+        <span class="fechar" id="fecharPopup" onclick="fecharPopup()">&times;</span>
+        <p>Deseja mesmo Editar?</p>
+        <input class="btn btn-primary btn-rounded" style ="background-color: green; border: none;" type="submit" id="enviarFormulario" value="Sim" onclick="enviarFormulario()">
+    </div>
+  </div>
   <div class="tabela">
     <table class="cabecalho">
       <thead>
@@ -184,12 +196,12 @@
           </td>
           <td style="width: 30%;">
           <div class="btn btn-primary btn-rounded" style ="background-color: #c53302; border: none; padding: 5px;">
-              <form id= "deletar" method="post" action="../../Controller/Bicicletario.controller.php?acao=deletar&locker=<?= $bicicletario->getlocker() ?>">
+              <form id= "deletar" class= "deletar" method="post" action="../../Controller/Bicicletario.controller.php?acao=deletar&locker=<?= $bicicletario->getlocker() ?>">
                   <input type="image" src="../../Images/Lixeira.png" title="deletar" alt="Submit" style="widht:25px; height:25px;">
               </form>
           </div>
           <div class="btn btn-primary btn-rounded" style ="background-color: #14bf25; border: none; padding: 5px;">
-              <form method="post" action="?locker=<?= $bicicletario->getLocker() ?>">
+              <form method="post" class= "editar" action="?locker=<?= $bicicletario->getLocker() ?>">
                   <input type="image" src="../../Images/Editar.png" title="editar" alt="Submit" style="widht:25px; height:25px;">
               </form>
           </div>

@@ -30,7 +30,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <img src="../../Images/logo.png" style="width:60px; margin-right:10px; margin-left:10px;">
+    <img src="../../Images/Logo.png" style="width:60px; margin-right:10px; margin-left:10px;">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alterna navegação">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -68,8 +68,11 @@
                     <strong><?php echo $file?></strong>
                 </td>
                 <td>
-                    <a href="../../Controller/Historico.controller.php?acao=download&id=<?= $file?>"
-                        class="btn btn-danger">Excluir</a>
+                <div class="btn btn-primary btn-rounded" style ="background-color: #14bf25; border: none; padding: 5px;">
+                    <form method="post" action="../../Controller/Historico.controller.php?acao=download&id=<?= $file?>">
+                        <input type="image" src="../../Images/nuvemUpload.png" title="download" alt="Submit" style="widht:25px; height:25px;">
+                    </form>
+                </div>
                 </td>
             </tr>
             <?php } ?>
