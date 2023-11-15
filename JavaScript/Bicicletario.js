@@ -39,3 +39,37 @@ function updateBikeOptions() {
         });
     }
 }
+
+function updateImageOptions() {
+    const selectedCpf = $("#cpf").val();
+    const bikeIdSelect = $("#bike_id");
+    const cor = $("#cor").val();
+
+    // Use AJAX para chamar o script PHP que retorna os IDs das bicicletas vinculadas ao CPF
+    // Exemplo com jQuery para simplicidade, mas você pode usar XMLHttpRequest se preferir
+    $.ajax({
+        url: `../../Controller/BicicletarioJs.controller.php?acao=selectedCpf&cpf=${selectedCpf}`,
+        dataType: 'json',
+        type: 'POST',
+        data: { cor: cor, id: bikeIdSelect.val(), cpf: selectedCpf },
+        success: function(data) {
+            console.log(data);
+        // 'response' deve conter a array com os IDs das bicicletas
+        const bikeData = data;
+        
+        console.log(bikeData);
+
+        $("#fotoSelect").empty();
+        
+        bikeData.forEach(function(bike) {
+            console.log(bike.id);
+                var imagePath = "../../Arquivos/" + bike.id + ".png";
+                var imgElement = $("<img style='width:100px;'>").attr("src", imagePath).attr("alt", "Bicicleta " + bike.id).attr("title", bike.id);
+                $("#fotoSelect").append( imgElement);
+            });
+        },
+        error: function(error) {
+        console.error('Erro ao obter os IDs das bicicletas: ' + error);
+        }
+    });
+}

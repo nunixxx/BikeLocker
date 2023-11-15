@@ -197,6 +197,7 @@ form input[type="color"]::-moz-color-swatch{
 }
 
 .fotoSelect{
+    max-width: 120px;
     border-radius: 5px;
     color: white;
     text-align: center;
@@ -206,6 +207,7 @@ form input[type="color"]::-moz-color-swatch{
     position: left;
     top: 50%;
     left: 10%;
+    transform: translate(-50%, -50%);
     background: linear-gradient(145deg, #456939, #004e36);
 }
 
@@ -215,6 +217,9 @@ form input[type="color"]::-moz-color-swatch{
     }
     .tabela{
         width: 500px;
+    }
+    .fotoSelect{
+        left: 5%;
     }
 
 }

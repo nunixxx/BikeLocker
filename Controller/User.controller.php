@@ -14,8 +14,9 @@ $acao = $_GET['acao'];
 
 if ($acao == 'cadastrar'){
     $user = new User();
-    $user->setCpf($_POST['cpf']);
-    $user->setNome($_POST['nome']);
+    $res = $user->setCpf($_POST['cpf']);
+    if($res){
+        $user->setNome($_POST['nome']);
     
     $user->save();
 
@@ -32,6 +33,14 @@ if ($acao == 'cadastrar'){
 
     move_uploaded_file($imagePath,$savePath);
     header('Location:../View/Func/Gere.User.php');
+    }else{
+        $message = new Message();
+        $message->setTipo("danger");
+        $message->setConteudo("CPF inválido");
+
+        header('Location:../View/Func/Gere.User.php?message=' . $message->__toString());
+    }
+
 }
 
 else if($acao == 'deletar'){

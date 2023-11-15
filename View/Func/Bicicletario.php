@@ -78,7 +78,7 @@
     <br>
     <form action="../../Controller/Bicicletario.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
       <label> Usuário </label><br>
-      <select class="form-select" aria-label="Default select example" id="cpf" name="cpf" required onchange="updateBikeOptions()">
+      <select class="form-select" aria-label="Default select example" id="cpf" name="cpf" required onchange="updateBikeOptions(); updateImageOptions();">
         <option value="" disabled selected>
           <?php if(!isset($_GET['locker']) ){echo "CPF";} else{echo $bicicletario->getCpf();}  ?>
         </option>
@@ -146,7 +146,8 @@
     <?php }?>
     <label style="position: fixed; bottom: 10px; right: 10px;"> *Todos os campos devem ser preenchidos</label>
   </div>
-
+  <div id= 'fotoSelect' class="fotoSelect">
+    </div>
   <div id="ConfDel" class="popup" style="display: none;">
     <div class="popup-conteudo">
         <span class="fechar" id="fecharPopup" onclick="fecharPopup()">&times;</span>
