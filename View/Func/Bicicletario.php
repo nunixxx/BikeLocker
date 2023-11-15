@@ -63,9 +63,6 @@
       <li class="nav-item">
         <a class="nav-link" href="Gere.Bike.php">Bicicletas</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Histórico</a>
-      </li>
     </ul>
   </div>
   <div class="d-flex" role="search">
@@ -77,7 +74,7 @@
 </nav>
 
   <div class="form" style = "color: white">
-    <h3>Bicicletario</h3>
+    <h3>Bicicletário</h3>
     <br>
     <form action="../../Controller/Bicicletario.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
       <label> Usuário </label><br>

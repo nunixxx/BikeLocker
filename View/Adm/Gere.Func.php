@@ -37,7 +37,7 @@
         <a class="nav-link" href="Gere.Func.php"><strong>Funcionários</strong></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Histórico</a>
+        <a class="nav-link" href="Historico.php">Histórico</a>
       </li>
     </ul>
   </div>

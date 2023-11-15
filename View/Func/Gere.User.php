@@ -55,9 +55,6 @@
       <li class="nav-item">
         <a class="nav-link" href="Gere.Bike.php">Bicicletas</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Histórico</a>
-      </li>
     </ul>
   </div>
   <div class="d-flex" role="search">
@@ -71,7 +68,7 @@
     <div class="form">
         <h3>Cadastro Usuários</h3>
         <br>
-        <form action= "../../controller/User.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
+        <form action= "../../Controller/User.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
             <div class="inputBox">
                 <input type="text" name="cpf" id="cpf" placeholder="CPF" value="<?= $user->getCpf();?>" <?php
             if(isset($_GET['cpf'])==false){

@@ -1,0 +1,71 @@
+.tabela {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    max-height: 400px;
+    table-layout: auto;
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: rgb(245, 242, 242);
+    box-shadow: 3px 3px 3px 3px rgba(50, 50, 50, 0.77);
+    border-radius: 3px;
+}
+.tabela .cabecalho {
+    position: sticky;
+    height: 50px;
+    top: 0;
+    color: white;
+    background-color: rgb(74, 122, 74);
+}
+
+.tabela table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela table tr th {
+    height: 56px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: .25px;
+    text-align: left;
+    padding: 0 10px;
+}
+
+.tabela table tr.item td {
+    border-bottom: 1px solid #c8ccc8;
+    padding: 0 10px;
+}
+
+.tabela table tr.item {
+    height: 60px;
+}
+
+.tabela table tr td {
+    width: 50%;
+    vertical-align: middle;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.25px;
+}
+
+.tabela::-webkit-scrollbar {
+    width: 0.4vw;
+}
+
+.tabela::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.tabela::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.tabela::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}

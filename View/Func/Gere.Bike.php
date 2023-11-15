@@ -59,9 +59,6 @@
       <li class="nav-item">
         <a class="nav-link" href="Gere.Bike.php"><strong>Bicicletas</strong></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Histórico</a>
-      </li>
     </ul>
   </div>
   <div class="d-flex" role="search">
