@@ -125,10 +125,11 @@ public static function getAll()
         $pdo = Conexao::conexao();
         try{
             $stmt = $pdo->prepare(
-                'UPDATE bike SET cor = :cor WHERE id_bike = :id'
+                'UPDATE bike SET cpf = :cpf, cor = :cor WHERE id_bike = :id'
             );
 
             $res = $stmt->execute([
+                ':cpf' => $this->cpf,
                 ':cor' => $this->cor,
                 ':id' => $this->id
             ]);

@@ -146,6 +146,31 @@ class Bicicletario{
             throw $e;
         }
     }
+
+    public function update($locker)
+    {
+        $pdo = Conexao::conexao();
+        try{
+            $stmt = $pdo->prepare(
+                'UPDATE bicicletario SET LOCKER = :locker, usuario_CPF = :cpf, CADEADO = :cadeado, CHEGADA = :chegada, Bike_ID = :bikeId WHERE LOCKER = :id'
+            );
+
+            $res = $stmt->execute([
+                'locker' => $this->locker,
+                ':cpf' => $this->cpf,
+                ':cadeado' => $this->cadeado,
+                ':chegada' => $this->chegada,
+                ':bikeId' => $this->bikeId,
+                ':id' => $locker
+            ]);
+            echo $res;
+            return $res;
+        } catch (Exception $e){
+            throw $e;
+            return false;
+        }
+    }
+
     public function load(){
         $pdo = Conexao::conexao();
         #TODO ver que esse código cheira mal...
@@ -155,7 +180,6 @@ class Bicicletario{
             $this->setCadeado($linha["CADEADO"]);
             $this->setChegada($linha["CHEGADA"]);
             $this->setBikeId($linha["Bike_ID"]);
-            // $this->setId($linha['Id_Bike']);
             }
 
         return $this;

@@ -11,7 +11,7 @@ include_once __DIR__ . '/../Model/Bicicletario.class.php';
 include_once __DIR__ . '/../Model/Historico.class.php';
 include_once __DIR__ . '/../Model/Bike.class.php';
 date_default_timezone_set('America/Sao_Paulo');
-    
+    $bicicletarios = Bicicletario::getAll();
     $bicicletario = new Bicicletario();
     $horarioAtual = date('Y-m-d H:i:s');
 
@@ -61,22 +61,33 @@ else if(isset($_GET['acao']) && $_GET['acao']== 'deletar'){
     header('Location:../View/Func/Bicicletario.php');
     
 } else if(isset($_GET['acao']) && $_GET['acao']== 'atualizar'){
-    $bike = new Bike();
-    $bike->setCor($_POST['cor']);
-    $bike->setCpf( $_POST['cpf']);
-    $bike->setId($_REQUEST['id']);
-    $imageName = $bike->getId();
+    $antigo = new Bicicletario();
+    $antigo->setLocker($_GET['locker']);
+    $antigo->load();
+    
+    foreach($bicicletarios as $teste){
+        echo $_POST['cpf'] . "=" . $teste->getCpf() . " " . $_POST['cpf'] . "=" . $antigo->getCpf() ."<br>";
+        if($teste->getCpf() == $_POST['cpf'] && $_POST['cpf'] != $antigo->getCpf()){
+            $message = new Message();
+            $message->setTipo("danger");
+            $message->setConteudo("CPF já ocupado");
+            return header('Location:../View/Func/Bicicletario.php?message='. $message->__toString());
+        }else if($teste->getLocker() == $_POST['locker'] && $_POST['locker'] != $antigo->getLocker()){
+            $message = new Message();
+            $message->setTipo("danger");
+            $message->setConteudo("Locker já ocupado");
+            return header('Location:../View/Func/Bicicletario.php?message='. $message->__toString());
+        }
+    }
+    $bicicletario->setlocker($_POST['locker']);
+    $bicicletario->setCpf($_POST['cpf']);
+    $bicicletario->setCadeado($_POST['cadeado']);
+    $bicicletario->setBikeId($_POST['bike_id']);
+    $bicicletario->setChegada($_POST['chegada']);
 
-    $savePath = '../Arquivos/'.$imageName.'.png';
-    $imagePath = $_FILES['imagem']['tmp_name'];
-
-    move_uploaded_file($imagePath,$savePath);
-
-    $bike->update(); 
+    $bicicletario->update($_GET['locker']); 
     header('Location:../View/Func/Bicicletario.php');
 
-} else if(isset($_GET['acao']) && $_GET['acao'] == 'pdf'){
-    Historico::createPdf();
 }
 }else{
 

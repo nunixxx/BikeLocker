@@ -22,7 +22,7 @@
         $bicicletario->setLocker($_REQUEST['locker']);
 
         $bicicletario->load(); 
-        $acao = 'atualizar';
+        $acao = 'atualizar&locker='.$_REQUEST['locker'];
 
     }else{
         $bicicletario = new Bicicletario();
@@ -62,9 +62,6 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="Gere.Bike.php">Bicicletas</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Histórico</a>
       </li>
     </ul>
   </div>
@@ -140,6 +137,7 @@
         <input class="cadeado" type="radio" name="cadeado" id="0" value="0" <?php if($bicicletario->getCadeado() !== null && $bicicletario->getCadeado() == 0){echo "checked";}?>>
           <label for="0">Não Possui </label>
       </div>
+      <input type="hidden" name="chegada" value="<?php echo $bicicletario->getChegada();?>;">
       <input type="submit" class="btn btn-primary btn-block mb-4" value="Cadastrar" style="background-color: #0c945de3; border: none; border-radius: 0px; font-weight: bold;">
     </form>
 

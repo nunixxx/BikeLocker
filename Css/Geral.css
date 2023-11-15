@@ -197,6 +197,8 @@ form input[type="color"]::-moz-color-swatch{
 }
 
 .fotoSelect{
+    border-radius: 5px;
+    color: white;
     text-align: center;
     padding: 10px;
     background-color: #006747;

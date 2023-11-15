@@ -59,9 +59,6 @@
       <li class="nav-item">
         <a class="nav-link" href="Gere.Bike.php"><strong>Bicicletas</strong></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Histórico</a>
-      </li>
     </ul>
   </div>
   <div class="d-flex" role="search">
@@ -75,13 +72,13 @@
     <h3>Cadastro Bicicletas</h3>
     <br>
     <form action="../../Controller/Bike.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
-      <div class="inputBox" styler = "witdh: 20px">
+      <div class="inputBox" style = "witdh: 20px">
         <input type="text" name="id" id="id" placeholder="ID" value="<?= $bike->getId();?>"
           readonly />
       </div>
       <br>
       <select class="form-select" aria-label="Default select example" id="cpf" name="cpf" required>
-        <option value="" disabled selected>
+        <option value="">
           <?php if(null == $bike->getCpf() ){echo "CPF";} else{echo $bike->getCpf();}  ?>
         </option>
         <?php 
@@ -118,6 +115,7 @@
   </div>
   <?php if (isset($_GET['id'])){?>
   <div id="fotoSelect" class="fotoSelect">
+        <label>Foto Atual</label><br>
         <img id="imagemSelecionada" src="../../Arquivos/<?= $_GET['id']?>.png" alt="Bike Selecionada" style=" max-width: 100px; max-height: 100px;"/>
   </div>
   <?php }?>
