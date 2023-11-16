@@ -55,9 +55,6 @@
       <li class="nav-item">
         <a class="nav-link" href="Gere.Bike.php">Bicicletas</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Histórico</a>
-      </li>
     </ul>
   </div>
   <div class="d-flex" role="search">
@@ -100,13 +97,17 @@
                 <label class="imageButton" for="imagem"> <strong>Insira a Bicicleta</strong></label>
                 <input type="file" class="form-control d-none" id="imagem" onchange="validateFile(); exibirImagemSelecionada();" name="imagem" required accept="image/jpeg, image/png"/>
             </div>
-            <?php
-            }else{?>
-                <button id="limparURL">Cancelar</button>
-            <?php }?>
             <br><br>
             <input type="submit" value="Cadastrar">
         </form>
+        <?php
+            }else{?>
+                <input type="submit" value="Cadastrar">
+            </form>
+            <br>
+                <button id="limparURL">Cancelar</button>
+
+            <?php }?>
         <label style="position: fixed; bottom: 10px; right: 10px;"> *Todos os campos devem ser preenchidos</label>
     </div>
 
