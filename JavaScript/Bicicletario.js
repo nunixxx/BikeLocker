@@ -44,6 +44,9 @@ function updateImageOptions() {
     const selectedCpf = $("#cpf").val();
     const bikeIdSelect = $("#bike_id");
     const cor = $("#cor").val();
+    var divFoto = document.getElementById('fotoSelect');
+
+    divFoto.style.display = 'block';
 
     // Use AJAX para chamar o script PHP que retorna os IDs das bicicletas vinculadas ao CPF
     // Exemplo com jQuery para simplicidade, mas você pode usar XMLHttpRequest se preferir

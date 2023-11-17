@@ -74,7 +74,7 @@
 </nav>
 
   <div class="form" style = "color: white">
-    <h3>Bicicletario</h3>
+    <h3>Bicicletário</h3>
     <br>
     <form action="../../Controller/Bicicletario.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
       <label> Usuário </label><br>
@@ -146,22 +146,8 @@
     <?php }?>
     <label style="position: fixed; bottom: 10px; right: 10px;"> *Todos os campos devem ser preenchidos</label>
   </div>
-  <div id= 'fotoSelect' class="fotoSelect">
-    </div>
-  <div id="ConfDel" class="popup" style="display: none;">
-    <div class="popup-conteudo">
-        <span class="fechar" id="fecharPopup" onclick="fecharPopup()">&times;</span>
-        <p>Deseja mesmo Deletar?</p>
-        <input class="btn btn-primary btn-rounded" style ="background-color: #c53302; border: none;" type="submit" id="enviarFormulario" value="Sim" onclick="enviarFormulario()">
-    </div>
-  </div>
-  <div id="ConfEdit" class="popup" style="display: none;">
-    <div class="popup-conteudo">
-        <span class="fechar" id="fecharPopup" onclick="fecharPopup()">&times;</span>
-        <p>Deseja mesmo Editar?</p>
-        <input class="btn btn-primary btn-rounded" style ="background-color: green; border: none;" type="submit" id="enviarFormulario" value="Sim" onclick="enviarFormulario()">
-    </div>
-  </div>
+  <div id='fotoSelect' class="fotoSelect" style=" display:none;"></div>
+
   <div class="tabela">
     <table class="cabecalho">
       <thead>
@@ -169,7 +155,7 @@
           <th style="width: 10%;">Locker</th>
           <th style="width: 30%;">Usuário</th>
           <th style="width: 20%;">Bicicleta</th>
-          <th style="width: 50%;">Horario</th>
+          <th style="width: 50%;">Horário</th>
         </tr>
       </thead>
     </table>
@@ -195,7 +181,7 @@
           </td>
           <td style="width: 30%;">
           <div class="btn btn-primary btn-rounded" style ="background-color: #c53302; border: none; padding: 5px;">
-              <form id= "deletar" class= "deletar" method="post" action="../../Controller/Bicicletario.controller.php?acao=deletar&locker=<?= $bicicletario->getlocker() ?>">
+              <form id= "deletar" class= "deletar" method="post" action="../../Controller/Bicicletario.controller.php?acao=deletar&locker=<?= $bicicletario->getlocker() ?>" onsubmit="return confirmarEnvio()">
                   <input type="image" src="../../Images/Lixeira.png" title="deletar" alt="Submit" style="widht:25px; height:25px;">
               </form>
           </div>

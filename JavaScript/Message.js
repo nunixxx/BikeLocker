@@ -5,33 +5,11 @@ setTimeout(() => {
     }
 }, 5000);
 // ----------------------------------
-document.addEventListener("DOMContentLoaded", function() {
-    document.body.addEventListener("submit", function(event) {
-        if (event.target.classList.contains("deletar")) {
-            event.preventDefault();
-            mostrarPopupAntesDoEnvio();
-        }
-    });
-
-    document.getElementById("enviarFormulario").addEventListener("click", function() {
-        document.querySelector(".deletar").submit(); // Envie o formulário após a confirmação
-    });
-});
-
-function mostrarPopupAntesDoEnvio() {
-    document.getElementById("ConfDel").style.display = "block";
+function confirmarEnvio() {
+    // Exibe um pop-up de confirmação
+    return confirm("Deseja mesmo confirmar a ação?");
 }
 
-function fecharPopup() {
-    document.getElementById("ConfDel").style.display = "none";
-}
-
-function enviarFormulario(idUsuario) {
-  
-        var form = document.getElementById("deletar");
-        form.action = "../../Controller/User.controller.php?acao=deletar&id=" + idUsuario;
-        form.submit();
-}
 // -----------------------------------
 
 function exibirImagemSelecionada() {

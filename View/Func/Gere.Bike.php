@@ -68,6 +68,7 @@
     </button>
   </div>
 </nav>
+
   <div class="form">
     <h3>Cadastro Bicicletas</h3>
     <br>
@@ -122,13 +123,6 @@
   
   <div id="fotoSelect" class="fotoSelect" style=" display:none;">
     <img id="imagemSelecionada" src="#" alt="Imagem Selecionada" style=" max-width: 100px; max-height: 100px;"/>
-  </div>      
-  <div id="ConfDel" class="popup" style="display: none;">
-        <div class="popup-conteudo">
-            <span class="fechar" id="fecharPopup" onclick="fecharPopup()">&times;</span>
-            <p>Deseja mesmo Deletar?</p>
-            <input class="btn btn-primary btn-rounded" style ="background-color: #c53302; border: none;" type="submit" id="enviarFormulario" value="Sim" onclick="enviarFormulario(<?= $bike->getId() ?>)">
-        </div>
   </div>
   
   <div class="tabela" style="width: 450px;">
@@ -157,7 +151,7 @@
           </td>
           <td>
           <div class="btn btn-primary btn-rounded btn-excluir" style ="background-color: #c53302; border: none; padding: 5px;">
-            <form id="deletar" class= "deletar" method="post" action="../../Controller/Bike.controller.php?acao=deletar&id=<?= $bike->getId() ?>">
+            <form id="deletar" class= "deletar" method="post" action="../../Controller/Bike.controller.php?acao=deletar&id=<?= $bike->getId() ?>" onsubmit="return confirmarEnvio()">
                 <input type="image" src="../../Images/Lixeira.png" title="deletar" alt="Submit" style="widht:25px; height:25px;">
             </form>
           </div>

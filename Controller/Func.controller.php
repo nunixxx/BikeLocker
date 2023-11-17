@@ -14,14 +14,30 @@ if(time() - $_SESSION['loggedin'] < $session_timeout){
     if ($acao == 'cadastrar'){
         
         $funcionario = new Funcionario();
-        $funcionario->setCpf($_POST['cpf']);
-        $funcionario->setNome($_POST['nome']);
-        $funcionario->setEmail($_POST['email']);
-        $funcionario->setSenha($_POST['senha']);
-        $funcionario->setPapel($_POST['papel']);
-        
-        $funcionario->save();
-        header('Location:../View/Adm/Gere.Func.php ');
+        $res = $funcionario->setCpf($_POST['cpf']);
+        if($res){
+            $var = $funcionario->setSenha($_POST['senha']);
+            if($var){
+            $funcionario->setNome($_POST['nome']);
+            $funcionario->setEmail($_POST['email']);
+            $funcionario->setPapel($_POST['papel']);
+            
+            $funcionario->save();
+            header('Location:../View/Adm/Gere.Func.php ');
+            }else{
+                $message = new Message();
+                $message->setTipo("danger");
+                $message->setConteudo("A senha deve conter no minimo 4 caractéres");
+
+                header('Location:../View/Adm/Gere.Func.php?message=' . $message->__toString());
+            }
+        }else{
+            $message = new Message();
+            $message->setTipo("danger");
+            $message->setConteudo("CPF inválido");
+
+            header('Location:../View/Adm/Gere.Func.php?message=' . $message->__toString());
+        }
     }
     else if($acao == 'deletar'){
         Funcionario::delete($_REQUEST['id']);
@@ -35,19 +51,5 @@ if(time() - $_SESSION['loggedin'] < $session_timeout){
 
     header('Location:../View/Login.php?message=' . $message->__toString());
 }
-
-// } else if($acao =='atualizar'){
-//     $funcionario = new Funcionario();
-//     $funcionario->setCpf($_POST['cpf']);
-//     $funcionario->setNome($_POST['nome']);
-//     $funcionario->setEmail($_POST['email']);
-//     $funcionario->setSenha($_POST['senha']);
-//     $funcionario->setPapel($_POST['papel']);
-    
-//     $funcionario->update();
-
-//     header('Location:../View/Adm/Gere.Func.php ');
-
-// }
 
 ?>

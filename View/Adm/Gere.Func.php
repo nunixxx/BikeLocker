@@ -49,16 +49,16 @@
   </div>
 </nav>
     <div class="form">
-        <h3>Cadastro</h3>
+        <h3>Cadastro Funcionario</h3>
         <br>
         <form action="../../Controller/Func.controller.php?acao=<?= $acao ?>" method="post" style="padding: 30px">
-                <input type="text" name="cpf" id="cpf" placeholder="CPF" />
+                <input type="text" name="cpf" id="cpf" placeholder="CPF" required/>
             <br>
-                <input type="text" name="nome" id="nome" placeholder="Nome" />
+                <input type="text" name="nome" id="nome" placeholder="Nome" required/>
             <br>
-                <input type="email" name="email" id="email" placeholder="E-mail" />
+                <input type="email" name="email" id="email" placeholder="E-mail" required/>
             <br>
-                <input type="password" name="senha" id="senha" placeholder="Senha" />
+                <input type="password" name="senha" id="senha" placeholder="Senha" required/>
             <input type="hidden" name="papel" id="papel" value='func' />
             <br>
             <input type="submit" value="Cadastrar">

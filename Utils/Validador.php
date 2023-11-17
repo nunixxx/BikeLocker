@@ -42,13 +42,8 @@ class validador{
         if($senha == 'adm'){
             return true;
         }
-        // Verifica se a senha tem pelo menos 8 caracteres
+        // Verifica se a senha tem pelo menos 4 caracteres
         if (strlen($senha) < 4) {
-            return false;
-        }
-        
-        // Verifica se a senha contém pelo menos uma letra minúscula
-        if (!preg_match('/[a-z]/', $senha)) {
             return false;
         }
     

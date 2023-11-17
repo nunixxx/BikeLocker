@@ -115,14 +115,6 @@
         <img id="imagemSelecionada" src="#" alt="Imagem Selecionada" style=" max-width: 100px; max-height: 100px;"/>
     </div>    
 
-    <div id="ConfDel" class="popup" style="display: none;">
-        <div class="popup-conteudo">
-            <span class="fechar" id="fecharPopup" onclick="fecharPopup()">&times;</span>
-            <p>Deseja mesmo Deletar?</p>
-            <input class="btn btn-primary btn-rounded" style ="background-color: #c53302; border: none;" type="submit" id="enviarFormulario" value="Sim" onclick="enviarFormulario('<?= $user->getCpf() ?>')">
-        </div>
-    </div>
-
     <div class="tabela" style="width: 500px;">
         <table class="cabecalho">
             <thead>
@@ -144,7 +136,7 @@
                     </td>
                     <td>
                     <div class="btn btn-primary btn-rounded" style ="background-color: #c53302; border: none; padding: 5px;">
-                        <form id= "deletar" class="deletar" method="post" action="../../Controller/User.controller.php?acao=deletar&id=<?= $user->getCpf() ?>">
+                        <form id= "deletar" class="deletar" method="post" action="../../Controller/User.controller.php?acao=deletar&id=<?= $user->getCpf() ?>" onsubmit="return confirmarEnvio()">
                             <input type="image"src="../../Images/Lixeira.png" title="deletar" alt="Submit" style="widht:25px; height:25px;">
                         </form>
                     </div>
