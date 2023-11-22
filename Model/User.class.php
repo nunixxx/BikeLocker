@@ -76,6 +76,19 @@ class User
         }
         return $lista;
     }
+    public function userCheck()
+    {
+        $pdo = Conexao::conexao();
+
+        $stmt = $pdo->prepare("SELECT * FROM usuario WHERE CPF = :cpf");
+        $stmt->execute([
+            ":cpf" => $this->cpf,
+        ]);
+        $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return count($res) > 0;
+
+    }
+
     public function update()
     {
         $pdo = Conexao::conexao();

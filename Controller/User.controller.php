@@ -16,23 +16,32 @@ if ($acao == 'cadastrar'){
     $user = new User();
     $res = $user->setCpf($_POST['cpf']);
     if($res){
-        $user->setNome($_POST['nome']);
+        if(!$user->userCheck()){
+            $user->setNome($_POST['nome']);
     
-    $user->save();
+            $user->save();
+        
+            $bike = new Bike();
+            $bike->setCor($_POST['cor']);
+            $bike->setCpf($user->getCpf());
+        
+            $bike->save();
+        
+            $imageName = $bike->getId();
+        
+            $savePath = '../Arquivos/'.$imageName.'.png';
+            $imagePath = $_FILES['imagem']['tmp_name'];
+        
+            move_uploaded_file($imagePath,$savePath);
+            header('Location:../View/Func/Gere.User.php');
+        }else{
+            $message = new Message();
+            $message->setTipo("danger");
+            $message->setConteudo("Usuário já cadastrado");
 
-    $bike = new Bike();
-    $bike->setCor($_POST['cor']);
-    $bike->setCpf($user->getCpf());
-
-    $bike->save();
-
-    $imageName = $bike->getId();
-
-    $savePath = '../Arquivos/'.$imageName.'.png';
-    $imagePath = $_FILES['imagem']['tmp_name'];
-
-    move_uploaded_file($imagePath,$savePath);
-    header('Location:../View/Func/Gere.User.php');
+            header('Location:../View/Func/Gere.User.php?message=' . $message->__toString());
+        }
+       
     }else{
         $message = new Message();
         $message->setTipo("danger");

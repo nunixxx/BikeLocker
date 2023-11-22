@@ -79,7 +79,7 @@
     <form action="../../Controller/Bicicletario.controller.php?acao=<?= $acao ?>" method="post" enctype="multipart/form-data">
       <label> Usuário </label><br>
       <select class="form-select" aria-label="Default select example" id="cpf" name="cpf" required onchange="updateBikeOptions(); updateImageOptions();">
-        <option value="" disabled selected>
+        <option value="<?= $bicicletario->getCpf();?>">
           <?php if(!isset($_GET['locker']) ){echo "CPF";} else{echo $bicicletario->getCpf();}  ?>
         </option>
         <?php 
@@ -95,7 +95,7 @@
       <br>
       <label> Bicicleta </label><br>
           <select class="form-select" aria-label="Default select example" id="bike_id" name="bike_id" required>
-        <option value="" disabled selected>
+        <option value="<?= $bicicletario->getBikeId();?>">
           <?php if((!isset($_GET['locker']) )){echo "ID";} else{echo $bicicletario->getBikeId();}  ?>
         </option>
         <?php 
@@ -113,7 +113,7 @@
       <br>
       <div class="inputBox">
         <select class="form-select" aria-label="Default select example" id="locker" name="locker" required>
-          <option value="" disabled selected>
+          <option value="<?= $bicicletario->getLocker();?>">
           <?php if(!isset($_GET['locker']) ){echo "Locker";} else{echo $bicicletario->getLocker();}  ?>
           </option>
           <?php
